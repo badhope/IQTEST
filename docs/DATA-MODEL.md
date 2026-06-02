@@ -2,7 +2,7 @@
 
 `data/projects.json` is the **single source of truth** for the directory. This document describes its schema in depth.
 
-> 🇬🇧 English (default) · 🇨🇳 [简体中文](./DATA-MODEL.zh.md) · 🇯🇵 [日本語](./DATA-MODEL.ja.md)
+> 🇬🇧 English (default) — additional translations planned; the schema is JSON keys + TypeScript types, so English serves most readers.
 
 ---
 

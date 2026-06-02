@@ -119,7 +119,7 @@ NetTools-Hub/
 │   ├── FUNDING.yml
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── data/
-│   └── projects.json           # 124 个项目 × 21 个分类（数据源）
+│   └── projects.json           # 124 个项目 × 21 个子分类（6 大主题组，数据源）
 ├── docs/                       # 补充文档
 ├── src/
 │   ├── app/                    # Next.js App Router

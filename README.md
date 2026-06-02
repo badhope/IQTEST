@@ -119,7 +119,7 @@ NetTools-Hub/
 │   ├── FUNDING.yml
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── data/
-│   └── projects.json           # 124 projects × 21 categories (the source of truth)
+│   └── projects.json           # 124 projects × 21 sub-categories (6 themed groups) (the source of truth)
 ├── docs/                       # Additional documentation
 ├── src/
 │   ├── app/                    # Next.js App Router

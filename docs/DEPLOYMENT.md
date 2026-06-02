@@ -2,7 +2,7 @@
 
 Forking and deploying your own instance of **NetTools Hub** takes about 5 minutes.
 
-> 🇬🇧 English (default) · 🇨🇳 [简体中文](./DEPLOYMENT.zh.md) · 🇯🇵 [日本語](./DEPLOYMENT.ja.md)
+> 🇬🇧 English (default) — additional translations planned; the content is short, visual, and largely code-driven, so English serves most readers.
 
 ---
 
