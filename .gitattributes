@@ -1,0 +1,52 @@
+# .gitattributes — control how GitHub displays diffs, line endings, and language detection
+# https://git-scm.com/docs/gitattributes
+
+# Auto-detect text files
+*           text=auto whitespace=-trailing-space,-space-before-tab,tab-in-indent,cr-at-eol
+
+# Normalise line endings
+*.ts        text eol=lf
+*.tsx       text eol=lf
+*.js        text eol=lf
+*.mjs       text eol=lf
+*.cjs       text eol=lf
+*.css       text eol=lf
+*.scss      text eol=lf
+*.json      text eol=lf
+*.md        text eol=lf
+*.mdx       text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.html      text eol=lf
+*.svg       text eol=lf
+*.sh        text eol=lf
+*.toml      text eol=lf
+*.lock      text eol=lf -diff
+*.svg       binary
+
+# GitHub Linguist overrides
+# https://github.com/github/linguist/blob/master/docs/overrides.md
+
+# These files contain translatable content; keep them out of the code-language stats
+README.md          linguist-documentation
+README.zh.md       linguist-documentation
+README.ja.md       linguist-documentation
+CHANGELOG.md       linguist-documentation
+CHANGELOG.zh.md    linguist-documentation
+CHANGELOG.ja.md    linguist-documentation
+CONTRIBUTING.md    linguist-documentation
+CODE_OF_CONDUCT.md linguist-documentation
+SECURITY.md        linguist-documentation
+LICENSE            linguist-documentation
+docs/**            linguist-documentation
+.github/SUPPORT.md linguist-documentation
+.github/CODEOWNERS linguist-documentation
+
+# Lockfile is auto-generated, do not diff it as text in PRs
+pnpm-lock.yaml linguist-generated=true
+.next/**       linguist-generated=true
+out/**         linguist-generated=true
+
+# Exclude vendored / generated from language stats
+*.min.js       linguist-generated=true
+*.min.css      linguist-generated=true

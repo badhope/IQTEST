@@ -69,7 +69,7 @@ For new project entries, please open an issue using the **"Project submission"**
 - **Primary language / framework**
 - **License** (must be OSI-approved, e.g. MIT / Apache-2.0 / GPL / BSD)
 - **Stars** and **last commit date** (we re-check both)
-- **Category** — pick from the existing 21 categories in `data/projects.json` or propose a new one with justification
+- **Category** — pick from one of the 21 sub-categories (under 6 themed groups) in `data/projects.json` or propose a new one with justification. See the [🗂 6 themed groups section in README](./README.md#-the-6-themed-groups-21-sub-categories) for the full list.
 - **Why it deserves to be listed** — 1–2 sentences on what makes it stand out
 
 > Inclusion criteria: actively maintained (commit in the last 6 months), non-abandoned, solves a real networking need, and ideally fills a gap not already covered.
@@ -123,7 +123,7 @@ pnpm dev
 │   └── workflows/
 │       └── deploy.yml          # GitHub Pages CI/CD
 ├── data/
-│   └── projects.json           # 124 curated projects, 21 categories
+│   └── projects.json           # 124 curated projects, 21 sub-categories (6 themed groups)
 ├── src/
 │   ├── app/
 │   │   ├── explore/            # /explore — filterable / sortable list

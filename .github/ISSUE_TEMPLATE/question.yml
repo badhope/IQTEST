@@ -1,0 +1,49 @@
+name: ❓ Question / Help
+description: Ask a question about the project, deployment, or how to contribute.
+title: "[Question] "
+labels: ["question"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question? We're happy to help! 💬
+
+        For **security issues**, please follow the private disclosure process in
+        `SECURITY.md` instead — do **not** file a public issue.
+
+        For **English** bug / feature reports, use the dedicated templates:
+        `Bug Report` or `Feature Request`.
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Preferred language for follow-up
+      options:
+        - English
+        - 简体中文
+        - 日本語
+    validations:
+      required: true
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      options:
+        - General usage
+        - Local development
+        - Deployment / GitHub Pages
+        - Data / project submission
+        - i18n / translation
+        - Contribution workflow
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true

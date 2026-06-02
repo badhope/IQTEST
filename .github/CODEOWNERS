@@ -1,0 +1,43 @@
+# CODEOWNERS
+# Each line is a file pattern followed by one or more owners.
+# Order matters — the last matching pattern wins.
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything
+*       @badhope
+
+# Documentation (English)
+README.md              @badhope
+CHANGELOG.md           @badhope
+CONTRIBUTING.md        @badhope
+CODE_OF_CONDUCT.md     @badhope
+SECURITY.md            @badhope
+LICENSE                @badhope
+
+# Documentation (zh-CN)
+README.zh.md           @badhope
+CHANGELOG.zh.md        @badhope
+
+# Documentation (ja-JP)
+README.ja.md           @badhope
+CHANGELOG.ja.md        @badhope
+
+# Issue / PR templates
+/.github/ISSUE_TEMPLATE/   @badhope
+/.github/PULL_REQUEST_TEMPLATE.md  @badhope
+
+# GitHub workflows
+/.github/workflows/  @badhope
+
+# Core data & schema
+/data/projects.json    @badhope
+/src/types/            @badhope
+/src/lib/projects.ts   @badhope
+/src/lib/category-groups.ts  @badhope
+
+# i18n (any change requires all 3 languages to be updated in lockstep)
+/src/lib/i18n.ts       @badhope
+
+# Components & pages
+/src/components/       @badhope
+/src/app/              @badhope

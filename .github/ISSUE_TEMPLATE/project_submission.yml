@@ -1,0 +1,117 @@
+name: ➕ Add a Project
+description: Suggest a new project to be listed in `data/projects.json`.
+title: "[Project] "
+labels: ["project", "data"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Found a great open-source network tool that belongs in **NetTools Hub**? Tell us about it!
+
+        📋 **Inclusion criteria** (see `CONTRIBUTING.md` for the full guide):
+        - 🟢 Active commits within the **last 6 months**
+        - 🪪 **OSI-approved** open-source license
+        - 🌟 Public GitHub repository
+        - 🛠 Real-world use case
+
+  - type: input
+    id: name
+    attributes:
+      label: Project name
+      placeholder: "e.g. sing-box"
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: GitHub URL
+      placeholder: "https://github.com/SagerNet/sing-box"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: "Pick the most appropriate one. The 6 themed groups are listed first, sub-categories underneath."
+      options:
+        - 🔌 Proxy Core — proxy cores
+        - 🔌 Proxy Core — GUI clients
+        - 🔌 Proxy Core — subscription management
+        - 🔌 Proxy Core — protocol tools
+        - 🚀 Acceleration — GitHub acceleration
+        - 🚀 Acceleration — router plugins
+        - 🚀 Acceleration — mirror acceleration
+        - 🚀 Acceleration — tunnel tools
+        - 🐳 Deploy & Ops — Docker deployment
+        - 🐳 Deploy & Ops — container orchestration
+        - 🐳 Deploy & Ops — server management
+        - 🐳 Deploy & Ops — node tools
+        - 🐳 Deploy & Ops — monitoring
+        - ⚙️ Config & DNS — rule collections
+        - ⚙️ Config & DNS — DNS tools
+        - ⚙️ Config & DNS — certificate tools
+        - 🧰 Tools & Test — utilities
+        - 🧰 Tools & Test — network testing
+        - 🧰 Tools & Test — data transfer
+        - 🛡️ Security & More — security tools
+        - 🛡️ Security & More — project collections
+        - ❓ Not sure / other
+    validations:
+      required: true
+
+  - type: input
+    id: description
+    attributes:
+      label: Short description (1 line, English)
+      placeholder: "Universal proxy platform."
+    validations:
+      required: true
+
+  - type: input
+    id: language
+    attributes:
+      label: Primary language
+      placeholder: "Go, Rust, TypeScript, …"
+    validations:
+      required: true
+
+  - type: input
+    id: license
+    attributes:
+      label: License
+      placeholder: "MIT, Apache-2.0, GPL-3.0, …"
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags (comma-separated, max 5)
+      placeholder: "proxy, shadowsocks, trojan"
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Why should this be listed?
+      description: "1-3 sentences. Mention any features that are unique or notable."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: The project has had a commit in the last 6 months.
+          required: true
+        - label: The project uses an OSI-approved license.
+          required: true
+        - label: I am not the project author (or I have disclosed my affiliation).
+          required: false
+        - label: I am willing to open a PR to add it.
+          required: false

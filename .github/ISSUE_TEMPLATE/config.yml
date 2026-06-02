@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions (Q&A, ideas, show & tell)
+    url: https://github.com/badhope/NetTools-Hub/discussions
+    about: Prefer a forum for open-ended conversation? Use GitHub Discussions.
+  - name: 🔐 Private security disclosure
+    url: https://github.com/badhope/NetTools-Hub/security/advisories/new
+    about: Found a security issue? Report it privately (do NOT open a public issue).
+  - name: 📖 Contributing guide
+    url: https://github.com/badhope/NetTools-Hub/blob/main/CONTRIBUTING.md
+    about: How to set up locally, add a project, submit a PR, and write Conventional Commits.

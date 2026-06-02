@@ -1,0 +1,77 @@
+name: 🌍 Translation / i18n
+description: Propose a new language, fix a typo in an existing translation, or improve wording.
+title: "[i18n] "
+labels: ["i18n", "documentation"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us reach a wider audience! 🌍
+        NetTools Hub ships in **English / 简体中文 / 日本語**. Open a PR to:
+
+        - Fix a typo / grammar / awkward phrasing
+        - Add a brand-new language (Spanish, French, Korean, Russian, …)
+        - Improve wording in an existing language
+
+        See `CONTRIBUTING.md` → **"Adding or improving translations"** for the full workflow.
+
+  - type: dropdown
+    id: target_language
+    attributes:
+      label: Target language
+      options:
+        - English (en) — primary
+        - 简体中文 (zh)
+        - 日本語 (ja)
+        - New language — proposal (specify in "Notes")
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Affected surface
+      description: "Which file(s) does this change touch?"
+      options:
+        - UI strings (`src/lib/i18n.ts`)
+        - README.md / README.zh.md / README.ja.md
+        - CHANGELOG.md / CHANGELOG.zh.md / CHANGELOG.ja.md
+        - Issue / PR templates
+        - Multiple files
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Source text (English, if applicable)
+      description: "The original English text, copied verbatim from the repo."
+    validations:
+      required: true
+
+  - type: textarea
+    id: translation
+    attributes:
+      label: Proposed translation
+      description: "Your translation. For UI strings, paste the exact string(s)."
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / context
+      placeholder: "e.g. This is for a new 'es' (Spanish) translation. I'm a native speaker."
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I am a native / fluent speaker of the target language.
+          required: true
+        - label: I understand that translations need to stay short to fit the UI.
+          required: true

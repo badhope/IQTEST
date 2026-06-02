@@ -11,18 +11,32 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 max_line_length = 100
 
+# Markdown — allow long lines (prose), but still strip trailing whitespace
 [*.md]
 trim_trailing_whitespace = false
+max_line_length = off
 
+# YAML
 [*.{yml,yaml}]
 indent_size = 2
 
+# JS / TS
 [*.{ts,tsx,js,jsx,mjs,cjs}]
 indent_size = 2
 quote_type = double
 
+# Shell
+[*.{sh,bash}]
+indent_size = 2
+
+# Makefile — must use tabs
 [Makefile]
 indent_style = tab
 
+# Lockfiles & JSON — preserve as-is
 [*.{json,lock}]
 insert_final_newline = true
+
+# Windows batch files
+[*.{bat,cmd,ps1}]
+end_of_line = crlf
