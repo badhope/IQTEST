@@ -1,0 +1,62 @@
+{
+  "name": "net-tools-hub",
+  "version": "1.0.0",
+  "description": "NetTools Hub - One-stop navigation platform for network tools, proxies, VPNs, and more",
+  "author": "badhope",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "proxy",
+    "vpn",
+    "network",
+    "tools",
+    "clash",
+    "shadowsocks",
+    "v2ray",
+    "sing-box",
+    "hysteria",
+    "nettools",
+    "github",
+    "navigation",
+    "china-network",
+    "open-source"
+  ],
+  "homepage": "https://badhope.github.io/NetTools-Hub",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/badhope/NetTools-Hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/badhope/NetTools-Hub/issues"
+  },
+  "scripts": {
+    "dev": "next dev -p 8080",
+    "build": "next build",
+    "start": "npx serve@latest out -p 8080",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "browserslist": [
+    ">0.5%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^20.19.41",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "16.2.6",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^5.9.3"
+  }
+}

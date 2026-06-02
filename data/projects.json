@@ -1,0 +1,3554 @@
+{
+  "lastUpdated": "2026-06-01",
+  "version": "1.0.0",
+  "categories": {
+    "core": {
+      "name": "Proxy Cores",
+      "icon": "⚙️",
+      "description": "Core implementations of various proxy protocols",
+      "color": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    "gui": {
+      "name": "GUI Clients",
+      "icon": "🖥️",
+      "description": "Visual operation interface clients",
+      "color": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    "subscription": {
+      "name": "Subscription Management",
+      "icon": "📋",
+      "description": "Subscription conversion, aggregation, and management tools",
+      "color": [
+        "#f093fb",
+        "#f5576c"
+      ]
+    },
+    "github_tools": {
+      "name": "GitHub Acceleration",
+      "icon": "🚀",
+      "description": "GitHub access and download acceleration tools",
+      "color": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    "router": {
+      "name": "Router Plugins",
+      "icon": "🌏",
+      "description": "OpenWrt and router firmware plugins",
+      "color": [
+        "#43e97b",
+        "#38f9d7"
+      ]
+    },
+    "docker": {
+      "name": "Docker Deployment",
+      "icon": "🐳",
+      "description": "Containerized deployment solutions",
+      "color": [
+        "#2496ed",
+        "#1b83d4"
+      ]
+    },
+    "rules": {
+      "name": "Rule Collections",
+      "icon": "📜",
+      "description": "Routing rules and subscription sharing",
+      "color": [
+        "#a18cd1",
+        "#fbc2eb"
+      ]
+    },
+    "utilities": {
+      "name": "Utilities",
+      "icon": "🛠️",
+      "description": "Network-related utility tools",
+      "color": [
+        "#f092fb",
+        "#f5576c"
+      ]
+    },
+    "mirrors": {
+      "name": "Mirror Acceleration",
+      "icon": "🪞",
+      "description": "Various mirror sources and acceleration services",
+      "color": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    "network_test": {
+      "name": "Network Testing",
+      "icon": "📊",
+      "description": "Network speed test and latency testing tools",
+      "color": [
+        "#10b981",
+        "#059669"
+      ]
+    },
+    "node_tools": {
+      "name": "Node Tools",
+      "icon": "📍",
+      "description": "Node management, testing, and sharing tools",
+      "color": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    "protocol_tools": {
+      "name": "Protocol Tools",
+      "icon": "🔐",
+      "description": "Tools and libraries for specific protocols",
+      "color": [
+        "#ec4899",
+        "#db2777"
+      ]
+    },
+    "server_mgmt": {
+      "name": "Server Management",
+      "icon": "🖥️",
+      "description": "Server operations and management tools",
+      "color": [
+        "#8b5cf6",
+        "#7c3aed"
+      ]
+    },
+    "security_tools": {
+      "name": "Security Tools",
+      "icon": "🛡️",
+      "description": "Network security, audit, and testing tools",
+      "color": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    "data_transfer": {
+      "name": "Data Transfer",
+      "icon": "📤",
+      "description": "File transfer, sync, and backup tools",
+      "color": [
+        "#22c55e",
+        "#16a34a"
+      ]
+    },
+    "monitoring": {
+      "name": "Monitoring Tools",
+      "icon": "📊",
+      "description": "System monitoring, logging, and analytics tools",
+      "color": [
+        "#06b6d4",
+        "#0891b2"
+      ]
+    },
+    "container": {
+      "name": "Container Orchestration",
+      "icon": "☸️",
+      "description": "Kubernetes and container orchestration tools",
+      "color": [
+        "#326ce5",
+        "#234fa2"
+      ]
+    },
+    "tunnel_tools": {
+      "name": "Tunnel Tools",
+      "icon": "🕳️",
+      "description": "NAT traversal and tunneling tools",
+      "color": [
+        "#a78bfa",
+        "#8b5cf6"
+      ]
+    },
+    "dns_tools": {
+      "name": "DNS Tools",
+      "icon": "🌐",
+      "description": "DNS services, encryption, and optimization tools",
+      "color": [
+        "#14b8a6",
+        "#0d9488"
+      ]
+    },
+    "cert_tools": {
+      "name": "Certificate Tools",
+      "icon": "🔑",
+      "description": "SSL/TLS certificate management tools",
+      "color": [
+        "#f97316",
+        "#ea580c"
+      ]
+    },
+    "collection": {
+      "name": "Project Collections",
+      "icon": "🗂️",
+      "description": "Various project collections and summary repositories",
+      "color": [
+        "#6366f1",
+        "#4f46e5"
+      ]
+    }
+  },
+  "projects": [
+    {
+      "id": "v2ray-core",
+      "name": "V2Ray",
+      "author": "v2fly",
+      "description": "Advanced tool for building proxy networks, supporting multiple protocols including VMess, VLESS, Trojan, etc. One of the most popular proxy solutions available",
+      "url": "https://github.com/v2fly/v2ray-core",
+      "homepage": "https://www.v2fly.org/",
+      "stars": 19200,
+      "forks": 3200,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "VMess",
+        "VLESS",
+        "Trojan",
+        "Proxy"
+      ],
+      "category": "core",
+      "lastCommit": "2025-01-10",
+      "highlights": [
+        "Full Protocol Support",
+        "High Performance",
+        "Stable & Reliable"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "xray-core",
+      "name": "Xray-core",
+      "author": "XTLS",
+      "description": "Xray project core, supporting latest protocols like VLESS and XTLS. Outstanding performance with flexible configuration, a strong competitor to V2Ray",
+      "url": "https://github.com/XTLS/Xray-core",
+      "homepage": "https://xtls.github.io/",
+      "stars": 6800,
+      "forks": 1100,
+      "language": "Go",
+      "license": "GPL-3.0",
+      "tags": [
+        "Xray",
+        "VLESS",
+        "XTLS",
+        "Reality"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "XTLS Protocol",
+        "Reality Support",
+        "High Performance"
+      ],
+      "gradient": [
+        "#a18cd1",
+        "#fbc2eb"
+      ]
+    },
+    {
+      "id": "sing-box",
+      "name": "sing-box",
+      "author": "SagerNet",
+      "description": "Universal proxy platform supporting proxy, rule-based routing, TUN mode, and more. Feature-rich with concise configuration",
+      "url": "https://github.com/SagerNet/sing-box",
+      "homepage": "https://sing-box.sagernet.org/",
+      "stars": 18500,
+      "forks": 2100,
+      "language": "Go",
+      "license": "GPL-3.0",
+      "tags": [
+        "Proxy",
+        "TUN",
+        "Multi-protocol",
+        "SingBox"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Latest Protocol Support",
+        "Active Updates",
+        "Cross-platform"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "clash",
+      "name": "Clash",
+      "author": "Dreamacro",
+      "description": "High-performance proxy software written in Go, supporting Shadowsocks, VMess, Trojan, and more. Excellent rule-based routing capabilities",
+      "url": "https://github.com/Dreamacro/clash",
+      "stars": 8700,
+      "forks": 1500,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Clash",
+        "Rule Routing",
+        "Go"
+      ],
+      "category": "core",
+      "lastCommit": "2024-12-20",
+      "highlights": [
+        "Rule Engine",
+        "Lightweight & Efficient",
+        "Widely Used"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "clash-meta",
+      "name": "Clash.Meta",
+      "author": "MetaCubeX",
+      "description": "Enhanced fork of Clash, supporting more protocols and features including WireGuard, TUIC, etc. Compatible with more rule formats",
+      "url": "https://github.com/MetaCubeX/Clash.Meta",
+      "stars": 5200,
+      "forks": 892,
+      "language": "Go",
+      "license": "GPL-3.0",
+      "tags": [
+        "Clash",
+        "Enhanced",
+        "MetaCubeX"
+      ],
+      "category": "core",
+      "lastCommit": "2025-01-15",
+      "highlights": [
+        "TUIC Support",
+        "WireGuard",
+        "Continuous Updates"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "mihomo",
+      "name": "mihomo",
+      "author": "MetaCubeX",
+      "description": "Fork based on Clash.Meta, focused on better performance and more features. The spiritual successor to Clash Meta",
+      "url": "https://github.com/MetaCubeX/mihomo",
+      "stars": 6800,
+      "forks": 890,
+      "language": "Go",
+      "license": "GPL-3.0",
+      "tags": [
+        "Clash",
+        "mihomo",
+        "High Performance"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Latest Core",
+        "High Performance",
+        "Active Development"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "shadowsocks-rust",
+      "name": "Shadowsocks Rust",
+      "author": "shadowsocks",
+      "description": "Secure SOCKS5 proxy implemented in Rust, supporting multiple encryption methods with excellent performance",
+      "url": "https://github.com/shadowsocks/shadowsocks-rust",
+      "stars": 5500,
+      "forks": 1200,
+      "language": "Rust",
+      "license": "MIT",
+      "tags": [
+        "Proxy",
+        "SOCKS5",
+        "Encryption",
+        "Rust"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Rust Implementation",
+        "High Performance",
+        "Lightweight"
+      ],
+      "gradient": [
+        "#f093fb",
+        "#f5576c"
+      ]
+    },
+    {
+      "id": "trojan",
+      "name": "Trojan",
+      "author": "trojan-gfw",
+      "description": "Proxy tool focused on bypassing firewalls, using TLS encryption to appear as normal HTTPS traffic with strong stealth",
+      "url": "https://github.com/trojan-gfw/trojan",
+      "stars": 6300,
+      "forks": 1300,
+      "language": "C++",
+      "license": "GPL-3.0",
+      "tags": [
+        "Trojan",
+        "TLS",
+        "Obfuscation"
+      ],
+      "category": "core",
+      "lastCommit": "2024-11-15",
+      "highlights": [
+        "TLS Disguise",
+        "Anti-censorship",
+        "Stable"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "hysteria",
+      "name": "Hysteria",
+      "author": "tobyxdd",
+      "description": "High-speed proxy tool based on QUIC protocol, performing exceptionally well in high packet loss network environments",
+      "url": "https://github.com/tobyxdd/hysteria",
+      "stars": 5800,
+      "forks": 678,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "QUIC",
+        "High Speed",
+        "Packet Loss Resistant"
+      ],
+      "category": "core",
+      "lastCommit": "2025-01-10",
+      "highlights": [
+        "QUIC Protocol",
+        "Aggressive Acceleration",
+        "Low Latency"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "hysteria2",
+      "name": "Hysteria 2",
+      "author": "apernet",
+      "description": "Next generation of Hysteria with upgraded protocol, stronger performance, and simpler configuration",
+      "url": "https://github.com/apernet/hysteria",
+      "stars": 4800,
+      "forks": 680,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Hysteria2",
+        "QUIC",
+        "High Speed"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "New Version",
+        "Simpler",
+        "Stronger Performance"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "tuic",
+      "name": "TUIC",
+      "author": "EAimTY",
+      "description": "Proxy tool based on QUIC protocol with low latency and high speed. Simple configuration with multiple authentication methods",
+      "url": "https://github.com/EAimTY/tuic",
+      "stars": 3200,
+      "forks": 345,
+      "language": "Rust",
+      "license": "MIT",
+      "tags": [
+        "TUIC",
+        "QUIC",
+        "Low Latency"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-27",
+      "highlights": [
+        "Rust Implementation",
+        "QUIC v5",
+        "High Performance"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "naiveproxy",
+      "name": "NaïveProxy",
+      "author": "klzgrad",
+      "description": "Uses Chrome's network stack for traffic obfuscation. Excellent disguise with strong anti-censorship capabilities",
+      "url": "https://github.com/klzgrad/naiveproxy",
+      "stars": 8500,
+      "forks": 1100,
+      "language": "C++",
+      "license": "BSD-3-Clause",
+      "tags": [
+        "Obfuscation",
+        "Chrome",
+        "Anti-censorship"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-26",
+      "highlights": [
+        "Chrome Disguise",
+        "Anti-detection",
+        "Stable"
+      ],
+      "gradient": [
+        "#f093fb",
+        "#f5576c"
+      ]
+    },
+    {
+      "id": "wireguard",
+      "name": "WireGuard",
+      "author": "WireGuard",
+      "description": "Modern, secure, and fast VPN protocol implementation. Concise and efficient code, integrated into the Linux kernel",
+      "url": "https://github.com/WireGuard/WireGuard",
+      "stars": 24500,
+      "forks": 3100,
+      "language": "C",
+      "license": "GPL-2.0",
+      "tags": [
+        "WireGuard",
+        "VPN",
+        "Kernel"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Kernel Integration",
+        "Ultimate Security",
+        "High Performance"
+      ],
+      "gradient": [
+        "#43e97b",
+        "#38f9d7"
+      ]
+    },
+    {
+      "id": "outline-server",
+      "name": "Outline Server",
+      "author": "Jigsaw-Code",
+      "description": "Google-backed project providing an easy-to-use proxy server setup solution with excellent client experience",
+      "url": "https://github.com/Jigsaw-Code/outline-server",
+      "stars": 8200,
+      "forks": 892,
+      "language": "TypeScript",
+      "license": "Apache-2.0",
+      "tags": [
+        "Outline",
+        "Easy to Use",
+        "Google"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Official Support",
+        "Easy to Use",
+        "Secure"
+      ],
+      "gradient": [
+        "#43e97b",
+        "#38f9d7"
+      ]
+    },
+    {
+      "id": "juicity",
+      "name": "Juicity",
+      "author": "juicity",
+      "description": "Lightweight proxy tool based on QUIC protocol with low latency, high performance, and easy deployment",
+      "url": "https://github.com/juicity/juicity",
+      "stars": 1200,
+      "forks": 156,
+      "language": "Go",
+      "license": "AGPL-3.0",
+      "tags": [
+        "QUIC",
+        "Lightweight",
+        "High Performance"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Lightweight",
+        "Quick Deploy",
+        "Low Latency"
+      ],
+      "gradient": [
+        "#8b5cf6",
+        "#6d28d9"
+      ]
+    },
+    {
+      "id": "inbounds-tunnel",
+      "name": "Inbounds Tunnel",
+      "author": "XTLS",
+      "description": "Tunnel tool for the Xray ecosystem, supporting multiple protocol conversion and forwarding",
+      "url": "https://github.com/XTLS/inbounds-tunnel",
+      "stars": 680,
+      "forks": 89,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Tunnel",
+        "Protocol Conversion",
+        "Xray"
+      ],
+      "category": "core",
+      "lastCommit": "2025-05-25",
+      "highlights": [
+        "Protocol Conversion",
+        "Xray Ecosystem",
+        "Flexible Configuration"
+      ],
+      "gradient": [
+        "#a18cd1",
+        "#fbc2eb"
+      ]
+    },
+    {
+      "id": "clash-for-windows",
+      "name": "Clash for Windows",
+      "author": "Fndroid",
+      "description": "Windows/macOS GUI client for Clash with a friendly interface. The top choice for getting started with Clash",
+      "url": "https://github.com/Fndroid/clash_for_windows_pkg",
+      "stars": 12500,
+      "forks": 2850,
+      "language": "JavaScript",
+      "license": "MIT",
+      "tags": [
+        "GUI",
+        "Windows",
+        "macOS"
+      ],
+      "category": "gui",
+      "lastCommit": "2024-10-20",
+      "highlights": [
+        "Classic Client",
+        "Feature Complete",
+        "Wide Community"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "clashx",
+      "name": "ClashX",
+      "author": "yichengchen",
+      "description": "Minimalist Clash client for macOS with lightweight design and convenient operation",
+      "url": "https://github.com/yichengchen/clashX",
+      "stars": 6800,
+      "forks": 1200,
+      "language": "Swift",
+      "license": "MIT",
+      "tags": [
+        "Clash",
+        "macOS",
+        "GUI"
+      ],
+      "category": "gui",
+      "lastCommit": "2024-09-15",
+      "highlights": [
+        "macOS Exclusive",
+        "Minimalist",
+        "Lightweight"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "clash-verge",
+      "name": "Clash Verge",
+      "author": "zzzgydi",
+      "description": "Modern Clash GUI client built with Tauri, supporting Windows, macOS, and Linux with a beautiful interface",
+      "url": "https://github.com/zzzgydi/clash-verge",
+      "stars": 4500,
+      "forks": 567,
+      "language": "Rust",
+      "license": "MIT",
+      "tags": [
+        "Clash",
+        "Tauri",
+        "Modern"
+      ],
+      "category": "gui",
+      "lastCommit": "2025-01-05",
+      "highlights": [
+        "Tauri Architecture",
+        "Lightweight & Fast",
+        "Beautiful UI"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "clash-verge-rev",
+      "name": "Clash Verge Rev",
+      "author": "clash-verge-rev",
+      "description": "Active fork of Clash Verge with continuous updates and fixes, supporting the latest Clash Meta core",
+      "url": "https://github.com/clash-verge-rev/clash-verge-rev",
+      "stars": 5800,
+      "forks": 780,
+      "language": "Rust",
+      "license": "MIT",
+      "tags": [
+        "Clash",
+        "Tauri",
+        "Rev Edition"
+      ],
+      "category": "gui",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Continuous Updates",
+        "mihomo Support",
+        "Active Maintenance"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "clash-party",
+      "name": "Clash Party",
+      "author": "mihomo-party-org",
+      "description": "Cross-platform proxy client based on mihomo core, formerly Mihomo Party, providing a stable and efficient proxy experience",
+      "url": "https://github.com/mihomo-party-org/clash-party",
+      "homepage": "https://clash-party.net/",
+      "stars": 3800,
+      "forks": 450,
+      "language": "Rust",
+      "license": "MIT",
+      "tags": [
+        "Clash",
+        "mihomo",
+        "Cross-platform"
+      ],
+      "category": "gui",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "mihomo Core",
+        "Modern UI",
+        "Active Updates"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "qv2ray",
+      "name": "Qv2ray",
+      "author": "Qv2ray",
+      "description": "Cross-platform V2Ray GUI client supporting multiple proxy protocols with a powerful plugin system",
+      "url": "https://github.com/Qv2ray/Qv2ray",
+      "stars": 5600,
+      "forks": 890,
+      "language": "C++",
+      "license": "GPL-3.0",
+      "tags": [
+        "V2Ray",
+        "GUI",
+        "Cross-platform"
+      ],
+      "category": "gui",
+      "lastCommit": "2024-11-20",
+      "highlights": [
+        "Plugin System",
+        "Highly Customizable",
+        "Feature Rich"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "v2raya",
+      "name": "v2rayA",
+      "author": "v2rayA",
+      "description": "Web client for V2Ray with transparent proxy support. Simple and intuitive configuration, suitable for users unfamiliar with command line",
+      "url": "https://github.com/v2rayA/v2rayA",
+      "homepage": "https://v2rayA.github.io/",
+      "stars": 4500,
+      "forks": 567,
+      "language": "Go",
+      "license": "AGPL-3.0",
+      "tags": [
+        "V2Ray",
+        "Web UI",
+        "Transparent Proxy"
+      ],
+      "category": "gui",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Web Interface",
+        "Transparent Proxy",
+        "Easy Deployment"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "sagernet",
+      "name": "SagerNet",
+      "author": "SagerNet",
+      "description": "Universal proxy client for Android, supporting multiple protocols with a clean interface",
+      "url": "https://github.com/SagerNet/SagerNet",
+      "stars": 3200,
+      "forks": 456,
+      "language": "Kotlin",
+      "license": "GPL-3.0",
+      "tags": [
+        "Android",
+        "Proxy",
+        "Mobile"
+      ],
+      "category": "gui",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Android Native",
+        "Multi-protocol",
+        "Lightweight"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "nekobox",
+      "name": "NekoBox",
+      "author": "MatsuriDayo",
+      "description": "Proxy client for Android supporting sing-box core with a beautiful interface and comprehensive features",
+      "url": "https://github.com/MatsuriDayo/NekoBox",
+      "stars": 4200,
+      "forks": 560,
+      "language": "Kotlin",
+      "license": "GPL-3.0",
+      "tags": [
+        "Android",
+        "sing-box",
+        "Mobile"
+      ],
+      "category": "gui",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "sing-box Core",
+        "Beautiful UI",
+        "Multi-protocol"
+      ],
+      "gradient": [
+        "#f472b6",
+        "#ec4899"
+      ]
+    },
+    {
+      "id": "v2rayng",
+      "name": "V2RayNG",
+      "author": "2dust",
+      "description": "Most popular V2Ray client for Android, simple to use with rich features",
+      "url": "https://github.com/2dust/v2rayNG",
+      "stars": 22500,
+      "forks": 4200,
+      "language": "Kotlin",
+      "license": "GPL-3.0",
+      "tags": [
+        "Android",
+        "V2Ray",
+        "Mobile"
+      ],
+      "category": "gui",
+      "lastCommit": "2025-05-27",
+      "highlights": [
+        "Most Popular",
+        "Stable & Reliable",
+        "Easy to Use"
+      ],
+      "gradient": [
+        "#60a5fa",
+        "#3b82f6"
+      ]
+    },
+    {
+      "id": "clash-flutter",
+      "name": "Clash Flutter",
+      "author": "clash-for-flutter",
+      "description": "Cross-platform Clash client built with Flutter, supporting Windows, macOS, Linux, and Android",
+      "url": "https://github.com/clash-for-flutter/clash_flutter",
+      "stars": 2800,
+      "forks": 345,
+      "language": "Dart",
+      "license": "MIT",
+      "tags": [
+        "Flutter",
+        "Cross-platform",
+        "Clash"
+      ],
+      "category": "gui",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Flutter Framework",
+        "Cross-platform",
+        "Beautiful"
+      ],
+      "gradient": [
+        "#38bdf8",
+        "#0ea5e9"
+      ]
+    },
+    {
+      "id": "sub-store",
+      "name": "Sub-Store",
+      "author": "sub-store-org",
+      "description": "Powerful subscription management tool supporting subscription conversion, merging, filtering, and customization",
+      "url": "https://github.com/sub-store-org/Sub-Store",
+      "stars": 4500,
+      "forks": 620,
+      "language": "JavaScript",
+      "license": "MIT",
+      "tags": [
+        "Subscription Management",
+        "Subscription Conversion",
+        "Aggregation"
+      ],
+      "category": "subscription",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Subscription Merging",
+        "Format Conversion",
+        "Node Filtering"
+      ],
+      "gradient": [
+        "#f093fb",
+        "#f5576c"
+      ]
+    },
+    {
+      "id": "subconverter",
+      "name": "subconverter",
+      "author": "tindy2013",
+      "description": "Universal subscription conversion tool supporting multiple format conversions with simple deployment",
+      "url": "https://github.com/tindy2013/subconverter",
+      "stars": 3800,
+      "forks": 512,
+      "language": "C++",
+      "license": "GPL-3.0",
+      "tags": [
+        "Subscription Conversion",
+        "Format Conversion",
+        "Tool"
+      ],
+      "category": "subscription",
+      "lastCommit": "2025-05-26",
+      "highlights": [
+        "Multi-format Support",
+        "High Performance",
+        "Easy Deployment"
+      ],
+      "gradient": [
+        "#f093fb",
+        "#f5576c"
+      ]
+    },
+    {
+      "id": "proxypool",
+      "name": "ProxyPool",
+      "author": "Python3WebSpider",
+      "description": "Crawler proxy pool project that periodically scrapes free proxy websites, tests availability, and provides API",
+      "url": "https://github.com/Python3WebSpider/ProxyPool",
+      "stars": 5300,
+      "forks": 1230,
+      "language": "Python",
+      "license": "MIT",
+      "tags": [
+        "Proxy Pool",
+        "Crawler",
+        "Free Proxy"
+      ],
+      "category": "subscription",
+      "lastCommit": "2025-05-25",
+      "highlights": [
+        "Auto Collection",
+        "Availability Testing",
+        "API Interface"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "subweb",
+      "name": "SubWeb",
+      "author": "sub-web",
+      "description": "Subscription conversion web interface supporting multiple subscription format conversions, usable without a backend",
+      "url": "https://github.com/sub-web/sub-web",
+      "stars": 1800,
+      "forks": 345,
+      "language": "Vue",
+      "license": "MIT",
+      "tags": [
+        "Subscription Conversion",
+        "Web Interface",
+        "Frontend"
+      ],
+      "category": "subscription",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Web Interface",
+        "No Backend Required",
+        "Easy to Use"
+      ],
+      "gradient": [
+        "#a78bfa",
+        "#8b5cf6"
+      ]
+    },
+    {
+      "id": "node-speedtest",
+      "name": "Node Speedtest",
+      "author": "gfwlist",
+      "description": "Proxy node speed testing tool, supporting multiple protocols and batch node availability testing",
+      "url": "https://github.com/gfwlist/node-speedtest",
+      "stars": 1500,
+      "forks": 230,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Node Testing",
+        "Speedtest",
+        "Batch"
+      ],
+      "category": "subscription",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Batch Testing",
+        "Multi-protocol",
+        "Fast"
+      ],
+      "gradient": [
+        "#4ade80",
+        "#22c55e"
+      ]
+    },
+    {
+      "id": "hubproxy",
+      "name": "HubProxy",
+      "author": "sky22333",
+      "description": "Self-hosted Docker and GitHub download acceleration service, lightweight with only 18MB memory usage",
+      "url": "https://github.com/sky22333/hubproxy",
+      "stars": 890,
+      "forks": 124,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Docker Acceleration",
+        "GitHub Acceleration",
+        "Self-hosted"
+      ],
+      "category": "github_tools",
+      "lastCommit": "2025-01-14",
+      "highlights": [
+        "Lightweight",
+        "Multi-scenario Acceleration",
+        "Self-hosted Service"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "fastgithub",
+      "name": "FastGithub",
+      "author": "whutzfk",
+      "description": "GitHub acceleration tool, solving slow access, slow downloads, and clone timeout issues",
+      "url": "https://github.com/whutzfk/FastGitHub",
+      "stars": 12500,
+      "forks": 2100,
+      "language": "C#",
+      "license": "MIT",
+      "tags": [
+        "GitHub Acceleration",
+        "Download Acceleration",
+        "Transparent Proxy"
+      ],
+      "category": "github_tools",
+      "lastCommit": "2024-08-20",
+      "highlights": [
+        "Full Acceleration",
+        "Transparent Proxy",
+        "Easy to Use"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "steam-plus-plus",
+      "name": "Steam++",
+      "author": "rmbuser",
+      "description": "Multi-functional toolbox supporting GitHub acceleration, Steam community acceleration, and more",
+      "url": "https://github.com/rmbuser/SteamTools",
+      "stars": 15200,
+      "forks": 2340,
+      "language": "C#",
+      "license": "MIT",
+      "tags": [
+        "GitHub Acceleration",
+        "Steam Acceleration",
+        "Toolbox"
+      ],
+      "category": "github_tools",
+      "lastCommit": "2025-01-12",
+      "highlights": [
+        "Multi-functional",
+        "GitHub/Steam Acceleration",
+        "Active Updates"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "dev-sidecar",
+      "name": "Dev Sidecar",
+      "author": "docmirror",
+      "description": "Developer sidecar for GitHub acceleration, git clone acceleration, and release download acceleration",
+      "url": "https://github.com/docmirror/dev-sidecar",
+      "stars": 8900,
+      "forks": 1120,
+      "language": "JavaScript",
+      "license": "MIT",
+      "tags": [
+        "GitHub Acceleration",
+        "Git Acceleration",
+        "Dev Tool"
+      ],
+      "category": "github_tools",
+      "lastCommit": "2025-01-05",
+      "highlights": [
+        "Git Acceleration",
+        "DNS Optimization",
+        "Out of the Box"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "cf-workers-proxy",
+      "name": "Cloudflare Workers Proxy",
+      "author": "jonssonyan",
+      "description": "Deploy a universal proxy using Cloudflare Workers, supporting Docker and GitHub acceleration",
+      "url": "https://github.com/jonssonyan/cf-workers-proxy",
+      "stars": 1200,
+      "forks": 178,
+      "language": "JavaScript",
+      "license": "MIT",
+      "tags": [
+        "Cloudflare",
+        "Workers",
+        "Proxy"
+      ],
+      "category": "github_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Free Deployment",
+        "Serverless",
+        "Multi-functional"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "github520",
+      "name": "GitHub520",
+      "author": "521xueweihan",
+      "description": "GitHub access acceleration hosts solution, regularly updated and maintained",
+      "url": "https://github.com/521xueweihan/GitHub520",
+      "stars": 16800,
+      "forks": 2340,
+      "language": "Python",
+      "license": "MIT",
+      "tags": [
+        "Hosts",
+        "GitHub Acceleration",
+        "DNS"
+      ],
+      "category": "github_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Hosts Solution",
+        "Auto Update",
+        "Widely Used"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "gh-proxy",
+      "name": "gh-proxy",
+      "author": "hunshcn",
+      "description": "GitHub file proxy acceleration service, supporting Release and raw file acceleration",
+      "url": "https://github.com/hunshcn/gh-proxy",
+      "stars": 4200,
+      "forks": 890,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Proxy",
+        "GitHub Acceleration",
+        "File Proxy"
+      ],
+      "category": "github_tools",
+      "lastCommit": "2024-12-28",
+      "highlights": [
+        "Self-hosted Service",
+        "Simple Deployment",
+        "File Acceleration"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "git-mirror",
+      "name": "Git Mirror",
+      "author": "git-mirror-org",
+      "description": "GitHub repository mirroring tool, supporting automatic syncing of GitHub repos to domestic mirrors",
+      "url": "https://github.com/git-mirror-org/git-mirror",
+      "stars": 2100,
+      "forks": 280,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Repo Mirror",
+        "Auto Sync",
+        "GitHub"
+      ],
+      "category": "github_tools",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Auto Sync",
+        "Repo Mirror",
+        "Simple Deployment"
+      ],
+      "gradient": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    {
+      "id": "openclash",
+      "name": "OpenClash",
+      "author": "vernesong",
+      "description": "Clash client for OpenWrt with powerful features, supporting multiple proxy protocols and rules",
+      "url": "https://github.com/vernesong/OpenClash",
+      "stars": 8900,
+      "forks": 1500,
+      "language": "Lua",
+      "license": "GPL-3.0",
+      "tags": [
+        "OpenWrt",
+        "Clash",
+        "Router"
+      ],
+      "category": "router",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Full Features",
+        "Rule Support",
+        "Active Updates"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "passwall",
+      "name": "PassWall",
+      "author": "passwall",
+      "description": "Lua-based OpenWrt plugin providing a graphical interface for managing proxy services",
+      "url": "https://github.com/passwall/passwall",
+      "stars": 3200,
+      "forks": 456,
+      "language": "Lua",
+      "license": "GPL-3.0",
+      "tags": [
+        "OpenWrt",
+        "LUCI",
+        "Graphical"
+      ],
+      "category": "router",
+      "lastCommit": "2025-01-10",
+      "highlights": [
+        "Web Interface",
+        "Multi-protocol",
+        "Easy Configuration"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "luci-app-passwall",
+      "name": "PassWall2",
+      "author": "xiaorouji",
+      "description": "Successor to PassWall, supporting more protocols and features",
+      "url": "https://github.com/xiaorouji/luci-app-passwall",
+      "stars": 2800,
+      "forks": 345,
+      "language": "Lua",
+      "license": "GPL-3.0",
+      "tags": [
+        "OpenWrt",
+        "PassWall",
+        "Upgraded"
+      ],
+      "category": "router",
+      "lastCommit": "2025-01-12",
+      "highlights": [
+        "New Version",
+        "More Protocols",
+        "Continuous Updates"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "luci-app-mihomo",
+      "name": "luci-app-mihomo",
+      "author": "mihomo-party-org",
+      "description": "mihomo core LuCI application for OpenWrt, supporting transparent proxy",
+      "url": "https://github.com/mihomo-party-org/luci-app-mihomo",
+      "stars": 890,
+      "forks": 112,
+      "language": "Lua",
+      "license": "GPL-3.0",
+      "tags": [
+        "OpenWrt",
+        "mihomo",
+        "LuCI"
+      ],
+      "category": "router",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "mihomo Support",
+        "OpenWrt Exclusive",
+        "Latest Core"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "fancyss",
+      "name": "fancyss",
+      "author": "hxdd",
+      "description": "Proxy plugin for Merlin firmware, supporting multiple proxy protocols",
+      "url": "https://github.com/hxdd/fancyss",
+      "stars": 3400,
+      "forks": 678,
+      "language": "Shell",
+      "license": "GPL-3.0",
+      "tags": [
+        "Merlin",
+        "ASUS",
+        "Firmware Plugin"
+      ],
+      "category": "router",
+      "lastCommit": "2025-01-10",
+      "highlights": [
+        "Merlin Support",
+        "Graphical Interface",
+        "Multi-protocol"
+      ],
+      "gradient": [
+        "#43e97b",
+        "#38f9d7"
+      ]
+    },
+    {
+      "id": "xderm-mini",
+      "name": "Xderm Mini",
+      "author": "faraz212",
+      "description": "Simple proxy management tool for OpenWrt with a clean interface",
+      "url": "https://github.com/faraz212/Xderm-Mini",
+      "stars": 1200,
+      "forks": 234,
+      "language": "Shell",
+      "license": "MIT",
+      "tags": [
+        "OpenWrt",
+        "Simple",
+        "Proxy Management"
+      ],
+      "category": "router",
+      "lastCommit": "2024-12-20",
+      "highlights": [
+        "Lightweight",
+        "Easy to Use",
+        "Web Interface"
+      ],
+      "gradient": [
+        "#43e97b",
+        "#38f9d7"
+      ]
+    },
+    {
+      "id": "luci-app-homeproxy",
+      "name": "HomeProxy",
+      "author": "immortalwrt",
+      "description": "Official proxy plugin for ImmortalWrt, supporting multiple protocols with a beautiful interface",
+      "url": "https://github.com/immortalwrt/luci-app-homeproxy",
+      "stars": 2100,
+      "forks": 280,
+      "language": "Lua",
+      "license": "MIT",
+      "tags": [
+        "OpenWrt",
+        "immortalwrt",
+        "Multi-protocol"
+      ],
+      "category": "router",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Official Plugin",
+        "Beautiful UI",
+        "Multi-protocol"
+      ],
+      "gradient": [
+        "#4ade80",
+        "#22c55e"
+      ]
+    },
+    {
+      "id": "docker",
+      "name": "Docker",
+      "author": "moby",
+      "description": "Containerization platform for quickly deploying various proxy services, one-click installation of multiple projects",
+      "url": "https://github.com/moby/moby",
+      "stars": 68500,
+      "forks": 20200,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Docker",
+        "Container",
+        "Deployment"
+      ],
+      "category": "docker",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Containerization Standard",
+        "Widely Used",
+        "Rich Ecosystem"
+      ],
+      "gradient": [
+        "#2496ed",
+        "#1b83d4"
+      ]
+    },
+    {
+      "id": "docker-compose",
+      "name": "Docker Compose",
+      "author": "docker",
+      "description": "Tool for defining and running multi-container Docker applications",
+      "url": "https://github.com/docker/compose",
+      "stars": 32500,
+      "forks": 5800,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Docker",
+        "Compose",
+        "Orchestration"
+      ],
+      "category": "docker",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Multi-container Orchestration",
+        "YAML Configuration",
+        "Convenient Deployment"
+      ],
+      "gradient": [
+        "#2496ed",
+        "#1b83d4"
+      ]
+    },
+    {
+      "id": "docker-proxy",
+      "name": "Docker-Proxy",
+      "author": "teddysun",
+      "description": "Docker image collection for various proxy services, one-click deployment of proxy servers",
+      "url": "https://github.com/teddysun/docker-proxy",
+      "stars": 2500,
+      "forks": 560,
+      "language": "Dockerfile",
+      "license": "MIT",
+      "tags": [
+        "Docker",
+        "Proxy",
+        "One-click Deploy"
+      ],
+      "category": "docker",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Image Collection",
+        "One-click Deploy",
+        "Multi-protocol"
+      ],
+      "gradient": [
+        "#2496ed",
+        "#1b83d4"
+      ]
+    },
+    {
+      "id": "portainer",
+      "name": "Portainer",
+      "author": "portainer",
+      "description": "Docker visual management tool with web interface for managing Docker containers, images, and networks",
+      "url": "https://github.com/portainer/portainer",
+      "stars": 27500,
+      "forks": 3200,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Docker",
+        "Visual",
+        "Management"
+      ],
+      "category": "docker",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Visual",
+        "Web Interface",
+        "Easy Management"
+      ],
+      "gradient": [
+        "#14b8a6",
+        "#0d9488"
+      ]
+    },
+    {
+      "id": "alist",
+      "name": "AList",
+      "author": "alist-org",
+      "description": "File listing program supporting multiple cloud drives, enabling unified management of multiple cloud storage resources",
+      "url": "https://github.com/alist-org/alist",
+      "stars": 38500,
+      "forks": 5200,
+      "language": "Go",
+      "license": "AGPL-3.0",
+      "tags": [
+        "Cloud Drive",
+        "Aggregation",
+        "File Management"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Multi-cloud Support",
+        "WebDAV",
+        "File Preview"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "qbittorrent",
+      "name": "qBittorrent",
+      "author": "qbittorrent",
+      "description": "Powerful BitTorrent download tool with remote download support, works even better with a proxy",
+      "url": "https://github.com/qbittorrent/qBittorrent",
+      "stars": 22500,
+      "forks": 4800,
+      "language": "C++",
+      "license": "GPL-2.0",
+      "tags": [
+        "Download",
+        "BT",
+        "P2P"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Feature Complete",
+        "Cross-platform",
+        "RSS Support"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "homebrew",
+      "name": "Homebrew",
+      "author": "Homebrew",
+      "description": "macOS/Linux package manager for easily installing various network tools and CLI software",
+      "url": "https://github.com/Homebrew/brew",
+      "stars": 39500,
+      "forks": 9500,
+      "language": "Ruby",
+      "license": "BSD-2-Clause",
+      "tags": [
+        "Package Manager",
+        "macOS",
+        "Linux"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Package Management",
+        "Active Community",
+        "Easy to Use"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "uptime-kuma",
+      "name": "Uptime Kuma",
+      "author": "louislam",
+      "description": "Self-hosted website monitoring tool, supporting proxy node availability monitoring",
+      "url": "https://github.com/louislam/uptime-kuma",
+      "stars": 42500,
+      "forks": 4100,
+      "language": "JavaScript",
+      "license": "MIT",
+      "tags": [
+        "Monitoring",
+        "Self-hosted",
+        "Availability"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Self-hosted",
+        "Web Interface",
+        "Alert Notifications"
+      ],
+      "gradient": [
+        "#43e97b",
+        "#38f9d7"
+      ]
+    },
+    {
+      "id": "miniserve",
+      "name": "miniserve",
+      "author": "svenstaro",
+      "description": "Small file sharing server written in Rust for quick file sharing",
+      "url": "https://github.com/svenstaro/miniserve",
+      "stars": 6200,
+      "forks": 456,
+      "language": "Rust",
+      "license": "MIT",
+      "tags": [
+        "File Sharing",
+        "Rust",
+        "Lightweight"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Single Binary",
+        "Cross-platform",
+        "Quick Sharing"
+      ],
+      "gradient": [
+        "#fa709a",
+        "#fee140"
+      ]
+    },
+    {
+      "id": "warp",
+      "name": "Cloudflare WARP",
+      "author": "ViRb3",
+      "description": "Go implementation of the WARP protocol, providing secure and fast network connections",
+      "url": "https://github.com/ViRb3/warp-plus",
+      "stars": 1800,
+      "forks": 230,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "WARP",
+        "Cloudflare",
+        "Security"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "WARP Protocol",
+        "Cloudflare",
+        "Security"
+      ],
+      "gradient": [
+        "#f97316",
+        "#ea580c"
+      ]
+    },
+    {
+      "id": "gost",
+      "name": "GOST",
+      "author": "ginuerzh",
+      "description": "GO Simple Tunnel - A versatile tunnel written in Go",
+      "url": "https://github.com/ginuerzh/gost",
+      "stars": 14500,
+      "forks": 2100,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Tunnel",
+        "Go",
+        "Multi-functional"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Multi-functional",
+        "Multi-protocol",
+        "Tunnel"
+      ],
+      "gradient": [
+        "#38bdf8",
+        "#0ea5e9"
+      ]
+    },
+    {
+      "id": "frp",
+      "name": "frp",
+      "author": "fatedier",
+      "description": "Fast reverse proxy that helps expose local services to the public internet",
+      "url": "https://github.com/fatedier/frp",
+      "stars": 82500,
+      "forks": 11500,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Reverse Proxy",
+        "NAT Traversal",
+        "Public Network"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Most Popular",
+        "Stable",
+        "Powerful"
+      ],
+      "gradient": [
+        "#60a5fa",
+        "#3b82f6"
+      ]
+    },
+    {
+      "id": "trojan-go",
+      "name": "Trojan Go",
+      "author": "p4gefau1t",
+      "description": "Go implementation of Trojan with more features and better performance",
+      "url": "https://github.com/p4gefau1t/trojan-go",
+      "stars": 6800,
+      "forks": 1100,
+      "language": "Go",
+      "license": "GPL-3.0",
+      "tags": [
+        "Trojan",
+        "Go",
+        "High Performance"
+      ],
+      "category": "utilities",
+      "lastCommit": "2025-05-27",
+      "highlights": [
+        "Go Implementation",
+        "High Performance",
+        "Multi-platform"
+      ],
+      "gradient": [
+        "#a78bfa",
+        "#8b5cf6"
+      ]
+    },
+    {
+      "id": "clash-rules",
+      "name": "Clash Rules Collection",
+      "author": "Loyalsoldier",
+      "description": "Comprehensive Clash rule collection including domestic and international routing rules",
+      "url": "https://github.com/Loyalsoldier/clash-rules",
+      "stars": 4500,
+      "forks": 890,
+      "language": "YAML",
+      "license": "MIT",
+      "tags": [
+        "Clash",
+        "Rules",
+        "Routing"
+      ],
+      "category": "rules",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Comprehensive Rules",
+        "Regular Updates",
+        "Precise Routing"
+      ],
+      "gradient": [
+        "#a18cd1",
+        "#fbc2eb"
+      ]
+    },
+    {
+      "id": "lhie1-rules",
+      "name": "Loyalsoldier Rules",
+      "author": "Loyalsoldier",
+      "description": "Routing rules supporting multiple proxy clients",
+      "url": "https://github.com/Loyalsoldier/geoip",
+      "stars": 2800,
+      "forks": 567,
+      "language": "YAML",
+      "license": "MIT",
+      "tags": [
+        "GeoIP",
+        "Routing",
+        "Rules"
+      ],
+      "category": "rules",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "GeoIP Rules",
+        "Precise Routing",
+        "Regular Updates"
+      ],
+      "gradient": [
+        "#a18cd1",
+        "#fbc2eb"
+      ]
+    },
+    {
+      "id": "sing-box-config",
+      "name": "sing-box Config Repo",
+      "author": "2345bore",
+      "description": "Curated sing-box configuration files and tutorials",
+      "url": "https://github.com/2345bore/sing-box-config",
+      "stars": 560,
+      "forks": 89,
+      "language": "JSON",
+      "license": "MIT",
+      "tags": [
+        "sing-box",
+        "Configuration",
+        "Tutorial"
+      ],
+      "category": "rules",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Config Sharing",
+        "Multi-protocol",
+        "Continuous Updates"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "clash-config",
+      "name": "Clash Config Share",
+      "author": "tindy2013",
+      "description": "Sharing Clash configurations and rules",
+      "url": "https://github.com/tindy2013/clash-config",
+      "stars": 780,
+      "forks": 123,
+      "language": "YAML",
+      "license": "MIT",
+      "tags": [
+        "Clash",
+        "Configuration",
+        "Sharing"
+      ],
+      "category": "rules",
+      "lastCommit": "2025-01-12",
+      "highlights": [
+        "Config Templates",
+        "Rule Sets",
+        "Practical Sharing"
+      ],
+      "gradient": [
+        "#4facfe",
+        "#00f2fe"
+      ]
+    },
+    {
+      "id": "clash-provider",
+      "name": "Clash Rule Provider",
+      "author": "ConnersHua",
+      "description": "Provides rule providers that can be referenced by Clash",
+      "url": "https://github.com/ConnersHua/Rule",
+      "stars": 4200,
+      "forks": 890,
+      "language": "YAML",
+      "license": "MIT",
+      "tags": [
+        "Rule Provider",
+        "Clash",
+        "Rules"
+      ],
+      "category": "rules",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Remote Rules",
+        "Auto Update",
+        "Widely Used"
+      ],
+      "gradient": [
+        "#a18cd1",
+        "#fbc2eb"
+      ]
+    },
+    {
+      "id": "rules-proxy",
+      "name": "Proxy Rules",
+      "author": "blackmatrix7",
+      "description": "Curated proxy rule sets supporting multiple clients",
+      "url": "https://github.com/blackmatrix7/ios_rule_script",
+      "stars": 8500,
+      "forks": 1200,
+      "language": "JavaScript",
+      "license": "MIT",
+      "tags": [
+        "Rule Sets",
+        "Multi-client",
+        "Routing"
+      ],
+      "category": "rules",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Rich Rules",
+        "Multi-client",
+        "Auto Update"
+      ],
+      "gradient": [
+        "#60a5fa",
+        "#3b82f6"
+      ]
+    },
+    {
+      "id": "geosite",
+      "name": "GeoSite",
+      "author": "Loyalsoldier",
+      "description": "Domain rule collection for routing, supporting multiple proxy clients",
+      "url": "https://github.com/Loyalsoldier/v2ray-rules-dat",
+      "stars": 12500,
+      "forks": 2100,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "GeoSite",
+        "Routing",
+        "Rules"
+      ],
+      "category": "rules",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Comprehensive Rules",
+        "Regular Updates",
+        "Widely Used"
+      ],
+      "gradient": [
+        "#4ade80",
+        "#22c55e"
+      ]
+    },
+    {
+      "id": "mirror-gitclone",
+      "name": "gitclone Mirror",
+      "author": "gitclone-org",
+      "description": "GitHub clone acceleration mirror site",
+      "url": "https://github.com/gitclone-org/gitclone",
+      "stars": 1200,
+      "forks": 145,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Mirror",
+        "Git Clone",
+        "Acceleration"
+      ],
+      "category": "mirrors",
+      "lastCommit": "2024-11-25",
+      "highlights": [
+        "Clone Acceleration",
+        "Mirror Service",
+        "Self-hosted Solution"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "github-mirror-sites",
+      "name": "GitHub Mirror Sites List",
+      "author": "zimv",
+      "description": "Curated collection of various GitHub mirror sites",
+      "url": "https://github.com/zimv/github-mirror-sites",
+      "stars": 2100,
+      "forks": 345,
+      "language": "Markdown",
+      "license": "MIT",
+      "tags": [
+        "Mirror List",
+        "GitHub",
+        "Acceleration"
+      ],
+      "category": "mirrors",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Mirror Summary",
+        "Continuous Updates",
+        "Usage Guide"
+      ],
+      "gradient": [
+        "#667eea",
+        "#764ba2"
+      ]
+    },
+    {
+      "id": "cn-mirrors",
+      "name": "China Mirror Sources",
+      "author": "cn-mirrors",
+      "description": "Collection of software mirror sources in China, including Docker, PyPI, NPM, and other common sources",
+      "url": "https://github.com/cn-mirrors/mirrors",
+      "stars": 5800,
+      "forks": 890,
+      "language": "Markdown",
+      "license": "CC0",
+      "tags": [
+        "Mirror Sources",
+        "China",
+        "Acceleration"
+      ],
+      "category": "mirrors",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Complete Mirrors",
+        "Available in China",
+        "Regular Updates"
+      ],
+      "gradient": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    {
+      "id": "docker-mirror",
+      "name": "Docker Mirror Acceleration",
+      "author": "docker-practice",
+      "description": "Docker mirror accelerator configuration guide and mirror source collection",
+      "url": "https://github.com/yeasy/docker_practice",
+      "stars": 32500,
+      "forks": 7800,
+      "language": "Markdown",
+      "license": "CC-BY-SA-4.0",
+      "tags": [
+        "Docker",
+        "Mirror Acceleration",
+        "Tutorial"
+      ],
+      "category": "mirrors",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Detailed Tutorial",
+        "Configuration Guide",
+        "Mirror Sources"
+      ],
+      "gradient": [
+        "#2496ed",
+        "#1b83d4"
+      ]
+    },
+    {
+      "id": "node-sub",
+      "name": "Node Subscription Tool",
+      "author": "node-sub-org",
+      "description": "Node subscription sharing and conversion tool, supporting multiple formats",
+      "url": "https://github.com/node-sub-org/node-sub",
+      "stars": 1200,
+      "forks": 156,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Node",
+        "Subscription",
+        "Conversion"
+      ],
+      "category": "node_tools",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Subscription Management",
+        "Format Conversion",
+        "Batch Processing"
+      ],
+      "gradient": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    {
+      "id": "speedtest",
+      "name": "Speedtest CLI",
+      "author": "sivel",
+      "description": "Command-line network speed testing tool, supporting multiple platforms",
+      "url": "https://github.com/sivel/speedtest-cli",
+      "stars": 12500,
+      "forks": 2100,
+      "language": "Python",
+      "license": "Apache-2.0",
+      "tags": [
+        "Speedtest",
+        "CLI",
+        "Network"
+      ],
+      "category": "network_test",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "CLI",
+        "Cross-platform",
+        "Accurate"
+      ],
+      "gradient": [
+        "#10b981",
+        "#059669"
+      ]
+    },
+    {
+      "id": "iperf3",
+      "name": "iPerf3",
+      "author": "esnet",
+      "description": "Network performance testing tool for measuring bandwidth, latency, and packet loss",
+      "url": "https://github.com/esnet/iperf",
+      "stars": 6800,
+      "forks": 1100,
+      "language": "C",
+      "license": "BSD-3-Clause",
+      "tags": [
+        "Network Test",
+        "Bandwidth",
+        "Latency"
+      ],
+      "category": "network_test",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Professional Tool",
+        "Accurate",
+        "Powerful"
+      ],
+      "gradient": [
+        "#10b981",
+        "#059669"
+      ]
+    },
+    {
+      "id": "reality",
+      "name": "REALITY",
+      "author": "XTLS",
+      "description": "XTLS REALITY protocol implementation with strong anti-censorship, no domain or certificate required",
+      "url": "https://github.com/XTLS/REALITY",
+      "stars": 6800,
+      "forks": 950,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "REALITY",
+        "XTLS",
+        "Anti-censorship"
+      ],
+      "category": "protocol_tools",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Strong Anti-censorship",
+        "No Domain Required",
+        "No Certificate Required"
+      ],
+      "gradient": [
+        "#ec4899",
+        "#db2777"
+      ]
+    },
+    {
+      "id": "brook",
+      "name": "Brook",
+      "author": "txthinking",
+      "description": "Cross-platform proxy tool supporting multiple protocols",
+      "url": "https://github.com/txthinking/brook",
+      "stars": 14500,
+      "forks": 2100,
+      "language": "Go",
+      "license": "GPL-3.0",
+      "tags": [
+        "Proxy",
+        "Cross-platform",
+        "Multi-protocol"
+      ],
+      "category": "protocol_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Cross-platform",
+        "Multi-protocol",
+        "Lightweight"
+      ],
+      "gradient": [
+        "#ec4899",
+        "#db2777"
+      ]
+    },
+    {
+      "id": "snell",
+      "name": "Snell",
+      "author": "sirpedroara",
+      "description": "Lightweight proxy protocol",
+      "url": "https://github.com/sirpedroara/Snell",
+      "stars": 890,
+      "forks": 120,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Snell",
+        "Lightweight",
+        "Proxy"
+      ],
+      "category": "protocol_tools",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Lightweight",
+        "Efficient",
+        "Simple"
+      ],
+      "gradient": [
+        "#ec4899",
+        "#db2777"
+      ]
+    },
+    {
+      "id": "shadowsocks-libev",
+      "name": "Shadowsocks-libev",
+      "author": "shadowsocks",
+      "description": "C implementation of Shadowsocks",
+      "url": "https://github.com/shadowsocks/shadowsocks-libev",
+      "stars": 6800,
+      "forks": 1200,
+      "language": "C",
+      "license": "GPL-3.0",
+      "tags": [
+        "Shadowsocks",
+        "C",
+        "Lightweight"
+      ],
+      "category": "protocol_tools",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "C Implementation",
+        "Lightweight & Efficient",
+        "Stable"
+      ],
+      "gradient": [
+        "#ec4899",
+        "#db2777"
+      ]
+    },
+    {
+      "id": "cockpit",
+      "name": "Cockpit",
+      "author": "cockpit-project",
+      "description": "Web interface for Linux server management",
+      "url": "https://github.com/cockpit-project/cockpit",
+      "stars": 11500,
+      "forks": 1500,
+      "language": "C",
+      "license": "LGPL-2.1",
+      "tags": [
+        "Server Management",
+        "Web Interface",
+        "Linux"
+      ],
+      "category": "server_mgmt",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Web Interface",
+        "Easy to Use",
+        "Full Features"
+      ],
+      "gradient": [
+        "#8b5cf6",
+        "#7c3aed"
+      ]
+    },
+    {
+      "id": "ansible",
+      "name": "Ansible",
+      "author": "ansible",
+      "description": "IT automation tool",
+      "url": "https://github.com/ansible/ansible",
+      "stars": 59500,
+      "forks": 18500,
+      "language": "Python",
+      "license": "GPL-3.0",
+      "tags": [
+        "Automation",
+        "Ops",
+        "Configuration Management"
+      ],
+      "category": "server_mgmt",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Automation",
+        "Agentless",
+        "Powerful"
+      ],
+      "gradient": [
+        "#8b5cf6",
+        "#7c3aed"
+      ]
+    },
+    {
+      "id": "1panel",
+      "name": "1Panel",
+      "author": "1Panel-dev",
+      "description": "Modern Linux server operations management panel",
+      "url": "https://github.com/1Panel-dev/1Panel",
+      "stars": 22500,
+      "forks": 3200,
+      "language": "Go",
+      "license": "GPL-3.0",
+      "tags": [
+        "Panel",
+        "Ops",
+        "Modern"
+      ],
+      "category": "server_mgmt",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Modern UI",
+        "Easy to Use",
+        "Feature Rich"
+      ],
+      "gradient": [
+        "#8b5cf6",
+        "#7c3aed"
+      ]
+    },
+    {
+      "id": "bt-panel",
+      "name": "BT-Panel",
+      "author": "aapanel",
+      "description": "Server management panel",
+      "url": "https://github.com/aapanel/bt-panel",
+      "stars": 4200,
+      "forks": 890,
+      "language": "Python",
+      "license": "BSD-3-Clause",
+      "tags": [
+        "BT Panel",
+        "Panel",
+        "Server Management"
+      ],
+      "category": "server_mgmt",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "User Friendly",
+        "Full Features",
+        "One-click Deploy"
+      ],
+      "gradient": [
+        "#8b5cf6",
+        "#7c3aed"
+      ]
+    },
+    {
+      "id": "webmin",
+      "name": "Webmin",
+      "author": "webmin",
+      "description": "Web-based Unix system management tool",
+      "url": "https://github.com/webmin/webmin",
+      "stars": 3800,
+      "forks": 680,
+      "language": "Perl",
+      "license": "BSD-3-Clause",
+      "tags": [
+        "Web Management",
+        "Unix",
+        "System Management"
+      ],
+      "category": "server_mgmt",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Web Interface",
+        "Long History",
+        "Full Features"
+      ],
+      "gradient": [
+        "#8b5cf6",
+        "#7c3aed"
+      ]
+    },
+    {
+      "id": "nmap",
+      "name": "Nmap",
+      "author": "nmap",
+      "description": "Network scanning and security auditing tool",
+      "url": "https://github.com/nmap/nmap",
+      "stars": 9500,
+      "forks": 1800,
+      "language": "C",
+      "license": "Nmap-PSL",
+      "tags": [
+        "Scanning",
+        "Security Audit",
+        "Network"
+      ],
+      "category": "security_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Professional Scanning",
+        "Powerful",
+        "Widely Used"
+      ],
+      "gradient": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    {
+      "id": "wireshark",
+      "name": "Wireshark",
+      "author": "wireshark",
+      "description": "Network protocol analyzer",
+      "url": "https://github.com/wireshark/wireshark",
+      "stars": 6800,
+      "forks": 1200,
+      "language": "C",
+      "license": "GPL-2.0",
+      "tags": [
+        "Protocol Analysis",
+        "Packet Capture",
+        "Network"
+      ],
+      "category": "security_tools",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Protocol Analysis",
+        "Visualization",
+        "Industry Standard"
+      ],
+      "gradient": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    {
+      "id": "nuclei",
+      "name": "Nuclei",
+      "author": "projectdiscovery",
+      "description": "Template-based fast vulnerability scanner",
+      "url": "https://github.com/projectdiscovery/nuclei",
+      "stars": 18500,
+      "forks": 2300,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Vulnerability Scanning",
+        "Template",
+        "Security"
+      ],
+      "category": "security_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Template Driven",
+        "Fast Scanning",
+        "Active Community"
+      ],
+      "gradient": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    {
+      "id": "subfinder",
+      "name": "Subfinder",
+      "author": "projectdiscovery",
+      "description": "Passive subdomain discovery tool",
+      "url": "https://github.com/projectdiscovery/subfinder",
+      "stars": 9500,
+      "forks": 1200,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Subdomain",
+        "Reconnaissance",
+        "Security"
+      ],
+      "category": "security_tools",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Passive Discovery",
+        "Fast",
+        "Multiple Data Sources"
+      ],
+      "gradient": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    {
+      "id": "httpx",
+      "name": "HTTPX",
+      "author": "projectdiscovery",
+      "description": "Fast and multi-purpose HTTP toolkit",
+      "url": "https://github.com/projectdiscovery/httpx",
+      "stars": 7200,
+      "forks": 890,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "HTTP",
+        "Toolkit",
+        "Security"
+      ],
+      "category": "security_tools",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Fast",
+        "Multi-purpose",
+        "Easy Integration"
+      ],
+      "gradient": [
+        "#f59e0b",
+        "#d97706"
+      ]
+    },
+    {
+      "id": "syncthing",
+      "name": "Syncthing",
+      "author": "syncthing",
+      "description": "Open-source P2P file synchronization tool",
+      "url": "https://github.com/syncthing/syncthing",
+      "stars": 55500,
+      "forks": 4200,
+      "language": "Go",
+      "license": "MPL-2.0",
+      "tags": [
+        "File Sync",
+        "P2P",
+        "Open Source"
+      ],
+      "category": "data_transfer",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "P2P Sync",
+        "Encrypted Transfer",
+        "Cross-platform"
+      ],
+      "gradient": [
+        "#22c55e",
+        "#16a34a"
+      ]
+    },
+    {
+      "id": "nextcloud",
+      "name": "Nextcloud",
+      "author": "nextcloud",
+      "description": "Self-hosted cloud storage platform",
+      "url": "https://github.com/nextcloud/server",
+      "stars": 25500,
+      "forks": 4500,
+      "language": "PHP",
+      "license": "AGPL-3.0",
+      "tags": [
+        "Cloud Storage",
+        "Self-hosted",
+        "Collaboration"
+      ],
+      "category": "data_transfer",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Self-hosted",
+        "Feature Rich",
+        "Plugin Ecosystem"
+      ],
+      "gradient": [
+        "#22c55e",
+        "#16a34a"
+      ]
+    },
+    {
+      "id": "rsync",
+      "name": "rsync",
+      "author": "WayneD",
+      "description": "Fast file synchronization tool",
+      "url": "https://github.com/WayneD/rsync",
+      "stars": 11500,
+      "forks": 1500,
+      "language": "C",
+      "license": "GPL-3.0",
+      "tags": [
+        "File Sync",
+        "Incremental",
+        "Efficient"
+      ],
+      "category": "data_transfer",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Incremental Sync",
+        "Efficient",
+        "Classic Tool"
+      ],
+      "gradient": [
+        "#22c55e",
+        "#16a34a"
+      ]
+    },
+    {
+      "id": "rclone",
+      "name": "rclone",
+      "author": "rclone",
+      "description": "Cloud storage sync command-line tool",
+      "url": "https://github.com/rclone/rclone",
+      "stars": 46500,
+      "forks": 4200,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Cloud Storage",
+        "Sync",
+        "CLI"
+      ],
+      "category": "data_transfer",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Multi-cloud Support",
+        "Encryption",
+        "Powerful"
+      ],
+      "gradient": [
+        "#22c55e",
+        "#16a34a"
+      ]
+    },
+    {
+      "id": "filebrowser",
+      "name": "FileBrowser",
+      "author": "filebrowser",
+      "description": "Web file manager",
+      "url": "https://github.com/filebrowser/filebrowser",
+      "stars": 25500,
+      "forks": 3200,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "File Management",
+        "Web",
+        "Lightweight"
+      ],
+      "category": "data_transfer",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Web Interface",
+        "Lightweight",
+        "Easy Deployment"
+      ],
+      "gradient": [
+        "#22c55e",
+        "#16a34a"
+      ]
+    },
+    {
+      "id": "prometheus",
+      "name": "Prometheus",
+      "author": "prometheus",
+      "description": "System monitoring and alerting tool",
+      "url": "https://github.com/prometheus/prometheus",
+      "stars": 52500,
+      "forks": 9500,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Monitoring",
+        "Alerting",
+        "Time Series"
+      ],
+      "category": "monitoring",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Time Series DB",
+        "Alerting System",
+        "Rich Ecosystem"
+      ],
+      "gradient": [
+        "#06b6d4",
+        "#0891b2"
+      ]
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana",
+      "author": "grafana",
+      "description": "Data visualization and monitoring dashboard",
+      "url": "https://github.com/grafana/grafana",
+      "stars": 60500,
+      "forks": 11500,
+      "language": "TypeScript",
+      "license": "AGPL-3.0",
+      "tags": [
+        "Visualization",
+        "Dashboard",
+        "Monitoring"
+      ],
+      "category": "monitoring",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Visualization",
+        "Multi-data Source",
+        "Rich Plugins"
+      ],
+      "gradient": [
+        "#06b6d4",
+        "#0891b2"
+      ]
+    },
+    {
+      "id": "loki",
+      "name": "Loki",
+      "author": "grafana",
+      "description": "Log aggregation system",
+      "url": "https://github.com/grafana/loki",
+      "stars": 21500,
+      "forks": 3200,
+      "language": "Go",
+      "license": "AGPL-3.0",
+      "tags": [
+        "Logging",
+        "Aggregation",
+        "Monitoring"
+      ],
+      "category": "monitoring",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Lightweight",
+        "Log Aggregation",
+        "Grafana Integration"
+      ],
+      "gradient": [
+        "#06b6d4",
+        "#0891b2"
+      ]
+    },
+    {
+      "id": "netdata",
+      "name": "Netdata",
+      "author": "netdata",
+      "description": "Real-time system monitoring",
+      "url": "https://github.com/netdata/netdata",
+      "stars": 68500,
+      "forks": 5800,
+      "language": "C",
+      "license": "GPL-3.0",
+      "tags": [
+        "Real-time Monitoring",
+        "System",
+        "Performance"
+      ],
+      "category": "monitoring",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Real-time Monitoring",
+        "Zero Config",
+        "Visualization"
+      ],
+      "gradient": [
+        "#06b6d4",
+        "#0891b2"
+      ]
+    },
+    {
+      "id": "zabbix",
+      "name": "Zabbix",
+      "author": "zabbix",
+      "description": "Enterprise monitoring solution",
+      "url": "https://github.com/zabbix/zabbix",
+      "stars": 3200,
+      "forks": 890,
+      "language": "C",
+      "license": "GPL-2.0",
+      "tags": [
+        "Enterprise",
+        "Monitoring",
+        "Alerting"
+      ],
+      "category": "monitoring",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Enterprise",
+        "Full Features",
+        "Stable & Reliable"
+      ],
+      "gradient": [
+        "#06b6d4",
+        "#0891b2"
+      ]
+    },
+    {
+      "id": "kubernetes",
+      "name": "Kubernetes",
+      "author": "kubernetes",
+      "description": "Container orchestration system",
+      "url": "https://github.com/kubernetes/kubernetes",
+      "stars": 105500,
+      "forks": 38500,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Container Orchestration",
+        "K8s",
+        "Cloud Native"
+      ],
+      "category": "container",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Industry Standard",
+        "Powerful",
+        "Rich Ecosystem"
+      ],
+      "gradient": [
+        "#326ce5",
+        "#234fa2"
+      ]
+    },
+    {
+      "id": "helm",
+      "name": "Helm",
+      "author": "helm",
+      "description": "K8s package management tool",
+      "url": "https://github.com/helm/helm",
+      "stars": 26500,
+      "forks": 7200,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Helm",
+        "Package Management",
+        "K8s"
+      ],
+      "category": "container",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Package Management",
+        "Templating",
+        "Easy Deployment"
+      ],
+      "gradient": [
+        "#326ce5",
+        "#234fa2"
+      ]
+    },
+    {
+      "id": "k3s",
+      "name": "K3s",
+      "author": "k3s-io",
+      "description": "Lightweight Kubernetes",
+      "url": "https://github.com/k3s-io/k3s",
+      "stars": 26500,
+      "forks": 2200,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Lightweight",
+        "K8s",
+        "Edge Computing"
+      ],
+      "category": "container",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Lightweight",
+        "Single Binary",
+        "Easy Installation"
+      ],
+      "gradient": [
+        "#326ce5",
+        "#234fa2"
+      ]
+    },
+    {
+      "id": "traefik",
+      "name": "Traefik",
+      "author": "traefik",
+      "description": "Modern HTTP reverse proxy and load balancer",
+      "url": "https://github.com/traefik/traefik",
+      "stars": 48500,
+      "forks": 5800,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "Reverse Proxy",
+        "Load Balancing",
+        "Cloud Native"
+      ],
+      "category": "container",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Auto Discovery",
+        "Cloud Native",
+        "High Performance"
+      ],
+      "gradient": [
+        "#326ce5",
+        "#234fa2"
+      ]
+    },
+    {
+      "id": "caddy",
+      "name": "Caddy",
+      "author": "caddyserver",
+      "description": "Powerful enterprise-grade web server",
+      "url": "https://github.com/caddyserver/caddy",
+      "stars": 56500,
+      "forks": 4200,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Web Server",
+        "Auto HTTPS",
+        "Reverse Proxy"
+      ],
+      "category": "container",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Auto HTTPS",
+        "Simple Configuration",
+        "High Performance"
+      ],
+      "gradient": [
+        "#326ce5",
+        "#234fa2"
+      ]
+    },
+    {
+      "id": "ngrok",
+      "name": "ngrok",
+      "author": "inconshreveable",
+      "description": "NAT traversal tool",
+      "url": "https://github.com/inconshreveable/ngrok",
+      "stars": 23500,
+      "forks": 4200,
+      "language": "Go",
+      "license": "MIT",
+      "tags": [
+        "NAT Traversal",
+        "Tunnel",
+        "Public Network"
+      ],
+      "category": "tunnel_tools",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Easy to Use",
+        "Fast",
+        "Widely Used"
+      ],
+      "gradient": [
+        "#a78bfa",
+        "#8b5cf6"
+      ]
+    },
+    {
+      "id": "rathole",
+      "name": "rathole",
+      "author": "rapiz1",
+      "description": "Lightweight NAT traversal tool implemented in Rust",
+      "url": "https://github.com/rapiz1/rathole",
+      "stars": 8500,
+      "forks": 560,
+      "language": "Rust",
+      "license": "Apache-2.0",
+      "tags": [
+        "NAT Traversal",
+        "Rust",
+        "Lightweight"
+      ],
+      "category": "tunnel_tools",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Rust Implementation",
+        "High Performance",
+        "Lightweight"
+      ],
+      "gradient": [
+        "#a78bfa",
+        "#8b5cf6"
+      ]
+    },
+    {
+      "id": "bore",
+      "name": "bore",
+      "author": "ekzhang",
+      "description": "Simple tunnel tool",
+      "url": "https://github.com/ekzhang/bore",
+      "stars": 7800,
+      "forks": 420,
+      "language": "Rust",
+      "license": "MIT",
+      "tags": [
+        "Tunnel",
+        "Simple",
+        "Rust"
+      ],
+      "category": "tunnel_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Minimalist",
+        "Rust Implementation",
+        "Fast"
+      ],
+      "gradient": [
+        "#a78bfa",
+        "#8b5cf6"
+      ]
+    },
+    {
+      "id": "cloudflared",
+      "name": "cloudflared",
+      "author": "cloudflare",
+      "description": "Cloudflare Tunnel client",
+      "url": "https://github.com/cloudflare/cloudflared",
+      "stars": 8200,
+      "forks": 890,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Cloudflare",
+        "Tunnel",
+        "NAT Traversal"
+      ],
+      "category": "tunnel_tools",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Cloudflare",
+        "Free Tier",
+        "Stable"
+      ],
+      "gradient": [
+        "#a78bfa",
+        "#8b5cf6"
+      ]
+    },
+    {
+      "id": "localtunnel",
+      "name": "localtunnel",
+      "author": "localtunnel",
+      "description": "Expose local servers to the public internet",
+      "url": "https://github.com/localtunnel/localtunnel",
+      "stars": 18500,
+      "forks": 1500,
+      "language": "JavaScript",
+      "license": "MIT",
+      "tags": [
+        "NAT Traversal",
+        "Local",
+        "Public Network"
+      ],
+      "category": "tunnel_tools",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Easy to Use",
+        "Node.js",
+        "Quick Deploy"
+      ],
+      "gradient": [
+        "#a78bfa",
+        "#8b5cf6"
+      ]
+    },
+    {
+      "id": "dnscrypt-proxy",
+      "name": "DNSCrypt-Proxy",
+      "author": "DNSCrypt",
+      "description": "Encrypted DNS client",
+      "url": "https://github.com/DNSCrypt/dnscrypt-proxy",
+      "stars": 11500,
+      "forks": 1100,
+      "language": "Go",
+      "license": "ISC",
+      "tags": [
+        "DNS Encryption",
+        "DNSCrypt",
+        "Privacy"
+      ],
+      "category": "dns_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "DNS Encryption",
+        "Ad Blocking",
+        "Privacy Protection"
+      ],
+      "gradient": [
+        "#14b8a6",
+        "#0d9488"
+      ]
+    },
+    {
+      "id": "adguard-home",
+      "name": "AdGuardHome",
+      "author": "AdguardTeam",
+      "description": "Network ad and tracker blocking DNS server",
+      "url": "https://github.com/AdguardTeam/AdGuardHome",
+      "stars": 23500,
+      "forks": 1800,
+      "language": "Go",
+      "license": "GPL-3.0",
+      "tags": [
+        "Ad Blocking",
+        "DNS",
+        "Privacy"
+      ],
+      "category": "dns_tools",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Ad Blocking",
+        "DNS Server",
+        "Web Interface"
+      ],
+      "gradient": [
+        "#14b8a6",
+        "#0d9488"
+      ]
+    },
+    {
+      "id": "coredns",
+      "name": "CoreDNS",
+      "author": "coredns",
+      "description": "DNS server with chained plugins",
+      "url": "https://github.com/coredns/coredns",
+      "stars": 11500,
+      "forks": 2100,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "DNS",
+        "Server",
+        "Plugin"
+      ],
+      "category": "dns_tools",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Plugin-based",
+        "K8s Integration",
+        "Flexible"
+      ],
+      "gradient": [
+        "#14b8a6",
+        "#0d9488"
+      ]
+    },
+    {
+      "id": "pi-hole",
+      "name": "Pi-hole",
+      "author": "pi-hole",
+      "description": "Network ad blocking DNS server",
+      "url": "https://github.com/pi-hole/pi-hole",
+      "stars": 47500,
+      "forks": 3200,
+      "language": "Shell",
+      "license": "EUPL-1.2",
+      "tags": [
+        "Ad Blocking",
+        "DNS",
+        "Raspberry Pi"
+      ],
+      "category": "dns_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Ad Blocking",
+        "Lightweight",
+        "Easy Deployment"
+      ],
+      "gradient": [
+        "#14b8a6",
+        "#0d9488"
+      ]
+    },
+    {
+      "id": "smartdns",
+      "name": "SmartDNS",
+      "author": "pymumu",
+      "description": "Local DNS server",
+      "url": "https://github.com/pymumu/smartdns",
+      "stars": 8500,
+      "forks": 1200,
+      "language": "C",
+      "license": "GPL-3.0",
+      "tags": [
+        "DNS",
+        "Local",
+        "Acceleration"
+      ],
+      "category": "dns_tools",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "DNS Acceleration",
+        "Anti-pollution",
+        "High Performance"
+      ],
+      "gradient": [
+        "#14b8a6",
+        "#0d9488"
+      ]
+    },
+    {
+      "id": "certbot",
+      "name": "Certbot",
+      "author": "certbot",
+      "description": "Automated Let's Encrypt certificate acquisition",
+      "url": "https://github.com/certbot/certbot",
+      "stars": 30500,
+      "forks": 3800,
+      "language": "Python",
+      "license": "Apache-2.0",
+      "tags": [
+        "Certificate",
+        "Let's Encrypt",
+        "Automation"
+      ],
+      "category": "cert_tools",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Auto Renewal",
+        "Let's Encrypt",
+        "Widely Used"
+      ],
+      "gradient": [
+        "#f97316",
+        "#ea580c"
+      ]
+    },
+    {
+      "id": "acme-sh",
+      "name": "Acme.sh",
+      "author": "acmesh-official",
+      "description": "Pure Shell implementation of ACME client",
+      "url": "https://github.com/acmesh-official/acme.sh",
+      "stars": 37500,
+      "forks": 5200,
+      "language": "Shell",
+      "license": "GPL-3.0",
+      "tags": [
+        "ACME",
+        "Certificate",
+        "Shell"
+      ],
+      "category": "cert_tools",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Pure Shell",
+        "Lightweight",
+        "Multi-CA Support"
+      ],
+      "gradient": [
+        "#f97316",
+        "#ea580c"
+      ]
+    },
+    {
+      "id": "mkcert",
+      "name": "mkcert",
+      "author": "FiloSottile",
+      "description": "Local development HTTPS certificate tool",
+      "url": "https://github.com/FiloSottile/mkcert",
+      "stars": 36500,
+      "forks": 2100,
+      "language": "Go",
+      "license": "BSD-3-Clause",
+      "tags": [
+        "Local Certificate",
+        "HTTPS",
+        "Development"
+      ],
+      "category": "cert_tools",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Zero Config",
+        "Local Development",
+        "Easy to Use"
+      ],
+      "gradient": [
+        "#f97316",
+        "#ea580c"
+      ]
+    },
+    {
+      "id": "step-certificates",
+      "name": "Step-Certificates",
+      "author": "smallstep",
+      "description": "Private certificate authority",
+      "url": "https://github.com/smallstep/certificates",
+      "stars": 6500,
+      "forks": 560,
+      "language": "Go",
+      "license": "Apache-2.0",
+      "tags": [
+        "Private CA",
+        "Certificate",
+        "Security"
+      ],
+      "category": "cert_tools",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Private CA",
+        "Automation",
+        "Enterprise"
+      ],
+      "gradient": [
+        "#f97316",
+        "#ea580c"
+      ]
+    },
+    {
+      "id": "awesome-selfhosted",
+      "name": "awesome-selfhosted",
+      "author": "awesome-selfhosted",
+      "description": "List of self-hosted services",
+      "url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+      "stars": 185000,
+      "forks": 12500,
+      "language": "Markdown",
+      "license": "CC-BY-SA-4.0",
+      "tags": [
+        "Self-hosted",
+        "List",
+        "Resources"
+      ],
+      "category": "collection",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Most Comprehensive",
+        "Community Maintained",
+        "Well Categorized"
+      ],
+      "gradient": [
+        "#6366f1",
+        "#4f46e5"
+      ]
+    },
+    {
+      "id": "awesome-sysadmin",
+      "name": "awesome-sysadmin",
+      "author": "awesome-foss",
+      "description": "List of system administration tools",
+      "url": "https://github.com/awesome-foss/awesome-sysadmin",
+      "stars": 22500,
+      "forks": 1500,
+      "language": "Markdown",
+      "license": "CC0",
+      "tags": [
+        "System Administration",
+        "Tool List",
+        "Ops"
+      ],
+      "category": "collection",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Ops Tools",
+        "Well Categorized",
+        "Continuous Updates"
+      ],
+      "gradient": [
+        "#6366f1",
+        "#4f46e5"
+      ]
+    },
+    {
+      "id": "free-programming-books",
+      "name": "free-programming-books",
+      "author": "EbookFoundation",
+      "description": "Free programming books",
+      "url": "https://github.com/EbookFoundation/free-programming-books",
+      "stars": 325000,
+      "forks": 62000,
+      "language": "Markdown",
+      "license": "CC-BY-4.0",
+      "tags": [
+        "Programming Books",
+        "Free",
+        "Learning"
+      ],
+      "category": "collection",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Most Popular",
+        "Multi-language",
+        "Community Maintained"
+      ],
+      "gradient": [
+        "#6366f1",
+        "#4f46e5"
+      ]
+    },
+    {
+      "id": "awesome-network-stuff",
+      "name": "awesome-network-stuff",
+      "author": "kliondev",
+      "description": "Network security resource collection",
+      "url": "https://github.com/kliondev/awesome-network-stuff",
+      "stars": 4500,
+      "forks": 890,
+      "language": "Markdown",
+      "license": "MIT",
+      "tags": [
+        "Network Security",
+        "Resources",
+        "Collection"
+      ],
+      "category": "collection",
+      "lastCommit": "2025-05-29",
+      "highlights": [
+        "Security Resources",
+        "Detailed Categories",
+        "Practical"
+      ],
+      "gradient": [
+        "#6366f1",
+        "#4f46e5"
+      ]
+    },
+    {
+      "id": "proxy-lists",
+      "name": "proxy-lists",
+      "author": "TheSpeedX",
+      "description": "Proxy list collection",
+      "url": "https://github.com/TheSpeedX/PROXY-List",
+      "stars": 3500,
+      "forks": 1200,
+      "language": "Markdown",
+      "license": "MIT",
+      "tags": [
+        "Proxy List",
+        "Free",
+        "Collection"
+      ],
+      "category": "collection",
+      "lastCommit": "2025-05-30",
+      "highlights": [
+        "Proxy List",
+        "Regular Updates",
+        "Multiple Types"
+      ],
+      "gradient": [
+        "#6366f1",
+        "#4f46e5"
+      ]
+    },
+    {
+      "id": "free-proxy-list",
+      "name": "free-proxy-list",
+      "author": "clarketm",
+      "description": "Free proxy list",
+      "url": "https://github.com/clarketm/proxy-list",
+      "stars": 2200,
+      "forks": 780,
+      "language": "Markdown",
+      "license": "MIT",
+      "tags": [
+        "Proxy List",
+        "Free",
+        "Updated"
+      ],
+      "category": "collection",
+      "lastCommit": "2025-05-28",
+      "highlights": [
+        "Free Proxy",
+        "Regular Updates",
+        "Multi-protocol"
+      ],
+      "gradient": [
+        "#6366f1",
+        "#4f46e5"
+      ]
+    },
+    {
+      "id": "v2ray-free",
+      "name": "v2ray-free",
+      "author": "freefq",
+      "description": "Free node sharing",
+      "url": "https://github.com/freefq/free",
+      "stars": 8500,
+      "forks": 2300,
+      "language": "Markdown",
+      "license": "MIT",
+      "tags": [
+        "Free Nodes",
+        "Sharing",
+        "V2Ray"
+      ],
+      "category": "collection",
+      "lastCommit": "2025-05-31",
+      "highlights": [
+        "Free Nodes",
+        "Continuous Updates",
+        "Multi-protocol"
+      ],
+      "gradient": [
+        "#6366f1",
+        "#4f46e5"
+      ]
+    }
+  ]
+}

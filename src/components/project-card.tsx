@@ -1,0 +1,92 @@
+import Link from "next/link";
+import { Project } from "@/types/project";
+import { formatNumber } from "@/lib/utils";
+
+const languageColors: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f1e05a",
+  Go: "#00add8",
+  Rust: "#dea584",
+  Python: "#3572a5",
+  C: "#555555",
+  "C++": "#f34b7d",
+  "C#": "#178600",
+  Java: "#b07219",
+  Ruby: "#701516",
+  Swift: "#f05138",
+  Kotlin: "#a97bff",
+  Dart: "#00b4ab",
+  PHP: "#4f5d95",
+  Lua: "#000080",
+  Shell: "#89e051",
+  Markdown: "#083fa1",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  Vue: "#41b883",
+  Perl: "#0298c3",
+};
+
+export function ProjectCard({ project }: { project: Project }) {
+  const dotColor = languageColors[project.language] || "#8b949e";
+
+  return (
+    <Link
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex flex-col rounded-xl border border-[#30363d] bg-[#161b22] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#58a6ff]/30 hover:shadow-lg hover:shadow-black/20"
+      style={{ borderLeftWidth: "3px", borderLeftColor: project.gradient[0] }}
+    >
+      <div className="mb-2 flex items-start justify-between gap-2">
+        <h3 className="text-sm font-semibold text-[#e6edf3] group-hover:text-[#58a6ff] transition-colors line-clamp-1">
+          {project.name}
+        </h3>
+        <div className="flex shrink-0 items-center gap-1 text-xs text-[#6e7681]">
+          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
+          </svg>
+          {formatNumber(project.stars)}
+        </div>
+      </div>
+
+      <p className="mb-3 flex-1 text-xs leading-relaxed text-[#8b949e] line-clamp-2">
+        {project.description}
+      </p>
+
+      <div className="mb-3 flex flex-wrap gap-1.5">
+        {project.tags.slice(0, 3).map((tag) => (
+          <span
+            key={tag}
+            className="rounded-md bg-[#21262d] px-2 py-0.5 text-[10px] font-medium text-[#8b949e] border border-[#30363d]"
+          >
+            {tag}
+          </span>
+        ))}
+        {project.tags.length > 3 && (
+          <span className="rounded-md bg-[#21262d] px-2 py-0.5 text-[10px] text-[#6e7681]">
+            +{project.tags.length - 3}
+          </span>
+        )}
+      </div>
+
+      <div className="flex items-center justify-between text-[10px] text-[#6e7681]">
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1">
+            <span
+              className="inline-block h-2.5 w-2.5 rounded-full"
+              style={{ backgroundColor: dotColor }}
+            />
+            {project.language}
+          </span>
+          <span className="flex items-center gap-1">
+            <svg className="h-3 w-3" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z" />
+            </svg>
+            {formatNumber(project.forks)}
+          </span>
+        </div>
+        <span className="text-[#8b949e]">{project.author}</span>
+      </div>
+    </Link>
+  );
+}
