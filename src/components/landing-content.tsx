@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getAllProjects, getCategoryCounts, getCategories } from "@/lib/projects";
 import { t, Lang } from "@/lib/i18n";
 import { TopNav } from "@/components/top-nav";
+import { CATEGORY_GROUPS } from "@/lib/category-groups";
 
 function readLangFromUrl(): Lang | null {
   if (typeof window === "undefined") return null;
@@ -108,7 +109,7 @@ export function LandingContent() {
             <p className="text-[#8b949e]">{t(lang, "features.subtitle")}</p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 icon: "📦",
@@ -145,7 +146,7 @@ export function LandingContent() {
                 key={f.title}
                 className="rounded-2xl border border-[#30363d] bg-[#161b22] p-7 transition-colors hover:border-[#58a6ff]/30"
               >
-                <span className="mb-4 inline-block text-3xl">{f.icon}</span>
+                <span className="mb-5 inline-block text-3xl">{f.icon}</span>
                 <h3 className="mb-3 text-base font-semibold">{f.title}</h3>
                 <p className="text-sm leading-relaxed text-[#8b949e]">{f.desc}</p>
               </div>
@@ -161,18 +162,46 @@ export function LandingContent() {
             <p className="text-[#8b949e]">{t(lang, "categories.subtitle")}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {Object.entries(counts).map(([slug, count]) => {
-              const catInfo = categories[slug];
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {CATEGORY_GROUPS.map((group) => {
+              const items = group.slugs
+                .map((slug) => ({ slug, cat: categories[slug], count: counts[slug] || 0 }))
+                .filter((item) => item.cat && item.count > 0);
+              if (items.length === 0) return null;
+              const total = items.reduce((a, b) => a + b.count, 0);
               return (
-                <Link
-                  key={slug}
-                  href={lang !== "en" ? `/explore?category=${slug}&lang=${lang}` : `/explore?category=${slug}`}
-                  className="flex flex-col items-center gap-2 rounded-2xl border border-[#30363d] bg-[#161b22] px-4 py-6 text-center transition-colors hover:border-[#58a6ff]/30 hover:bg-[#1c2333]"
+                <div
+                  key={group.id}
+                  className="rounded-2xl border border-[#30363d] bg-[#161b22] p-7 transition-colors hover:border-[#58a6ff]/30"
                 >
-                  <span className="truncate text-sm font-medium text-[#e6edf3]">{catInfo?.icon} {catInfo?.name || slug}</span>
-                  <span className="text-xs text-[#6e7681]">{t(lang, "categories.count", { count })}</span>
-                </Link>
+                  <div className="mb-5 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-2xl">{group.icon}</span>
+                      <h3 className="text-base font-semibold text-[#e6edf3]">
+                        {t(lang, group.labelKey)}
+                      </h3>
+                    </div>
+                    <span className="rounded-full border border-[#30363d] bg-[#21262d] px-2 py-0.5 text-xs text-[#8b949e]">
+                      {total}
+                    </span>
+                  </div>
+                  <ul className="space-y-1">
+                    {items.map(({ slug, cat, count }) => (
+                      <li key={slug}>
+                        <Link
+                          href={lang !== "en" ? `/explore?category=${slug}&lang=${lang}` : `/explore?category=${slug}`}
+                          className="group flex items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-sm text-[#8b949e] transition-colors hover:bg-[#21262d] hover:text-[#e6edf3]"
+                        >
+                          <span className="flex items-center gap-2 truncate">
+                            <span>{cat.icon}</span>
+                            <span className="truncate">{cat.name}</span>
+                          </span>
+                          <span className="shrink-0 text-xs text-[#6e7681]">{count}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               );
             })}
           </div>
@@ -196,12 +225,14 @@ export function LandingContent() {
       </section>
 
       <footer className="border-t border-[#21262d] bg-[#010409] py-10">
-        <div className="mx-auto max-w-6xl px-6 text-center">
-          <div className="flex items-center justify-center gap-2 text-sm text-[#6e7681]">
-            <span>🛠️</span>
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-6 text-center">
+          <div className="flex items-center gap-2 text-sm text-[#8b949e]">
+            <span className="text-lg">🛠️</span>
+            <span className="font-semibold text-[#e6edf3]">{t(lang, "site.title")}</span>
+            <span className="text-[#30363d]">·</span>
             <span>{t(lang, "footer.text")}</span>
           </div>
-          <p className="mt-3 text-xs text-[#6e7681]">
+          <p className="max-w-md text-xs leading-relaxed text-[#6e7681]">
             {t(lang, "footer.disclaimer")}
           </p>
         </div>

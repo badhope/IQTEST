@@ -34,7 +34,7 @@ export function Sidebar({ categories, counts, lang, activeCategory }: SidebarPro
 
   return (
     <aside
-      className="hidden lg:flex w-64 shrink-0 flex-col border-r border-[#21262d] bg-[#0d1117]"
+      className="hidden lg:flex w-[232px] shrink-0 flex-col border-r border-[#21262d] bg-[#0d1117]"
       aria-label={t(lang, "sidebar.nav_label")}
       role="navigation"
     >
@@ -110,12 +110,6 @@ export function Sidebar({ categories, counts, lang, activeCategory }: SidebarPro
               </div>
             );
           })}
-        </div>
-      </div>
-
-      <div className="border-t border-[#21262d] px-5 py-4 text-[11px] text-[#6e7681]">
-        <div className="flex items-center justify-between">
-          <span>{t(lang, "footer.text")}</span>
         </div>
       </div>
     </aside>
