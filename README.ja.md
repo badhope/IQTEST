@@ -12,6 +12,8 @@
 
 <!-- BADGES -->
 [![Live Site](https://img.shields.io/badge/🌐_ライブサイト-blue?style=for-the-badge)](https://badhope.github.io/NetTools-Hub/)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/badhope/NetTools-Hub/deploy.yml?branch=main&label=Deploy&style=flat-square)](https://github.com/badhope/NetTools-Hub/actions/workflows/deploy.yml)
+[![Pages Status](https://img.shields.io/github/deployments/badhope/NetTools-Hub/github-pages?style=flat-square&label=Pages)](https://github.com/badhope/NetTools-Hub/deployments)
 [![MIT License](https://img.shields.io/github/license/badhope/NetTools-Hub?style=flat-square)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/badhope/NetTools-Hub?style=social)](https://github.com/badhope/NetTools-Hub/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/badhope/NetTools-Hub?style=social)](https://github.com/badhope/NetTools-Hub/network/members)
@@ -220,13 +222,15 @@ NetTools-Hub/
 
 ## 🤝 コントリビューション
 
-PR を歓迎します！[`CONTRIBUTING.md`](./CONTRIBUTING.md) を参照：
+PR を歓迎します！コントリビューションガイドを参照：
 
 - ローカル開発セットアップ & スクリプト
 - データスキーマとプロジェクトの追加方法
 - コードスタイル、Lint、**Conventional Commits**（`feat:`、`fix:`、`docs:`、…）
 - PR レビュープロセス
 - 翻訳の追加・改善方法
+
+**コントリビューションガイド：** [🇬🇧 English](CONTRIBUTING.md) · [🇨🇳 简体中文](CONTRIBUTING.zh.md) · **🇯🇵 日本語**
 
 参加することで、[行動規範](./CODE_OF_CONDUCT.md) に同意したものとみなされます。
 

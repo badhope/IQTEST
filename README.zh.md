@@ -12,6 +12,8 @@
 
 <!-- BADGES -->
 [![Live Site](https://img.shields.io/badge/🌐_在线站点-blue?style=for-the-badge)](https://badhope.github.io/NetTools-Hub/)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/badhope/NetTools-Hub/deploy.yml?branch=main&label=Deploy&style=flat-square)](https://github.com/badhope/NetTools-Hub/actions/workflows/deploy.yml)
+[![Pages Status](https://img.shields.io/github/deployments/badhope/NetTools-Hub/github-pages?style=flat-square&label=Pages)](https://github.com/badhope/NetTools-Hub/deployments)
 [![MIT License](https://img.shields.io/github/license/badhope/NetTools-Hub?style=flat-square)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/badhope/NetTools-Hub?style=social)](https://github.com/badhope/NetTools-Hub/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/badhope/NetTools-Hub?style=social)](https://github.com/badhope/NetTools-Hub/network/members)
@@ -220,13 +222,15 @@ NetTools-Hub/
 
 ## 🤝 贡献
 
-欢迎 PR！详见 [`CONTRIBUTING.md`](./CONTRIBUTING.md)：
+欢迎 PR！详见贡献指南：
 
 - 本地开发环境与脚本
 - 数据 schema 与如何添加项目
 - 代码风格、Lint、**Conventional Commits**（`feat:`、`fix:`、`docs:`、…）
 - PR 审核流程
 - 如何添加或改进翻译
+
+**贡献指南：** [🇬🇧 English](CONTRIBUTING.md) · **🇨🇳 简体中文** · [🇯🇵 日本語](CONTRIBUTING.ja.md)
 
 参与即视为同意遵守 [行为准则](./CODE_OF_CONDUCT.md)。
 

@@ -12,6 +12,8 @@
 
 <!-- PROJECT SHIELDS -->
 [![Live Site](https://img.shields.io/badge/🌐_Live_NetTools_Hub-blue?style=for-the-badge)](https://badhope.github.io/NetTools-Hub/)
+[![Deploy](https://img.shields.io/github/actions/workflow/status/badhope/NetTools-Hub/deploy.yml?branch=main&label=Deploy&style=flat-square)](https://github.com/badhope/NetTools-Hub/actions/workflows/deploy.yml)
+[![Pages Status](https://img.shields.io/github/deployments/badhope/NetTools-Hub/github-pages?style=flat-square&label=Pages)](https://github.com/badhope/NetTools-Hub/deployments)
 [![MIT License](https://img.shields.io/github/license/badhope/NetTools-Hub?style=flat-square)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/badhope/NetTools-Hub?style=social)](https://github.com/badhope/NetTools-Hub/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/badhope/NetTools-Hub?style=social)](https://github.com/badhope/NetTools-Hub/network/members)
@@ -195,7 +197,7 @@ All content is in a **single JSON file** — no CMS, no migration scripts.
 
 3. Open a PR. The CI will deploy a preview on the next push to `main`.
 
-> ✅ Inclusion criteria: active commits within the last 6 months, OSI-approved license, and a real-world use case. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the full guide.
+> ✅ Inclusion criteria: active commits within the last 6 months, OSI-approved license, and a real-world use case. See the [contributing guide](./CONTRIBUTING.md) for the full guide.
 
 ---
 
@@ -228,13 +230,15 @@ To **add a new translation** or **improve an existing one**, please open a PR �
 
 ## 🤝 Contributing
 
-We welcome PRs! See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for:
+We welcome PRs! See the contributing guide for:
 
 - Local dev setup & scripts
 - The data schema and how to add a project
 - Code style, lint, and **Conventional Commits** (`feat:`, `fix:`, `docs:`, …)
 - PR review process
 - How to add or improve a translation
+
+**Contributing guide:** [🇬🇧 English](CONTRIBUTING.md) · [🇨🇳 简体中文](CONTRIBUTING.zh.md) · [🇯🇵 日本語](CONTRIBUTING.ja.md)
 
 By participating, you agree to follow the [Code of Conduct](./CODE_OF_CONDUCT.md).
 

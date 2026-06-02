@@ -1,5 +1,7 @@
 # Contributing to NetTools Hub
 
+> **Language:** **🇬🇧 English** · [🇨🇳 简体中文](CONTRIBUTING.zh.md) · [🇯🇵 日本語](CONTRIBUTING.ja.md)
+
 First off, thanks for taking the time to contribute! 🎉
 NetTools Hub is a community-curated navigation platform for open-source network tools, and every contribution — from a typo fix to a new project entry — makes it better.
 
