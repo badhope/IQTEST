@@ -15,6 +15,7 @@ import {
   getTotalStars,
   getCategoryCount,
 } from "@/lib/projects";
+import { useClientLang } from "@/lib/use-client-lang";
 import { t, Lang, readLangFromUrl } from "@/lib/i18n";
 import { SortOption } from "@/types/project";
 import { getGroupOfSlug } from "@/lib/category-groups";
@@ -66,7 +67,12 @@ export function ExploreContent() {
   const [query, setQuery] = useState<string>("");
   const [sort, setSort] = useState<SortOption>("default");
   const [category, setCategory] = useState<string>("");
-  const [lang, setLang] = useState<Lang>("en");
+  // `lang` and `handleLangChange` come from the shared hook so the
+  // URL/storage/event triplet is in lockstep with every other page
+  // that renders localised text. The three `useState`s above still
+  // sync on `popstate` from the URL (line ~123) — that effect is
+  // unaffected.
+  const [lang, handleLangChange] = useClientLang();
   const searchRef = useRef<SearchBarHandle | null>(null);
 
   // Defer the heavy work of filtering + rendering the (potentially
@@ -101,21 +107,33 @@ export function ExploreContent() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
-  // Sync the four URL-driven pieces of state on mount and on every
-  // popstate (browser back/forward). This is the documented escape
-  // hatch for the `react-hooks/set-state-in-effect` rule:
-  // `readUrlState()` reads `window.location`, which is only available
-  // on the client, so we *must* do this inside an effect to avoid
-  // a window-touching render on the server. The four setState calls
-  // fire on the same event tick so React batches them into a single
+  // Sync the three URL-driven pieces of UI state (query, sort,
+  // category) on mount and on every popstate (browser back/forward).
+  // `lang` is now driven by the shared `useClientLang` hook, which
+  // listens for `nethub:langchange` — we re-dispatch that event
+  // here so a `popstate` (e.g. user clicks a translated
+  // `/explore?lang=zh` link in a new tab) propagates through to the
+  // hook without each consumer needing its own URL listener. This
+  // is the documented escape hatch for the
+  // `react-hooks/set-state-in-effect` rule: `readUrlState()` reads
+  // `window.location`, which is only available on the client, so
+  // we *must* do this inside an effect to avoid a window-touching
+  // render on the server. The three remaining setState calls fire
+  // on the same event tick so React batches them into a single
   // re-render.
   useEffect(() => {
     const onPop = () => {
       const next = readUrlState();
-      setLang(next.lang);
       setQuery(next.query);
       setSort(next.sort);
       setCategory(next.category);
+      // Propagate the language change (if any) to other consumers.
+      // We use `setLangAndPersist`-shaped logic but without the
+      // URL/storage write — the URL is the *source* of this update,
+      // not the destination.
+      window.dispatchEvent(
+        new CustomEvent("nethub:langchange", { detail: { lang: next.lang } }),
+      );
     };
     onPop();
     window.addEventListener("popstate", onPop);
@@ -131,17 +149,6 @@ export function ExploreContent() {
     }
     window.history.replaceState({}, "", url.toString());
   }, []);
-
-  const handleLangChange = (newLang: Lang) => {
-    setLang(newLang);
-    syncUrl({ lang: newLang === "en" ? null : newLang });
-    try {
-      window.localStorage.setItem("nethub.lang", newLang);
-    } catch {
-      /* storage may be disabled */
-    }
-    window.dispatchEvent(new CustomEvent("nethub:langchange", { detail: { lang: newLang } }));
-  };
 
   const handleQueryChange = (newQuery: string) => {
     setQuery(newQuery);

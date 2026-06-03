@@ -1,63 +1,31 @@
 "use client";
 
-/**
- * SetHtmlLang
- * ------------
- * Static export (`output: "export"`) means every page is pre-rendered, so we
- * cannot read the `?lang=` query parameter server-side and emit the right
- * `<html lang="...">` per request. This tiny client component runs as soon as
- * the page is parsed and synchronises `document.documentElement.lang` with
- * the value the user picked via the language switcher.
- *
- * It also re-runs on `popstate` (browser back/forward) and on a custom
- * `nethub:langchange` event that the language switcher dispatches after a
- * `history.replaceState`, so navigation between pages stays consistent.
- *
- * Falls back to `navigator.language` on first visit, then to `en`.
- */
 import { useEffect } from "react";
+import { LANG_HTML_LANG, Lang } from "@/lib/i18n";
+import { useClientLang } from "@/lib/use-client-lang";
 
-const SUPPORTED = ["en", "zh", "ja"] as const;
-type Supported = (typeof SUPPORTED)[number];
-
-function resolveLang(): Supported {
-  if (typeof window === "undefined") return "en";
-  try {
-    const url = new URL(window.location.href);
-    const fromQuery = url.searchParams.get("lang");
-    if (fromQuery && (SUPPORTED as readonly string[]).includes(fromQuery)) {
-      return fromQuery as Supported;
-    }
-  } catch {
-    /* ignore */
-  }
-  const stored = window.localStorage?.getItem("nethub.lang");
-  if (stored && (SUPPORTED as readonly string[]).includes(stored)) {
-    return stored as Supported;
-  }
-  const browser = window.navigator?.language?.toLowerCase() ?? "";
-  if (browser.startsWith("zh")) return "zh";
-  if (browser.startsWith("ja")) return "ja";
-  return "en";
-}
-
+/**
+ * Keeps `<html lang>` in sync with the client-side language state.
+ *
+ * The static export prerenders the document with `<html lang="en">`
+ * (see `app/layout.tsx`), so we have to push the real language to the
+ * DOM in a post-mount effect. We listen on the same
+ * `nethub:langchange` event used by `setLangAndPersist` so any
+ * language switch — from any component — updates the attribute
+ * without prop-drilling a callback through the layout tree.
+ *
+ * `tabIndex={-1}` is *not* on this element; the actual skip-link
+ * target is the `<main id="main">` deeper in the tree, and giving
+ * `<html>` a tab stop would make Tab from the URL bar focus the
+ * invisible language attribute before anything useful.
+ */
 export function SetHtmlLang() {
+  const [lang] = useClientLang();
+
   useEffect(() => {
-    const apply = () => {
-      const lang = resolveLang();
-      if (document.documentElement.lang !== lang) {
-        document.documentElement.lang = lang;
-      }
-    };
-    apply();
-    window.addEventListener("popstate", apply);
-    window.addEventListener("nethub:langchange", apply as EventListener);
-    return () => {
-      window.removeEventListener("popstate", apply);
-      window.removeEventListener("nethub:langchange", apply as EventListener);
-    };
-  }, []);
+    if (typeof document === "undefined") return;
+    document.documentElement.lang = LANG_HTML_LANG[lang as Lang];
+  }, [lang]);
+
   return null;
 }
-
-export default SetHtmlLang;

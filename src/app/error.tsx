@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Lang, readLangFromUrl, t } from "@/lib/i18n";
+import { useEffect } from "react";
+import { t } from "@/lib/i18n";
+import { useClientLang } from "@/lib/use-client-lang";
 
 export default function Error({
   error,
@@ -15,14 +16,9 @@ export default function Error({
   }, [error]);
 
   // `output: "export"` pre-renders this page in English regardless of
-  // the URL, so we read `?lang=` on the client to localise the copy.
-  // The setState is wrapped in a callback so React 19's
-  // `react-hooks/set-state-in-effect` rule does not flag it.
-  const [lang, setLang] = useState<Lang>("en");
-  useEffect(() => {
-    const sync = () => setLang(readLangFromUrl());
-    sync();
-  }, []);
+  // the URL; the shared `useClientLang` hook picks up the real
+  // language from `?lang=` / `localStorage` / `navigator` on mount.
+  const [lang] = useClientLang();
 
   return (
     <main
@@ -44,6 +40,7 @@ export default function Error({
         {t(lang, "error.description")}
       </p>
       <button
+        type="button"
         onClick={reset}
         className="group mt-10 inline-flex items-center gap-3 border-b border-accent pb-1 font-display text-lg text-accent transition-colors hover:text-accent-hover"
       >

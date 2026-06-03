@@ -3,6 +3,22 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Lang, LANG_OPTIONS, t } from "@/lib/i18n";
 
+/**
+ * Look up the listbox index of a given language. The two callers
+ * (the lazy `useState` initializer in `LanguageSwitcher` and the
+ * trigger-key handler that re-opens the listbox) need the same
+ * `-1 → 0` clamp, and a previous pass had two subtly different
+ * inline expressions (one `Math.max(0, findIndex(...))`, one
+ * `findIndex(...) ?? 0` — the second was actually wrong because
+ * `findIndex` returns `number`, not `number | undefined`, so `??`
+ * never fired). Centralising here is one search-replace away from
+ * a future fix.
+ */
+function highlightForLang(target: Lang): number {
+  const idx = LANG_OPTIONS.findIndex((o) => o.value === target);
+  return idx >= 0 ? idx : 0;
+}
+
 interface LanguageSwitcherProps {
   lang: Lang;
   onChange?: (lang: Lang) => void;
@@ -33,12 +49,14 @@ export function LanguageSwitcher({ lang, onChange }: LanguageSwitcherProps) {
   // The *visual* highlight index is separate from the *selected*
   // language: the user can arrow-key through options without having
   // committed to one yet. Committing happens on Enter/Space/click.
-  const [highlight, setHighlight] = useState(() =>
-    Math.max(
-      0,
-      LANG_OPTIONS.findIndex((o) => o.value === lang),
-    ),
-  );
+  // Initialise to the currently-selected language so re-opening the
+  // menu lands on whatever they last picked — matching the
+  // behaviour of every native `<select>`.
+  //
+  // Lifted out of the lazy initializer below to keep the function
+  // body tiny and to share the same clamp logic with the
+  // trigger-key handler in `onTriggerKey`.
+  const [highlight, setHighlight] = useState<number>(() => highlightForLang(lang));
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -94,12 +112,7 @@ export function LanguageSwitcher({ lang, onChange }: LanguageSwitcherProps) {
   const onTriggerKey = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      setHighlight(
-        Math.max(
-          0,
-          LANG_OPTIONS.findIndex((o) => o.value === lang),
-        ),
-      );
+      setHighlight(highlightForLang(lang));
       setOpen(true);
     }
   };
@@ -175,7 +188,16 @@ export function LanguageSwitcher({ lang, onChange }: LanguageSwitcherProps) {
         <div
           role="listbox"
           aria-label={t(lang, "nav.switch_language")}
-          aria-activedescendant={`lang-opt-${LANG_OPTIONS[highlight]?.value ?? "en"}`}
+          // `LANG_OPTIONS[highlight]!` — the invariant that
+          // `0 <= highlight < LANG_OPTIONS.length` is maintained
+          // by the `move()` and `highlightForLang()` helpers, and
+          // the type-narrowing `!` documents it explicitly for
+          // `noUncheckedIndexedAccess`. (The previous version
+          // used `?? "en"` as a defensive fallback, but the only
+          // way `highlight` is out of range is a bug in this
+          // file, in which case the wrong value is no better than
+          // crashing loudly during development.)
+          aria-activedescendant={`lang-opt-${LANG_OPTIONS[highlight]!.value}`}
           onKeyDown={onListKey}
           className="absolute right-0 top-full z-50 mt-2 min-w-[160px] border border-line bg-bg-elev p-1 shadow-xl"
         >

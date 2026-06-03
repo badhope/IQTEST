@@ -95,6 +95,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "editorial.divider": "Folio {n} · {groups} groups · {cats} categories · {stars} cumulative stars",
     "editorial.summary": "{n} entries · {m} categories · indexed daily",
     "editorial.compendium": "— Compendium",
+    "editorial.hero_title": "Network Tools",
+    "editorial.hero_atlas": "An Atlas",
     "error.folio": "Folio — error",
     "error.explore_folio": "Folio — explore / error",
   },
@@ -192,6 +194,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "editorial.divider": "第 {n} 卷 · {groups} 大主题 · {cats} 个分类 · 累计 {stars} 星",
     "editorial.summary": "{n} 个条目 · {m} 个分类 · 每日更新",
     "editorial.compendium": "— 概览",
+    "editorial.hero_title": "网络工具",
+    "editorial.hero_atlas": "图鉴",
     "error.folio": "错误页",
     "error.explore_folio": "探索页错误",
   },
@@ -289,6 +293,8 @@ const translations: Record<Lang, Record<string, string>> = {
     "editorial.divider": "第 {n} 巻 · {groups} テーマ · {cats} カテゴリ · 累計 {stars} スター",
     "editorial.summary": "{n} エントリ · {m} カテゴリ · 毎日更新",
     "editorial.compendium": "— 全書",
+    "editorial.hero_title": "ネットワークツール",
+    "editorial.hero_atlas": "図鑑",
     "error.folio": "エラー",
     "error.explore_folio": "探索エラー",
   },
@@ -332,6 +338,80 @@ export function langParam(lang: Lang, path: string): string {
 export function withLang(lang: Lang, path: string): string {
   if (lang === "en") return path;
   return path.includes("?") ? `${path}&lang=${lang}` : `${path}?lang=${lang}`;
+}
+
+/**
+ * Apply a new language across the whole client:
+ *   1. Write the URL `?lang=` query (delete it for English, since
+ *      English is the canonical URL for the static-export sitemap).
+ *   2. Persist to `localStorage` so the next visit keeps it, with a
+ *      `try/catch` because storage can be disabled in private windows
+ *      and we don't want the language switch to throw in that case.
+ *   3. Dispatch a `nethub:langchange` custom event so sibling
+ *      components (e.g. `set-html-lang`) can react without a
+ *      prop-drilling subscription tree.
+ *
+ * Centralising this in one place keeps the URL / storage / event
+ * triplet in lockstep — there were three near-duplicate copies of
+ * this 12-line function in `landing-content`, `explore-content`, and
+ * the two `*error.tsx` files, and a previous pass had landed
+ * `landing` and `explore` with subtly different URL-rewrite
+ * implementations (one used `URLSearchParams`, one used a `URL`
+ * object). This is the single source of truth now.
+ */
+export function setLangAndPersist(newLang: Lang): void {
+  if (typeof window === "undefined") return;
+  const url = new URL(window.location.href);
+  if (newLang === "en") url.searchParams.delete("lang");
+  else url.searchParams.set("lang", newLang);
+  window.history.replaceState({}, "", url.toString());
+  try {
+    window.localStorage.setItem(LANG_STORAGE_KEY, newLang);
+  } catch {
+    /* storage may be disabled */
+  }
+  window.dispatchEvent(
+    new CustomEvent("nethub:langchange", { detail: { lang: newLang } }),
+  );
+}
+
+/**
+ * `localStorage` key for the user's preferred language. Kept as a
+ * single constant so it's trivial to grep and rename.
+ */
+export const LANG_STORAGE_KEY = "nethub.lang";
+
+/**
+ * Resolve the initial client-side language using the same precedence
+ * as `set-html-lang`:
+ *   1. `?lang=` query string (deep link / canonical URL wins).
+ *   2. `localStorage` (sticky user preference).
+ *   3. `navigator.language` family match.
+ *   4. English (the i18n fallback).
+ *
+ * Lives next to `setLangAndPersist` so the read-side and write-side
+ * of the language switch share the same key name and the same
+ * precedence — we had drifted before (one file only checked URL,
+ * one only checked storage, one only checked navigator) and a user
+ * landing on `/?lang=zh` with no storage set would see English for
+ * a frame.
+ */
+export function resolveInitialLang(): Lang {
+  if (typeof window === "undefined") return "en";
+  const fromUrl = readLangFromUrl();
+  if (fromUrl) return fromUrl;
+  try {
+    const stored = window.localStorage.getItem(LANG_STORAGE_KEY);
+    if (stored === "en" || stored === "zh" || stored === "ja") return stored;
+  } catch {
+    /* storage may be disabled */
+  }
+  if (typeof navigator !== "undefined") {
+    const lang = navigator.language.toLowerCase();
+    if (lang.startsWith("zh")) return "zh";
+    if (lang.startsWith("ja")) return "ja";
+  }
+  return "en";
 }
 
 /**

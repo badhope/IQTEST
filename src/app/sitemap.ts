@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next";
-import { getAllProjects, getCategories, getLastUpdated } from "@/lib/projects";
+import {
+  getAllProjects,
+  getCategories,
+  getLastUpdated,
+} from "@/lib/projects";
+import { LANG_HTML_LANG, Lang } from "@/lib/i18n";
 
 // Required for `output: "export"`: the sitemap is generated at
 // build time and never revalidated at runtime.
@@ -11,13 +16,13 @@ export const dynamic = "force-static";
 // vice versa). Every entry includes its language alternates so
 // Google can serve the right variant to the right user without
 // having to guess from the `?lang=` query string.
+//
+// `LANGS_HTML` used to be a local lookup table; the previous
+// version had drifted out of sync with the canonical tags in
+// `LANG_HTML_LANG` (one was `zh-Hans`, the other was `zh-CN`), so
+// we now read directly from the i18n module's record.
 const SITE = "https://badhope.github.io/NetTools-Hub";
-const LANGS = ["en", "zh", "ja"] as const;
-const LANGS_HTML: Record<typeof LANGS[number], string> = {
-  en: "en",
-  zh: "zh-Hans",
-  ja: "ja",
-};
+const LANGS: readonly Lang[] = ["en", "zh", "ja"];
 
 function alternates(path: string) {
   // The path may already carry a query string (e.g.
@@ -25,7 +30,7 @@ function alternates(path: string) {
   // the `lang=` param with `&` in that case, not `?`.
   const sep = path.includes("?") ? "&" : "?";
   return LANGS.map((lang) => ({
-    hreflang: LANGS_HTML[lang],
+    hreflang: LANG_HTML_LANG[lang],
     href:
       lang === "en"
         ? `${SITE}${path}`
@@ -49,13 +54,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((slug) => projects.some((p) => p.category === slug))
     .flatMap((slug) =>
       LANGS.map((lang) => ({
-        url: lang === "en" ? `${SITE}/explore?category=${slug}` : `${SITE}/explore?category=${slug}&lang=${lang}`,
+        url:
+          lang === "en"
+            ? `${SITE}/explore?category=${slug}`
+            : `${SITE}/explore?category=${slug}&lang=${lang}`,
         lastModified: lastUpdated,
         changeFrequency: "weekly" as const,
         priority: 0.6,
         alternates: {
           languages: Object.fromEntries(
-            alternates(`/explore?category=${slug}`).map((a) => [a.hreflang, a.href]),
+            alternates(`/explore?category=${slug}`).map((a) => [
+              a.hreflang,
+              a.href,
+            ]),
           ),
         },
       })),

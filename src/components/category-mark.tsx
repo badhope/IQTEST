@@ -387,10 +387,14 @@ export function CategoryMark({
   ...rest
 }: MarkProps & { slug: string }) {
   const Mark = MARKS[slug] ?? MARKS.collection;
-  // The cast is required because TypeScript treats the dictionary value
-  // as a plain function type, not as a React component. The runtime
-  // contract is identical (a function returning JSX).
-  const Comp = Mark as unknown as React.FC<MarkProps>;
+  // The dictionary's value type is `(p: MarkProps) => JSX.Element`,
+  // a plain function — TypeScript does not treat that as a React
+  // component for the JSX call signature. A single cast to
+  // `ComponentType<MarkProps>` is enough; the previous version
+  // chained `as unknown as React.FC<MarkProps>`, which is the
+  // double-cast the React types docs warn against (it skips type
+  // checking on every property).
+  const Comp = Mark as React.ComponentType<MarkProps>;
   return <Comp {...rest} />;
 }
 

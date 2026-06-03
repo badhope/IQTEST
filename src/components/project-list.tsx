@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { Project, SortOption, ProjectCategory } from "@/types/project";
-import { Lang, t, langParam } from "@/lib/i18n";
+import { Lang, t, withLang } from "@/lib/i18n";
 import { ProjectCard } from "@/components/project-card";
 import { CATEGORY_GROUPS } from "@/lib/category-groups";
 import { GroupMark, CategoryMark } from "@/components/category-mark";
@@ -22,20 +22,28 @@ export function ProjectList({ projects, sort, stats, categories, lang }: Project
     // a new array and leaves the input untouched, which means a
     // stable reference survives across renders when the input
     // reference itself is stable (which it is — the parent passes
-    // the same `filtered` array reference until the query changes).
-    const copy = projects.slice();
+    // the same `projects` array reference until the query changes).
+    // (`projects` is typed `readonly Project[]` from the data
+    // module, so an in-place `.sort()` would actually be a type
+    // error — `toSorted` is the one that compiles *and* matches
+    // the Vercel `js-tosorted-immutable` rule.)
     switch (sort) {
       case "stars":
-        return copy.sort((a, b) => b.stars - a.stars);
+        return projects.toSorted((a, b) => b.stars - a.stars);
       case "name":
-        return copy.sort((a, b) => a.name.localeCompare(b.name, lang));
+        return projects.toSorted((a, b) => a.name.localeCompare(b.name, lang));
       case "updated":
-        return copy.sort(
+        return projects.toSorted(
           (a, b) =>
             new Date(b.lastCommit).getTime() - new Date(a.lastCommit).getTime(),
         );
       default:
-        return copy;
+        // Default sort: leave the input order intact. We still
+        // return a fresh array reference so the `useMemo` contract
+        // ("different input → different output") is preserved
+        // across the `projects` / `sort` axis when only the *order*
+        // has changed.
+        return projects.slice();
     }
   }, [projects, sort, lang]);
 
@@ -149,7 +157,7 @@ export function ProjectList({ projects, sort, stats, categories, lang }: Project
                 <div key={slug} id={`cat-${slug}`} className="cv-auto">
                   <div className="editorial-index mb-4" data-index={String(idx + 1).padStart(2, "0")}>
                     <Link
-                      href={langParam(lang, `/explore?category=${slug}`)}
+                      href={withLang(lang, `/explore?category=${slug}`)}
                       className="flex items-center gap-2 text-fg-2 transition-colors hover:text-accent"
                     >
                       <CategoryMark

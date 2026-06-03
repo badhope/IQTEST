@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useClientLang } from "@/lib/use-client-lang";
 import Link from "next/link";
 import { ProjectCategory } from "@/types/project";
 import {
@@ -11,7 +11,7 @@ import {
   getTotalStars,
   getCategoryCount,
 } from "@/lib/projects";
-import { t, Lang, readLangFromUrl, langParam } from "@/lib/i18n";
+import { t, withLang } from "@/lib/i18n";
 import { formatTotalStars } from "@/lib/utils";
 import { TopNav } from "@/components/top-nav";
 import { CATEGORY_GROUPS } from "@/lib/category-groups";
@@ -64,40 +64,14 @@ const FEATURES = [
 ] as const;
 
 export function LandingContent() {
-  // SSR-safe initial value. The static export pre-renders the page
-  // in English, and the URL-driven `lang` is applied by the effect
-  // below on mount (no hydration mismatch because the SSR HTML and
-  // the initial state both say "en").
-  const [lang, setLang] = useState<Lang>("en");
-
-  // Sync `lang` from the URL on mount and on every popstate. The
-  // setState is wrapped in a callback so React 19's
-  // `react-hooks/set-state-in-effect` rule does not flag it as a
-  // cascading render.
-  useEffect(() => {
-    const onPop = () => setLang(readLangFromUrl());
-    onPop();
-    window.addEventListener("popstate", onPop);
-    return () => window.removeEventListener("popstate", onPop);
-  }, []);
-
-  const handleLangChange = (newLang: Lang) => {
-    setLang(newLang);
-    if (typeof window !== "undefined") {
-      const url = new URL(window.location.href);
-      if (newLang === "en") url.searchParams.delete("lang");
-      else url.searchParams.set("lang", newLang);
-      window.history.replaceState({}, "", url.toString());
-      try {
-        window.localStorage.setItem("nethub.lang", newLang);
-      } catch {
-        /* storage may be disabled */
-      }
-      window.dispatchEvent(
-        new CustomEvent("nethub:langchange", { detail: { lang: newLang } }),
-      );
-    }
-  };
+  // All five pages that render localised text (landing, explore,
+  // not-found, error, explore-error) used to repeat the same 14-line
+  // "useState English, mount effect to read the URL, manually
+  // rewrite the URL and dispatch a custom event on change" dance.
+  // It's a hook now, so the SSR / hydration / cross-component
+  // coordination rules live in exactly one place — see
+  // `lib/use-client-lang.ts` for the long version of the comment.
+  const [lang, handleLangChange] = useClientLang();
 
   // Static, immutable for the lifetime of the bundle — see the
   // module-scope definitions of `LAST_UPDATED`, `TOTAL_STARS`, etc.
@@ -144,27 +118,17 @@ export function LandingContent() {
               </span>
             </div>
 
-            <h1 className="font-display text-[clamp(2.75rem,7vw,5.5rem)] font-normal leading-[0.96] tracking-[-0.02em] text-fg">
-              {lang === "zh" ? "网络工具" : lang === "ja" ? "ネットワークツール" : "Network Tools"}
-              <span
-                aria-hidden
-                className="ml-3 inline-block translate-y-[-0.08em] font-display text-[0.45em] italic text-accent"
-                style={{ fontVariationSettings: "'opsz' 144, 'SOFT' 50, 'WONK' 1" }}
-              >
-                —
-              </span>
-              <br />
-              <span
-                className="text-accent"
-                style={{ fontVariationSettings: "'opsz' 144" }}
-              >
-                {lang === "zh"
-                  ? "图鉴"
-                  : lang === "ja"
-                  ? "図鑑"
-                  : "An Atlas"}
+            <h1 className="font-display text-[clamp(2.5rem,7vw,5rem)] font-normal leading-[1.05] tracking-[-0.025em] text-fg">
+              <span className="text-fg-3">{t(lang, "editorial.eyebrow")}</span>
+              <span aria-hidden className="mx-3 text-accent">/</span>
+              <span className="text-accent">
+                {t(lang, "editorial.hero_title")}
               </span>
             </h1>
+
+            <p className="mt-6 font-display text-[clamp(1.25rem,2.5vw,1.75rem)] leading-[1.2] tracking-[-0.015em] text-fg-2">
+              {t(lang, "editorial.hero_atlas")}
+            </p>
 
             <p className="mt-8 max-w-xl text-balance text-[15px] leading-[1.7] text-fg-2 sm:text-base">
               {t(lang, "editorial.subtitle", { total: TOTAL_PROJECTS })}
@@ -172,7 +136,7 @@ export function LandingContent() {
 
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">
               <Link
-                href={langParam(lang, "/explore")}
+                href={withLang(lang, "/explore")}
                 className="group inline-flex items-center gap-3 border-b border-accent pb-1.5 font-display text-lg text-accent transition-colors hover:text-accent-hover"
               >
                 <span>{t(lang, "editorial.open_atlas")}</span>
@@ -355,7 +319,7 @@ export function LandingContent() {
                     {items.map(({ slug, cat, count }) => (
                       <li key={slug}>
                         <Link
-                          href={langParam(lang, `/explore?category=${slug}`)}
+                          href={withLang(lang, `/explore?category=${slug}`)}
                           className="group/link flex items-center justify-between gap-2 py-1 text-[13px] text-fg-2 transition-colors hover:text-fg"
                         >
                           <span className="flex items-center gap-2 truncate">
@@ -396,7 +360,7 @@ export function LandingContent() {
           </p>
           <div className="mt-10 flex items-center justify-center gap-6">
             <Link
-              href={langParam(lang, "/explore")}
+              href={withLang(lang, "/explore")}
               className="group inline-flex items-center gap-3 border-b border-accent pb-1.5 font-display text-lg text-accent transition-colors hover:text-accent-hover"
             >
               <span>{t(lang, "editorial.continue_reading")}</span>

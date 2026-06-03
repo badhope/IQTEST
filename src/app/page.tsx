@@ -20,14 +20,17 @@ const siteJsonLd = {
     name: "badhope",
     url: "https://github.com/badhope",
   },
+  // The search box is purely client-side (state held in
+  // `ExploreContent`); it does *not* rewrite the URL with
+  // `?q=…`, so there is no `target` template to advertise. The
+  // previous version listed a `SearchAction` template pointing
+  // at `/explore?q={search_term_string}` that did not actually
+  // resolve to anything — Google will silently demote or omit
+  // the sitelinks search box if the template is a dead end, so
+  // we just don't claim one exists.
   potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate:
-        "https://badhope.github.io/NetTools-Hub/explore?q={search_term_string}",
-    },
-    "query-input": "required name=search_term_string",
+    "@type": "ReadAction",
+    target: "https://badhope.github.io/NetTools-Hub/explore",
   },
 };
 
