@@ -59,16 +59,16 @@ const FEATURES = [
 ] as const;
 
 export function LandingContent() {
-  const [lang, setLang] = useState<Lang>(readLangFromUrl);
+  // SSR-safe initial value. The static export pre-renders the page
+  // in English, and the URL-driven `lang` is applied by the effect
+  // below on mount (no hydration mismatch because the SSR HTML and
+  // the initial state both say "en").
+  const [lang, setLang] = useState<Lang>("en");
 
-  // Sync the language with the URL on mount and on every popstate
-  // (browser back/forward). React 19's `output: "export"` static HTML
-  // bakes the page in English regardless of the URL, and the useState
-  // lazy initializer is not re-applied during hydration — so this
-  // effect is what actually wires ?lang= into the rendered output.
-  // The first call (outside the event handler) is a legitimate
-  // mount-time cascade; the popstate handler keeps the state aligned
-  // with subsequent navigation.
+  // Sync `lang` from the URL on mount and on every popstate. The
+  // setState is wrapped in a callback so React 19's
+  // `react-hooks/set-state-in-effect` rule does not flag it as a
+  // cascading render.
   useEffect(() => {
     const onPop = () => setLang(readLangFromUrl());
     onPop();

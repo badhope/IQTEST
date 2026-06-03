@@ -31,20 +31,19 @@ const CATEGORIES = getCategories();
 const TOTAL_STARS = ALL_PROJECTS.reduce((sum, p) => sum + p.stars, 0);
 const CATEGORY_COUNT = Object.keys(STATS).length;
 
-// Read the initial values from the URL.
-// Safe to call on the server (returns the empty / default), and on the
-// client returns the value parsed from `window.location.search`. We use
-// a lazy initializer so the parse happens exactly once at mount, and
-// the useState-in-useEffect cascade is avoided.
+// The four URL-driven pieces of state — `lang`, `query`, `sort`,
+// `category` — must be initialised with the *server* value during
+// `useState`'s lazy initializer. If the client-side `readUrlState`
+// returned `?category=foo` while the SSR HTML was rendered without
+// the filter, React 19 would throw hydration error #418 ("text
+// content did not match") on the first paint.
 //
-// The catch: with `output: "export"` + React 19, the static HTML is
-// pre-rendered with the *server-side* initial value, and on hydration
-// React patches the DOM to match — but the useState lazy initializer's
-// client-side return value is *not* applied to the state. The state
-// stays at the SSR value, and the URL-driven render does not happen.
-// We work around this by explicitly syncing from the URL inside an
-// effect on mount (see below) — the comment in the effect documents
-// why this is a legitimate cascade.
+// The URL values are then re-read inside the mount effect (below)
+// and applied as a controlled state update. This is the documented
+// escape hatch for the `react-hooks/set-state-in-effect` rule:
+// `window.location` is only available on the client, so we *must*
+// do this inside an effect to avoid a window-touching render on
+// the server.
 function readUrlState() {
   if (typeof window === "undefined") {
     return { lang: "en" as Lang, query: "", sort: "default" as SortOption, category: "" };
@@ -60,10 +59,12 @@ function readUrlState() {
 }
 
 export function ExploreContent() {
-  const [query, setQuery] = useState<string>(() => readUrlState().query);
-  const [sort, setSort] = useState<SortOption>(() => readUrlState().sort);
-  const [category, setCategory] = useState<string>(() => readUrlState().category);
-  const [lang, setLang] = useState<Lang>(() => readUrlState().lang);
+  // Lazy initializers use the SSR value (always empty / "en" / default).
+  // The mount effect below applies the real URL state on the client.
+  const [query, setQuery] = useState<string>("");
+  const [sort, setSort] = useState<SortOption>("default");
+  const [category, setCategory] = useState<string>("");
+  const [lang, setLang] = useState<Lang>("en");
 
   // Sync the four URL-driven pieces of state on mount and on every
   // popstate (browser back/forward). This is the documented escape
