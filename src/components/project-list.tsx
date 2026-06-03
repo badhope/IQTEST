@@ -2,7 +2,8 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
-import { Project, SortOption, ProjectCategory, Lang } from "@/types/project";
+import { Project, SortOption, ProjectCategory } from "@/types/project";
+import { Lang } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
 import { ProjectCard } from "@/components/project-card";
 import { CATEGORY_GROUPS } from "@/lib/category-groups";

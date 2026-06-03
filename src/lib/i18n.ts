@@ -259,8 +259,6 @@ export function t(lang: Lang, key: string, params?: Record<string, string | numb
   return text;
 }
 
-export const LANG_COOKIE = "nettools_lang";
-
 export const LANG_OPTIONS: { value: Lang; label: string }[] = [
   { value: "en", label: "EN" },
   { value: "zh", label: "中文" },

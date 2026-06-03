@@ -31,5 +31,3 @@ export interface ProjectsData {
 }
 
 export type SortOption = "default" | "stars" | "name" | "updated";
-
-export type Lang = "en" | "zh" | "ja";

@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { ProjectCategory, Lang } from "@/types/project";
+import { ProjectCategory } from "@/types/project";
+import { Lang } from "@/lib/i18n";
 import { t } from "@/lib/i18n";
 import { CATEGORY_GROUPS } from "@/lib/category-groups";
 
