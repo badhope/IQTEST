@@ -26,58 +26,70 @@ const languageColors: Record<string, string> = {
   Perl: "#0298c3",
 };
 
+// Atlas entry: left rail uses the project's own first gradient stop
+// as a hairline, never as a fill. The body is calm body text, the
+// title is the display serif, the metadata is mono. The hover state
+// warms the rail and the title — no translate, no shadow.
 export function ProjectCard({ project }: { project: Project }) {
   const dotColor = languageColors[project.language] || "#8b949e";
+  const railColor = project.gradient[0] || "#d97a3a";
 
   return (
     <Link
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col rounded-2xl border border-[#30363d] bg-[#161b22] p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-[#58a6ff]/40 hover:shadow-lg hover:shadow-black/30"
-      style={{ borderLeftWidth: "3px", borderLeftColor: project.gradient[0] }}
+      className="group relative flex h-full flex-col gap-3 border border-line bg-bg-elev/60 p-5 pl-6 transition-colors duration-300 hover:border-dim hover:bg-bg-elev focus-visible:border-accent"
+      style={
+        {
+          // The rail is a 1px-wide coloured bar inset on the left
+          // edge. Implemented as a CSS custom property so the
+          // hover-state override can re-tint it without recomputing
+          // the gradient.
+          ["--rail" as string]: railColor,
+        } as React.CSSProperties
+      }
     >
-      <div className="mb-3 flex items-start justify-between gap-3">
-        <h3 className="min-w-0 flex-1 text-[15px] font-semibold leading-snug text-[#e6edf3] group-hover:text-[#58a6ff] transition-colors line-clamp-1 break-all">
+      <span
+        aria-hidden
+        className="absolute inset-y-3 left-0 w-px transition-colors duration-300 group-hover:bg-[var(--rail)]"
+        style={{ backgroundColor: "var(--rail)" }}
+      />
+
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="min-w-0 flex-1 font-display text-[1.15rem] font-medium leading-tight text-fg transition-colors duration-200 group-hover:text-accent line-clamp-1 break-words">
           {project.name}
         </h3>
-        <div className="flex shrink-0 items-center gap-1 text-xs text-[#6e7681]">
-          <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
-          </svg>
-          {formatNumber(project.stars)}
-        </div>
+        <span className="flex shrink-0 items-baseline gap-1 font-mono text-[11px] text-muted">
+          <span className="text-fg-2">{formatNumber(project.stars)}</span>
+          <span aria-hidden>★</span>
+        </span>
       </div>
 
-      <p className="mb-5 text-[13px] leading-relaxed text-[#8b949e] line-clamp-2 break-words">
+      <p className="text-[13px] leading-relaxed text-fg-2 line-clamp-2 break-words">
         {project.description}
       </p>
 
-      <div className="mb-5 flex flex-wrap gap-1.5">
-        {project.tags.slice(0, 2).map((tag) => (
+      <div className="mt-1 flex flex-wrap gap-x-2 gap-y-1">
+        {project.tags.slice(0, 3).map((tag) => (
           <span
             key={tag}
-            className="rounded-md bg-[#21262d] px-2 py-0.5 text-[10px] font-medium text-[#8b949e] border border-[#30363d]"
+            className="font-mono text-[10px] uppercase tracking-wider text-muted"
           >
-            {tag}
+            #{tag}
           </span>
         ))}
-        {project.tags.length > 2 && (
-          <span className="rounded-md bg-[#21262d] px-2 py-0.5 text-[10px] text-[#6e7681]">
-            +{project.tags.length - 2}
-          </span>
-        )}
       </div>
 
-      <div className="mt-auto flex items-center justify-between gap-2 border-t border-[#21262d] pt-4 text-[11px]">
-        <div className="flex items-center gap-1.5 text-[#8b949e]">
+      <div className="mt-auto flex items-center justify-between gap-2 border-t border-line pt-3 font-mono text-[10.5px] text-muted">
+        <span className="flex items-center gap-1.5">
           <span
-            className="inline-block h-2.5 w-2.5 rounded-full"
+            className="inline-block h-1.5 w-1.5 rounded-full"
             style={{ backgroundColor: dotColor }}
           />
-          <span className="truncate">{project.language}</span>
-        </div>
-        <span className="truncate text-[#6e7681]">@{project.author}</span>
+          {project.language}
+        </span>
+        <span className="truncate">@{project.author}</span>
       </div>
     </Link>
   );

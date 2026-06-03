@@ -16,6 +16,7 @@ import {
 import { t, Lang } from "@/lib/i18n";
 import { SortOption } from "@/types/project";
 import { getGroupOfSlug } from "@/lib/category-groups";
+import { CategoryMark } from "@/components/category-mark";
 
 function isValidLang(value: string | null): value is Lang {
   return value === "en" || value === "zh" || value === "ja";
@@ -25,49 +26,58 @@ function isValidSort(value: string | null): value is SortOption {
   return value === "default" || value === "stars" || value === "name" || value === "updated";
 }
 
-// URL-driven lazy initializers. Same rationale as LandingContent — using
-// a useState lazy initializer avoids a setState-in-useEffect, at the cost
-// of a one-time hydration mismatch for users that visit with a non-default
-// ?lang / ?q / ?sort / ?category. The mismatch is benign: React patches
-// the DOM to the correct values before paint.
-function readInitialLang(): Lang {
-  if (typeof window === "undefined") return "en";
-  const v = new URLSearchParams(window.location.search).get("lang");
-  return isValidLang(v) ? v : "en";
-}
-function readInitialQuery(): string {
-  if (typeof window === "undefined") return "";
-  return new URLSearchParams(window.location.search).get("q") ?? "";
-}
-function readInitialSort(): SortOption {
-  if (typeof window === "undefined") return "default";
-  const v = new URLSearchParams(window.location.search).get("sort");
-  return isValidSort(v) ? v : "default";
-}
-function readInitialCategory(): string {
-  if (typeof window === "undefined") return "";
-  return new URLSearchParams(window.location.search).get("category") ?? "";
+// Read the initial values from the URL.
+// Safe to call on the server (returns the empty / default), and on the
+// client returns the value parsed from `window.location.search`. We use
+// a lazy initializer so the parse happens exactly once at mount, and
+// the useState-in-useEffect cascade is avoided.
+//
+// The catch: with `output: "export"` + React 19, the static HTML is
+// pre-rendered with the *server-side* initial value, and on hydration
+// React patches the DOM to match — but the useState lazy initializer's
+// client-side return value is *not* applied to the state. The state
+// stays at the SSR value, and the URL-driven render does not happen.
+// We work around this by explicitly syncing from the URL inside an
+// effect on mount (see below) — the comment in the effect documents
+// why this is a legitimate cascade.
+function readUrlState() {
+  if (typeof window === "undefined") {
+    return { lang: "en" as Lang, query: "", sort: "default" as SortOption, category: "" };
+  }
+  const sp = new URLSearchParams(window.location.search);
+  const langV = sp.get("lang");
+  const sortV = sp.get("sort");
+  return {
+    lang: isValidLang(langV) ? langV : "en",
+    query: sp.get("q") ?? "",
+    sort: isValidSort(sortV) ? sortV : "default",
+    category: sp.get("category") ?? "",
+  };
 }
 
 export function ExploreContent() {
-  const [query, setQuery] = useState<string>(readInitialQuery);
-  const [sort, setSort] = useState<SortOption>(readInitialSort);
-  const [category, setCategory] = useState<string>(readInitialCategory);
-  const [lang, setLang] = useState<Lang>(readInitialLang);
+  const [query, setQuery] = useState<string>(() => readUrlState().query);
+  const [sort, setSort] = useState<SortOption>(() => readUrlState().sort);
+  const [category, setCategory] = useState<string>(() => readUrlState().category);
+  const [lang, setLang] = useState<Lang>(() => readUrlState().lang);
 
-  // Re-sync with the URL on browser back / forward. The setState calls are
-  // inside the popstate event handler — not in the useEffect body — so this
-  // satisfies `react-hooks/set-state-in-effect`. The four readInitial*()
-  // helpers are module-level and capture no closure state, so they don't
-  // need to be in the dep array (and adding them would force the listener
-  // to re-attach on every render).
+  // Sync the four URL-driven pieces of state on mount and on every
+  // popstate (browser back/forward). This is the documented escape
+  // hatch for the `react-hooks/set-state-in-effect` rule:
+  // `readUrlState()` reads `window.location`, which is only available
+  // on the client, so we *must* do this inside an effect to avoid
+  // a window-touching render on the server. The four setState calls
+  // fire on the same event tick so React batches them into a single
+  // re-render.
   useEffect(() => {
     const onPop = () => {
-      setLang(readInitialLang());
-      setQuery(readInitialQuery());
-      setSort(readInitialSort());
-      setCategory(readInitialCategory());
+      const next = readUrlState();
+      setLang(next.lang);
+      setQuery(next.query);
+      setSort(next.sort);
+      setCategory(next.category);
     };
+    onPop();
     window.addEventListener("popstate", onPop);
     return () => window.removeEventListener("popstate", onPop);
   }, []);
@@ -116,7 +126,7 @@ export function ExploreContent() {
   const activeGroup = category ? getGroupOfSlug(category) : undefined;
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#0d1117] text-[#e6edf3]">
+    <div className="flex min-h-screen flex-col bg-bg text-fg">
       <TopNav
         lang={lang}
         onLangChange={handleLangChange}
@@ -134,45 +144,69 @@ export function ExploreContent() {
         />
 
         <main className="min-w-0 flex-1">
-          <div className="sticky top-16 z-30 border-b border-[#21262d] bg-[#0d1117]/85 backdrop-blur-md">
-            <div className="flex flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <div className="sticky top-16 z-30 border-b border-line bg-bg/85 backdrop-blur-md">
+            <div className="flex flex-col gap-5 px-5 py-5 sm:flex-row sm:items-end sm:justify-between sm:px-8">
               <StatsBar
                 projectCount={allProjects.length}
                 categoryCount={categoryCount}
                 totalStars={totalStars}
                 lang={lang}
               />
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <SearchBar value={query} onChange={handleQueryChange} lang={lang} />
                 <SortSelect value={sort} onChange={handleSortChange} lang={lang} />
               </div>
             </div>
 
             {category && (
-              <div className="border-t border-[#21262d] px-4 py-4 sm:px-6">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">{categories[category]?.icon || "📁"}</span>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[11px] font-medium uppercase tracking-wider text-[#6e7681]">
-                      {activeGroup ? t(lang, activeGroup.labelKey) : ""}
+              <div className="border-t border-line px-5 py-5 sm:px-8">
+                <div className="flex flex-wrap items-end justify-between gap-4">
+                  <div className="flex min-w-0 items-end gap-4">
+                    <CategoryMark
+                      slug={category}
+                      size={32}
+                      className="shrink-0 text-fg-2"
+                    />
+                    <div className="min-w-0">
+                      <div className="kicker">
+                        {activeGroup
+                          ? `${t(lang, "editorial.plate", { n: activeGroup.id.toUpperCase() })} — ${t(lang, activeGroup.labelKey)}`
+                          : t(lang, "editorial.section.curated")}
+                      </div>
+                      <h1 className="mt-1 truncate font-display text-2xl leading-tight text-fg sm:text-3xl">
+                        {t(lang, "category.header", {
+                          name: categories[category]?.name || category.replace(/_/g, " "),
+                        })}
+                      </h1>
                     </div>
-                    <h1 className="truncate text-lg font-bold text-[#e6edf3]">
-                      {t(lang, "category.header", { name: categories[category]?.name || category.replace(/_/g, " ") })}
-                    </h1>
                   </div>
-                  <span className="shrink-0 rounded-full border border-[#30363d] bg-[#21262d] px-2.5 py-1 text-xs text-[#8b949e]">
-                    {t(lang, "category.count", { count: filtered.length })}
-                  </span>
-                  <button
-                    onClick={() => {
-                      setCategory("");
-                      syncUrl({ category: null });
-                    }}
-                    className="shrink-0 rounded-md border border-[#30363d] bg-[#161b22] px-2.5 py-1 text-xs text-[#8b949e] transition-colors hover:border-[#58a6ff] hover:text-[#e6edf3]"
-                    aria-label="Clear category"
-                  >
-                    ✕
-                  </button>
+                  <div className="flex items-center gap-4 font-mono text-[11px] text-muted">
+                    <span>
+                      {t(lang, "category.count", { count: filtered.length })}
+                    </span>
+                    <button
+                      onClick={() => {
+                        setCategory("");
+                        syncUrl({ category: null });
+                      }}
+                      className="link-editorial inline-flex items-center gap-1.5"
+                      aria-label="Clear category"
+                    >
+                      <svg
+                        className="h-3 w-3"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={1.5}
+                      >
+                        <path
+                          strokeLinecap="square"
+                          d="M6 6l12 12M18 6L6 18"
+                        />
+                      </svg>
+                      <span>{t(lang, "empty.clear")}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             )}
@@ -180,11 +214,10 @@ export function ExploreContent() {
 
           {filtered.length === 0 ? (
             <div className="flex min-h-[50vh] flex-col items-center justify-center px-4 text-center">
-              <span className="text-5xl">🔍</span>
-              <h2 className="mt-6 text-lg font-semibold text-[#e6edf3]">
+              <span className="font-display text-4xl text-fg-2">
                 {t(lang, "empty.title")}
-              </h2>
-              <p className="mt-3 max-w-md text-sm text-[#8b949e]">
+              </span>
+              <p className="mt-3 max-w-md text-sm text-fg-2">
                 {t(lang, "empty.description")}
               </p>
               {(query || category) && (
@@ -194,9 +227,9 @@ export function ExploreContent() {
                     setCategory("");
                     syncUrl({ q: null, category: null });
                   }}
-                  className="mt-8 inline-flex items-center gap-2 rounded-lg border border-[#30363d] bg-[#161b22] px-4 py-2 text-sm text-[#58a6ff] transition-colors hover:bg-[#21262d]"
+                  className="mt-8 link-editorial inline-flex items-center gap-1.5"
                 >
-                  {t(lang, "empty.clear")}
+                  <span>{t(lang, "empty.clear")}</span>
                 </button>
               )}
             </div>

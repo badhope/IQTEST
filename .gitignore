@@ -63,3 +63,6 @@ Desktop.ini
 *.tar.gz
 *.rar
 *.7z
+
+# QA / visual regression artifacts
+/screenshots/

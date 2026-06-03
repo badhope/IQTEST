@@ -46,36 +46,45 @@ export function SearchBar({ value, onChange, lang }: SearchBarProps) {
   };
 
   return (
-    <div className="relative w-full max-w-xs">
+    <div className="relative w-full sm:w-72">
       <svg
-        className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#6e7681]"
+        className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        strokeWidth={1.5}
       >
         <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          strokeLinecap="square"
+          d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"
         />
+        <path strokeLinecap="square" d="M21 21l-5-5" />
       </svg>
       <input
         type="text"
         value={inputValue}
         onChange={(e) => handleInput(e.target.value)}
         placeholder={t(lang, "search.placeholder")}
-        className="w-full rounded-lg border border-[#30363d] bg-[#0d1117] py-2 pl-10 pr-8 text-sm text-[#e6edf3] placeholder:text-[#6e7681] focus:border-[#58a6ff] focus:outline-none focus:ring-1 focus:ring-[#58a6ff]"
+        className="w-full border border-dim bg-transparent py-2 pl-9 pr-8 font-sans text-sm text-fg placeholder:font-mono placeholder:text-[11px] placeholder:uppercase placeholder:tracking-[0.18em] placeholder:text-muted focus:border-accent focus:outline-none"
         aria-label={t(lang, "search.aria_label")}
       />
       {inputValue && (
         <button
           onClick={() => handleInput("")}
-          className="absolute right-2 top-1/2 -translate-y-1/2 text-[#6e7681] hover:text-[#e6edf3]"
+          className="absolute right-2 top-1/2 -translate-y-1/2 text-muted hover:text-accent"
           aria-label={t(lang, "search.clear")}
         >
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <svg
+            className="h-3.5 w-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
+          >
+            <path
+              strokeLinecap="square"
+              d="M6 6l12 12M18 6L6 18"
+            />
           </svg>
         </button>
       )}

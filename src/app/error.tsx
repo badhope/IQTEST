@@ -14,19 +14,36 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#0d1117]">
-      <span className="text-6xl">⚠️</span>
-      <h1 className="mt-4 text-2xl font-bold text-[#e6edf3]">
-        Something went wrong
+    <div className="flex min-h-screen flex-col items-center justify-center bg-bg px-6 text-center">
+      <div className="mb-6 flex items-center gap-3">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          Folio — error
+        </span>
+        <span className="h-px w-12 bg-dim" />
+      </div>
+      <h1 className="font-display text-5xl leading-none text-fg sm:text-6xl">
+        Err<span className="italic text-accent">/</span>or
       </h1>
-      <p className="mt-2 text-sm text-[#8b949e]">
-        An unexpected error occurred. Please try again.
+      <p className="mt-6 max-w-sm text-sm leading-relaxed text-fg-2">
+        An unexpected error interrupted this page. Please try again.
       </p>
       <button
         onClick={reset}
-        className="mt-6 inline-flex items-center gap-2 rounded-lg border border-[#30363d] bg-[#161b22] px-4 py-2 text-sm text-[#58a6ff] transition-colors hover:bg-[#21262d]"
+        className="group mt-10 inline-flex items-center gap-3 border-b border-accent pb-1 font-display text-lg text-accent transition-colors hover:text-accent-hover"
       >
-        Try Again
+        <span>Try again</span>
+        <svg
+          className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.5}
+        >
+          <path
+            strokeLinecap="square"
+            d="M5 12h14M13 6l6 6-6 6"
+          />
+        </svg>
       </button>
     </div>
   );
