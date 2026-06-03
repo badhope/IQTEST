@@ -300,10 +300,22 @@ const translations: Record<Lang, Record<string, string>> = {
   },
 };
 
-export function t(lang: Lang, key: string, params?: Record<string, string | number>): string {
+export function t(
+  lang: Lang,
+  key: string,
+  params?: Record<string, string | number>,
+): string {
   let text = translations[lang]?.[key] || translations.en[key] || key;
   if (params) {
-    for (const [k, v] of Object.entries(params)) {
+    // `for…in` walks own keys without allocating an
+    // `Object.entries()` array on every call. With ~5 keys per
+    // call site and `t()` running on every render of the project
+    // list, the array allocations add up to noticeable GC churn
+    // (and `t()` is also called for the fallback path when a key
+    // is missing in the active language).
+    for (const k in params) {
+      const v = params[k];
+      if (v === undefined) continue;
       text = text.replace(`{${k}}`, String(v));
     }
   }

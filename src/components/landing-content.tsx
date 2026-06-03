@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useClientLang } from "@/lib/use-client-lang";
 import Link from "next/link";
 import { ProjectCategory } from "@/types/project";
@@ -29,6 +30,54 @@ const LAST_UPDATED = getLastUpdated();
 const TOTAL_STARS = getTotalStars();
 const TOTAL_PROJECTS = getAllProjects().length;
 const CATEGORY_COUNT = getCategoryCount();
+
+// `counts` and `categories` are themselves cached inside the data
+// module (the getters are pure look-ups against a static Map /
+// Record), but the function-call overhead is wasted on every render.
+// Hoist the resolved references to module scope so the component
+// body just hands the same object identity down to `<TopNav>`.
+const COUNTS = getCategoryCounts();
+const CATEGORIES = getCategories();
+
+// `GROUP_CARDS` pre-resolves the (slug → category, count) join that
+// the "six groups" plate needs. Both `CATEGORIES` and `COUNTS` are
+// stable for the lifetime of the bundle, so the join only has to
+// run once; the render path then just maps over the result. The
+// pre-filter (`cat !== undefined && count > 0`) drops the rare
+// groups that have no live projects at the moment of the build,
+// which is the same logic the inline `.filter` used to do.
+type GroupCardItem = { slug: string; cat: ProjectCategory; count: number };
+type GroupCard = {
+  group: (typeof CATEGORY_GROUPS)[number];
+  items: GroupCardItem[];
+  total: number;
+};
+// `GROUP_CARDS` pre-resolves the (slug → category, count) join
+// that the "six groups" plate needs. Both `CATEGORIES` and
+// `COUNTS` are stable for the lifetime of the bundle, so the
+// join only has to run once; the render path then just maps
+// over the result. The pre-filter (`cat !== undefined &&
+// count > 0`) drops the rare groups that have no live
+// projects at the moment of the build, which is the same
+// logic the inline `.filter` used to do.
+const GROUP_CARDS: GroupCard[] = (() => {
+  const cards: GroupCard[] = [];
+  for (const group of CATEGORY_GROUPS) {
+    const items: GroupCardItem[] = [];
+    for (const slug of group.slugs) {
+      const cat = CATEGORIES[slug];
+      if (!cat) continue;
+      const count = COUNTS[slug] ?? 0;
+      if (count <= 0) continue;
+      items.push({ slug, cat, count });
+    }
+    if (items.length === 0) continue;
+    let total = 0;
+    for (const it of items) total += it.count;
+    cards.push({ group, items, total });
+  }
+  return cards;
+})();
 
 const FEATURES = [
   {
@@ -75,17 +124,22 @@ export function LandingContent() {
 
   // Static, immutable for the lifetime of the bundle — see the
   // module-scope definitions of `LAST_UPDATED`, `TOTAL_STARS`, etc.
-  const counts = getCategoryCounts();
-  const categories = getCategories();
-  const starsShort = formatTotalStars(TOTAL_STARS, lang);
+  // `starsShort` depends on `lang` (zh/ja render "万" instead of
+  // "M"), so it has to be recomputed when the language changes;
+  // `useMemo` keeps the format pass from running on every other
+  // re-render (the static `lang` part of the page is the only
+  // thing that triggers a re-render in practice, but the
+  // downstream `<TopNav>` re-renders when `lang` changes too, so
+  // the memo's input is essentially the only dep that matters).
+  const starsShort = useMemo(() => formatTotalStars(TOTAL_STARS, lang), [lang]);
 
   return (
     <div className="min-h-screen bg-bg text-fg">
       <TopNav
         lang={lang}
         onLangChange={handleLangChange}
-        categories={categories}
-        counts={counts}
+        categories={CATEGORIES}
+        counts={COUNTS}
         variant="landing"
       />
 
@@ -125,10 +179,6 @@ export function LandingContent() {
                 {t(lang, "editorial.hero_title")}
               </span>
             </h1>
-
-            <p className="mt-6 font-display text-[clamp(1.25rem,2.5vw,1.75rem)] leading-[1.2] tracking-[-0.015em] text-fg-2">
-              {t(lang, "editorial.hero_atlas")}
-            </p>
 
             <p className="mt-8 max-w-xl text-balance text-[15px] leading-[1.7] text-fg-2 sm:text-base">
               {t(lang, "editorial.subtitle", { total: TOTAL_PROJECTS })}
@@ -283,15 +333,7 @@ export function LandingContent() {
           </header>
 
           <div className="grid grid-cols-1 gap-px bg-line sm:grid-cols-2 lg:grid-cols-3">
-            {CATEGORY_GROUPS.map((group, gIdx) => {
-              const items = group.slugs
-                .map((slug) => ({ slug, cat: categories[slug], count: counts[slug] || 0 }))
-                .filter(
-                  (item): item is { slug: string; cat: ProjectCategory; count: number } =>
-                    item.cat !== undefined && item.count > 0,
-                );
-              if (items.length === 0) return null;
-              const total = items.reduce((a, b) => a + b.count, 0);
+            {GROUP_CARDS.map(({ group, items, total }, gIdx) => {
               return (
                 <article
                   key={group.id}

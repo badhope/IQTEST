@@ -386,22 +386,19 @@ export function CategoryMark({
   slug,
   ...rest
 }: MarkProps & { slug: string }) {
-  const Mark = MARKS[slug] ?? MARKS.collection;
-  // The dictionary's value type is `(p: MarkProps) => JSX.Element`,
-  // a plain function — TypeScript does not treat that as a React
-  // component for the JSX call signature. A single cast to
-  // `ComponentType<MarkProps>` is enough; the previous version
-  // chained `as unknown as React.FC<MarkProps>`, which is the
-  // double-cast the React types docs warn against (it skips type
-  // checking on every property).
-  const Comp = Mark as React.ComponentType<MarkProps>;
-  return <Comp {...rest} />;
+  // `MARKS[slug]` is typed `(p: MarkProps) => React.JSX.Element` —
+  // a plain function. TypeScript does not widen that to a React
+  // component for the JSX call signature, so we cast to
+  // `ComponentType<MarkProps>` (the canonical, single-step cast;
+  // the previous version used `as unknown as React.FC<MarkProps>`,
+  // which skips type checking on every prop).
+  const Mark = (MARKS[slug] ?? MARKS.collection) as React.ComponentType<MarkProps>;
+  return <Mark {...rest} />;
 }
 
 export function GroupMark({ id, ...rest }: MarkProps & { id: string }) {
-  const Mark = GROUP_MARKS[id] ?? GROUP_MARKS.tools;
-  const Comp = Mark as unknown as React.FC<MarkProps>;
-  return <Comp {...rest} />;
+  const Mark = (GROUP_MARKS[id] ?? GROUP_MARKS.tools) as React.ComponentType<MarkProps>;
+  return <Mark {...rest} />;
 }
 
 /**

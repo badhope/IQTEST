@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useDeferredValue, useMemo, useRef } from "react";
+import { useState, useEffect, useDeferredValue, useMemo, useRef, useCallback } from "react";
 import { Sidebar } from "@/components/sidebar";
 import { StatsBar } from "@/components/stats-bar";
 import { SearchBar, SearchBarHandle } from "@/components/search-bar";
@@ -142,25 +142,59 @@ export function ExploreContent() {
     return () => window.removeEventListener("popstate", applyFromUrl);
   }, []);
 
-  const syncUrl = (updates: Record<string, string | null>) => {
+  const syncUrl = useCallback((updates: Record<string, string | null>) => {
     if (typeof window === "undefined") return;
     const url = new URL(window.location.href);
-    for (const [k, v] of Object.entries(updates)) {
-      if (v === null || v === "") url.searchParams.delete(k);
-      else url.searchParams.set(k, v);
+    for (const k in updates) {
+      const v = updates[k];
+      // `updates[k]` is `string | null | undefined` under
+      // `noUncheckedIndexedAccess`. `null` and `""` are
+      // semantically "remove this key"; `undefined` is the
+      // impossible-via-the-public-type path that the `for…in`
+      // surfaces — guard it explicitly so the `set()` call sees
+      // only `string`.
+      if (v === undefined || v === null || v === "") {
+        url.searchParams.delete(k);
+      } else {
+        url.searchParams.set(k, v);
+      }
     }
     window.history.replaceState({}, "", url.toString());
-  };
+  }, []);
 
-  const handleQueryChange = (newQuery: string) => {
-    setQuery(newQuery);
-    syncUrl({ q: newQuery || null });
-  };
+  const handleQueryChange = useCallback(
+    (newQuery: string) => {
+      setQuery(newQuery);
+      syncUrl({ q: newQuery || null });
+    },
+    [syncUrl],
+  );
 
-  const handleSortChange = (newSort: SortOption) => {
-    setSort(newSort);
-    syncUrl({ sort: newSort === "default" ? null : newSort });
-  };
+  const handleSortChange = useCallback(
+    (newSort: SortOption) => {
+      setSort(newSort);
+      syncUrl({ sort: newSort === "default" ? null : newSort });
+    },
+    [syncUrl],
+  );
+
+  // Wrap the inline clear-category / clear-all buttons so the
+  // `<button onClick={…}>` props stay referentially stable
+  // across renders. Without `useCallback` the inline lambdas
+  // would re-allocate on every keystroke during search, which
+  // forces the `<button>` to re-render (and any React DevTools
+  // signal in the profile) even when the rest of the tree
+  // hasn't changed.
+  const clearCategory = useCallback(() => {
+    setCategory("");
+    syncUrl({ category: null });
+  }, [syncUrl]);
+
+  const clearAll = useCallback(() => {
+    setQuery("");
+    setCategory("");
+    syncUrl({ q: null, category: null });
+  }, [syncUrl]);
 
   // `deferredQuery` is what drives the actual filter+render, so the
   // filter is recomputed against the deferred value (and so does
@@ -274,10 +308,7 @@ export function ExploreContent() {
                   </span>
                   {category && (
                     <button
-                      onClick={() => {
-                        setCategory("");
-                        syncUrl({ category: null });
-                      }}
+                      onClick={clearCategory}
                       className="link-editorial inline-flex items-center gap-1.5"
                       aria-label={t(lang, "empty.clear")}
                     >
@@ -311,11 +342,7 @@ export function ExploreContent() {
               </p>
               {(query || category) && (
                 <button
-                  onClick={() => {
-                    setQuery("");
-                    setCategory("");
-                    syncUrl({ q: null, category: null });
-                  }}
+                  onClick={clearAll}
                   className="mt-8 link-editorial inline-flex items-center gap-1.5"
                 >
                   <span>{t(lang, "empty.clear")}</span>

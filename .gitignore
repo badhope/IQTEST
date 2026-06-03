@@ -69,3 +69,9 @@ Desktop.ini
 
 # Local smoke-test screenshots
 /smoke-*.png
+
+# Playwright E2E artifacts (visual + headless browser caches)
+/.playwright-pageshots/
+/.playwright-cache/
+/playwright-report/
+/test-results/

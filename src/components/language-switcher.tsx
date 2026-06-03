@@ -87,13 +87,18 @@ export function LanguageSwitcher({ lang, onChange }: LanguageSwitcherProps) {
   // but, per the listbox spec, *does* return focus to the trigger.
   useEffect(() => {
     if (!open) return;
-    const onPointer = (e: MouseEvent) => {
+    // `pointerdown` covers both mouse and touch in one event
+    // (mousedown is deprecated on iOS Safari 13+ and is the
+    // documented "click outside" pattern in the Pointer Events
+    // spec). We listen on the document, not the container, so
+    // taps on any element outside the menu dismiss it.
+    const onPointer = (e: PointerEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", onPointer);
-    return () => document.removeEventListener("mousedown", onPointer);
+    document.addEventListener("pointerdown", onPointer);
+    return () => document.removeEventListener("pointerdown", onPointer);
   }, [open]);
 
   // Whenever the listbox opens, focus the highlighted option. The

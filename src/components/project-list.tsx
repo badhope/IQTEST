@@ -33,10 +33,14 @@ export function ProjectList({ projects, sort, stats, categories, lang }: Project
       case "name":
         return projects.toSorted((a, b) => a.name.localeCompare(b.name, lang));
       case "updated":
-        return projects.toSorted(
-          (a, b) =>
-            new Date(b.lastCommit).getTime() - new Date(a.lastCommit).getTime(),
-        );
+        // `lastCommit` is a YYYY-MM-DD string in `data/projects.json`
+        // — that is a strict subset of ISO 8601, so lexicographic
+        // string order is identical to chronological order. We
+        // can therefore skip the `new Date(...).getTime()` dance
+        // the old comparator did, and avoid allocating two `Date`
+        // objects per comparison (the comparator fires ~n log n
+        // times per sort).
+        return projects.toSorted((a, b) => b.lastCommit.localeCompare(a.lastCommit));
       default:
         // Default sort: leave the input order intact. We still
         // return a fresh array reference so the `useMemo` contract
