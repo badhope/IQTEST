@@ -1,4 +1,4 @@
-"""End-to-end Playwright check of the deployed GitHub Pages site.
+"""End-to-end Playwright check of the deployed (or locally served) site.
 
 Targets:
   - Landing page `/` (English, Chinese, Japanese, all via ?lang=)
@@ -12,16 +12,27 @@ What it verifies:
      nav actually changes the page text + URL + localStorage.
   4. The search bar on /explore filters the project list.
   5. Category sidebar click on /explore swaps the active filter.
-  6. Screenshots before / after each interaction for a visual
+  6. Explore header auto-hides on scroll-down and re-shows on
+     scroll-up (the "上栏可以折叠" feature). The header wrapper
+     should carry `-translate-y-[calc(100%-12px)]` after a
+     substantial scroll-down and `translate-y-0` again after a
+     scroll-up past the threshold.
+  7. Screenshots before / after each interaction for a visual
      sanity check (saved to .playwright-pageshots/).
+
+Override the base URL with the BASE env var — `BASE=http://localhost:8080
+python3 scripts/pageshot.py` runs against the local `pnpm start`
+serving of `out/`. The default is the GitHub Pages deployment so
+the production smoke check stays useful.
 """
 
+import os
 import sys
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-BASE = "https://badhope.github.io/NetTools-Hub/"
+BASE = os.environ.get("BASE", "https://badhope.github.io/NetTools-Hub/")
 SHOTS = Path(".playwright-pageshots")
 SHOTS.mkdir(parents=True, exist_ok=True)
 
@@ -247,7 +258,101 @@ def main() -> int:
                 )
 
         # ------------------------------------------------------------
-        # 8) Sidebar category click. Pick the first category and
+        # 8) Explore header auto-hide on scroll. The whole
+        #    <header> (TopNav + stats + search) lives inside a
+        #    `sticky top-0 z-40` wrapper, and the inner div is
+        #    translated up by `calc(100% - 12px)` while a "show
+        #    header" tab peeks out at the top.
+        #
+        #    Sequence:
+        #      - scroll down ~1500px -> wrapper is hidden
+        #      - the "show header" tab is now visible
+        #      - scroll up by ~600px (above the 8px delta
+        #        threshold, but not all the way back to y=0)
+        #      - wrapper is visible again
+        # ------------------------------------------------------------
+        print("\n=== Explore: header auto-hide on scroll ===")
+        page.goto(BASE + "explore/", wait_until="load")
+        # Wait for the search input to be present so we know the
+        # header chrome has rendered. (The i18n shortcut hint
+        # lives in `aria-label` only, not visible text, so we
+        # cannot match it as a `text=` selector.)
+        page.wait_for_selector("input[type='search']", timeout=5000)
+        # The auto-hide wrapper is the only direct child of the
+        # outer sticky container. We use a structural selector
+        # that does not depend on a custom hook: the outer
+        # `<div class="sticky top-0 z-40">` is unique on the
+        # page, and its first child carries the transform.
+        wrapper_inner = page.locator(
+            "div.sticky.top-0.z-40 > div.will-change-transform"
+        )
+        if wrapper_inner.count() == 0:
+            failures.append(
+                "explore: scroll-collapse inner wrapper not found "
+                "(check the new <TopNav sticky={false}> wrapper in explore-content.tsx)"
+            )
+        else:
+            # (1) baseline: y=0, wrapper should be visible.
+            # Tailwind v4 emits translate utility classes via the
+            # newer CSS `translate` property, not via the legacy
+            # `transform: translate(...)` shorthand — so the
+            # `transform` computed value stays `none` while the
+            # `translate` value carries the actual offset. We
+            # read the `translate` property so the assertion
+            # tracks the visual position, which is what we
+            # actually want to verify.
+            def read_translate(el):
+                return el.evaluate(
+                    "el => getComputedStyle(el).translate"
+                )
+
+            t_baseline = read_translate(wrapper_inner)
+            print(f"  baseline translate: {t_baseline!r}")
+            page.screenshot(path=str(SHOTS / "10-explore-header-top.png"))
+
+            # (2) scroll down past the 120px threshold + a healthy
+            #     delta so the rAF flush sets headerCollapsed=true.
+            page.evaluate("window.scrollTo({ top: 1500, behavior: 'instant' })")
+            # Two RAFs: the scroll handler schedules one, the
+            # setState commit needs a frame to apply, then the
+            # 300 ms CSS transition has to finish. 500 ms is
+            # generous without being slow.
+            page.wait_for_timeout(500)
+            t_hidden = read_translate(wrapper_inner)
+            print(f"  after scroll-down translate: {t_hidden!r}")
+            page.screenshot(path=str(SHOTS / "11-explore-header-hidden.png"))
+            if t_hidden == t_baseline:
+                failures.append(
+                    f"explore header did NOT collapse on scroll-down "
+                    f"(translate stayed at {t_hidden!r})"
+                )
+            # The "show header" tab should be visible now.
+            show_btn = page.locator("button[aria-label*='header' i], button[aria-label*='ヘッダー'], button[aria-label*='顶栏'], button[aria-label*='Show header']")
+            if show_btn.count() == 0:
+                failures.append(
+                    "explore: 'show header' tab not visible after scroll-down"
+                )
+            else:
+                print("  'show header' tab visible OK")
+
+            # (3) scroll back up enough to flip the delta sign and
+            #     cross the -8px threshold. We do NOT want to
+            #     scroll all the way to y=0 because the
+            #     "always show below 120" branch would mask the
+            #     scroll-up branch.
+            page.evaluate("window.scrollTo({ top: 600, behavior: 'instant' })")
+            page.wait_for_timeout(500)
+            t_shown = read_translate(wrapper_inner)
+            print(f"  after scroll-up translate:   {t_shown!r}")
+            page.screenshot(path=str(SHOTS / "12-explore-header-reshown.png"))
+            if t_shown != t_baseline:
+                failures.append(
+                    f"explore header did NOT re-show on scroll-up "
+                    f"(expected {t_baseline!r}, got {t_shown!r})"
+                )
+
+        # ------------------------------------------------------------
+        # 9) Sidebar category click. Pick the first category and
         #    confirm the URL gains ?category=... and the result
         #    count changes.
         # ------------------------------------------------------------

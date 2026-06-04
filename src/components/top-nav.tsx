@@ -14,9 +14,29 @@ interface TopNavProps {
   categories: Record<string, ProjectCategory>;
   counts: Record<string, number>;
   variant: "landing" | "explore";
+  /**
+   * Whether the `<header>` should attach itself to the viewport
+   * edge via `position: sticky`. Defaults to `true` so the landing
+   * page (which does not wrap `<TopNav>` in a sticky parent) keeps
+   * its existing behaviour with no caller change. The explore
+   * page sets this to `false` so it can hoist the entire header
+   * (TopNav + stats + search + category title) into a single
+   * sticky wrapper and animate the *wrapper* on `transform:
+   * translateY(...)` — letting the search bar and category title
+   * slide out of view on scroll-down without leaving a 64px hole
+   * where the site logo used to be.
+   */
+  sticky?: boolean;
 }
 
-export function TopNav({ lang, onLangChange, categories, counts, variant }: TopNavProps) {
+export function TopNav({
+  lang,
+  onLangChange,
+  categories,
+  counts,
+  variant,
+  sticky = true,
+}: TopNavProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(() =>
     Object.fromEntries(CATEGORY_GROUPS.map((g) => [g.id, true])),
@@ -109,7 +129,11 @@ export function TopNav({ lang, onLangChange, categories, counts, variant }: TopN
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line bg-bg/85 backdrop-blur-md">
+      <header
+        className={`z-40 border-b border-line bg-bg/85 backdrop-blur-md ${
+          sticky ? "sticky top-0" : "relative"
+        }`}
+      >
         <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6">
           <Link
             href={homeHref}

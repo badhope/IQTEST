@@ -107,6 +107,85 @@ export function ExploreContent() {
     return () => document.removeEventListener("keydown", onKey);
   }, []);
 
+  // ----------------------------------------------------------------
+  // Auto-hide header on scroll-down / show on scroll-up.
+  //
+  // "上栏可以折叠" — the spec is that swiping *up* (which is what
+  // reading a long project list looks like in a touch device) hides
+  // the top bar so the project cards get the full viewport height,
+  // and swiping *down* (back towards the page top) brings it back.
+  // We do this at the `window` scroll level rather than via the
+  // pointer events directly: scroll position captures both touch
+  // *and* mouse-wheel / track-pad gestures, and a single listener
+  // drives both. The "swipe up" gesture *is* "scroll down" on a
+  // page that has more content below the fold.
+  //
+  // The hide / show threshold is 8 px of cumulative delta, not a
+  // single event, so jitter around the threshold does not
+  // cause the header to flicker. The hide is also suppressed
+  // while `scrollY < 120` so the user is always one short swipe
+  // away from seeing the navigation again.
+  //
+  // Desktop users with a fine pointer get the same behaviour,
+  // because the header getting out of the way when you scroll
+  // through a long list is a universally useful affordance, not
+  // a touch-only one.
+  // ----------------------------------------------------------------
+  const [headerCollapsed, setHeaderCollapsed] = useState(false);
+  // `useRef` so the scroll handler always reads the *latest*
+  // `headerCollapsed` value without needing to be re-attached on
+  // every state flip (which would also drop any in-flight
+  // momentum scrolls).
+  const headerCollapsedRef = useRef(headerCollapsed);
+  useEffect(() => {
+    headerCollapsedRef.current = headerCollapsed;
+  }, [headerCollapsed]);
+
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let pendingDelta = 0;
+    let rafId: number | null = null;
+
+    const flush = () => {
+      rafId = null;
+      const y = window.scrollY;
+      const netDelta = pendingDelta;
+      pendingDelta = 0;
+      // Always show the header near the top of the page; the
+      // user is one short swipe away from needing it back.
+      if (y < 120) {
+        if (headerCollapsedRef.current) setHeaderCollapsed(false);
+        lastY = y;
+        return;
+      }
+      if (netDelta > 8 && !headerCollapsedRef.current) {
+        // Scrolling down (or finger moving up) past the threshold
+        // — hide the header.
+        setHeaderCollapsed(true);
+      } else if (netDelta < -8 && headerCollapsedRef.current) {
+        // Scrolling up (or finger moving down) past the threshold
+        // — bring the header back.
+        setHeaderCollapsed(false);
+      }
+      lastY = y;
+    };
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      lastY = y;
+      pendingDelta += delta;
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(flush);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== null) window.cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   // Hydration bridge for the three URL-driven filters.
   //
   //   - On mount, read the real values from the URL and apply them
@@ -210,30 +289,37 @@ export function ExploreContent() {
 
   const activeGroup = category ? getGroupOfSlug(category) : undefined;
 
+  const clearHeader = useCallback(() => setHeaderCollapsed(false), []);
+
   return (
     <div className="flex min-h-screen flex-col bg-bg text-fg">
-      <TopNav
-        lang={lang}
-        onLangChange={handleLangChange}
-        categories={CATEGORIES}
-        counts={STATS}
-        variant="explore"
-      />
-
-      <div className="flex flex-1">
-        <Sidebar
-          categories={CATEGORIES}
-          counts={STATS}
-          lang={lang}
-          activeCategory={category}
-        />
-
-        <main
-          id="main"
-          aria-label={t(lang, "a11y.main")}
-          className="min-w-0 flex-1"
+      {/* The entire top bar — site nav + stats + search + active
+       *  category title — is hoisted into a single sticky
+       *  wrapper. The inner `<div>` carries the `transform:
+       *  translateY(...)` animation, so a `headerCollapsed` flip
+       *  smoothly slides the whole 200-ish-pixel chrome out of
+       *  the way without leaving a hole (the `top-3` peek shows
+       *  a 12 px-tall "expand" tab so the user can re-open the
+       *  header with one tap). `will-change-transform` is set on
+       *  the inner div so the browser can promote the layer once
+       *  and reuse it across the many tiny scroll deltas the
+       *  rAF flush coalesces. The wrapper itself is sticky so the
+       *  visible tab stays reachable at all scroll positions. */}
+      <div className="sticky top-0 z-40">
+        <div
+          className={`will-change-transform transition-transform duration-300 ease-out motion-reduce:transition-none ${
+            headerCollapsed ? "-translate-y-[calc(100%-12px)]" : "translate-y-0"
+          }`}
         >
-          <div className="sticky top-16 z-30 border-b border-line bg-bg/85 backdrop-blur-md">
+          <TopNav
+            lang={lang}
+            onLangChange={handleLangChange}
+            categories={CATEGORIES}
+            counts={STATS}
+            variant="explore"
+            sticky={false}
+          />
+          <div className="border-b border-line bg-bg/85 backdrop-blur-md">
             <div className="flex flex-col gap-5 px-5 py-5 sm:flex-row sm:items-end sm:justify-between sm:px-8">
               <StatsBar
                 projectCount={ALL_PROJECTS.length}
@@ -269,7 +355,12 @@ export function ExploreContent() {
                     >
                       {/* Compass mark in lieu of a per-category glyph
                        *  for the un-filtered "all" view. */}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.2}>
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={1.2}
+                      >
                         <circle cx="12" cy="12" r="9" />
                         <path d="M15.5 8.5l-2 5-5 2 2-5z" />
                       </svg>
@@ -293,7 +384,8 @@ export function ExploreContent() {
                       {category
                         ? t(lang, "category.header", {
                             name:
-                              CATEGORIES[category]?.name || category.replace(/_/g, " "),
+                              CATEGORIES[category]?.name ||
+                              category.replace(/_/g, " "),
                           })
                         : t(lang, "explore.title")}
                     </h1>
@@ -331,7 +423,47 @@ export function ExploreContent() {
               </div>
             </div>
           </div>
+        </div>
 
+        {/* The "expand" handle: the only piece of the header
+         *  that remains visible while `headerCollapsed` is true.
+         *  Tapping it (or any downward swipe) brings the rest
+         *  back. It is also keyboard-focusable and labelled so
+         *  screen readers do not lose access to the nav. */}
+        {headerCollapsed && (
+          <button
+            type="button"
+            onClick={clearHeader}
+            aria-label={t(lang, "nav.show_header")}
+            className="absolute inset-x-0 top-0 z-10 mx-auto flex h-3 w-24 items-center justify-center rounded-b-full border border-t-0 border-line bg-bg-elev/90 text-fg-3 backdrop-blur transition-colors hover:text-accent"
+          >
+            <svg
+              aria-hidden
+              className="h-2.5 w-2.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="square" d="M6 9l6 6 6-6" />
+            </svg>
+          </button>
+        )}
+      </div>
+
+      <div className="flex flex-1">
+        <Sidebar
+          categories={CATEGORIES}
+          counts={STATS}
+          lang={lang}
+          activeCategory={category}
+        />
+
+        <main
+          id="main"
+          aria-label={t(lang, "a11y.main")}
+          className="min-w-0 flex-1"
+        >
           {filtered.length === 0 ? (
             <div className="flex min-h-[50vh] flex-col items-center justify-center px-4 text-center">
               <span className="font-display text-4xl text-fg-2">
