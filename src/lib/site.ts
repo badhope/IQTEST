@@ -29,8 +29,20 @@ export const SITE_BASE_PATH = "/NetTools-Hub";
 /** Canonical origin (no trailing slash). */
 export const SITE_ORIGIN = "https://badhope.github.io";
 
-/** Fully-qualified canonical URL of the landing page. */
-export const SITE_CANONICAL = `${SITE_ORIGIN}${SITE_BASE_PATH}/`;
+/** Fully-qualified canonical URL of the landing page, *without* a
+ *  trailing slash. Callers that want to point at a sub-path or at
+ *  the root page itself are responsible for joining the slash:
+ *
+ *    SITE_CANONICAL                  → https://...Hub/NetTools-Hub
+ *    `${SITE_CANONICAL}/`            → https://...Hub/NetTools-Hub/    (landing)
+ *    `${SITE_CANONICAL}/explore`     → https://...Hub/NetTools-Hub/explore
+ *
+ *  Keeping the trailing slash *off* the constant means a careless
+ *  caller can't produce `https://...Hub/NetTools-Hub//explore`
+ *  (double slash) by writing `${SITE_CANONICAL}/${path}` — they
+ *  always have to think about the separator, which makes the
+ *  mistake obvious. */
+export const SITE_CANONICAL = `${SITE_ORIGIN}${SITE_BASE_PATH}`;
 
 /** Total number of curated projects — drives every "{n}+" copy. */
 export const PROJECT_COUNT: number = getAllProjects().length;

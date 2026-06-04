@@ -125,19 +125,19 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: SITE_OWNER }],
   creator: SITE_OWNER,
-  metadataBase: new URL(SITE_CANONICAL),
+  metadataBase: new URL(`${SITE_CANONICAL}/`),
   // Per-language alternates. `<link rel="alternate" hreflang>` is
   // what tells Google which URL serves which language so it does
   // not have to guess from the URL's `?lang=` query. The English
   // variant is the canonical URL (no query) and the `x-default`
   // fallback for unrecognised locales.
   alternates: {
-    canonical: SITE_CANONICAL,
+    canonical: `${SITE_CANONICAL}/`,
     languages: {
-      en: SITE_CANONICAL,
+      en: `${SITE_CANONICAL}/`,
       "zh-Hans": `${SITE_CANONICAL}/?lang=zh`,
       ja: `${SITE_CANONICAL}/?lang=ja`,
-      "x-default": SITE_CANONICAL,
+      "x-default": `${SITE_CANONICAL}/`,
     },
   },
   // The PWA manifest is a sibling of the favicon in /public. We
@@ -147,7 +147,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NetTools Hub — An Atlas of Network Tools",
     description: `A curated atlas of ${PROJECT_COUNT}+ open-source network tools, organised by purpose, with multilingual annotations and editorial notes.`,
-    url: SITE_CANONICAL,
+    url: `${SITE_CANONICAL}/`,
     siteName: "NetTools Hub",
     // Static export means `<html lang>` and the OG card both have to be
     // resolved at build time — we have no per-request metadata. We

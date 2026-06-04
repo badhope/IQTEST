@@ -13,7 +13,7 @@ const siteJsonLd = {
   "@type": "WebSite",
   name: "NetTools Hub",
   alternateName: "Network Tools Atlas",
-  url: SITE_CANONICAL,
+  url: `${SITE_CANONICAL}/`,
   description: `A curated atlas of ${PROJECT_COUNT}+ open-source network tools, organised by purpose, with multilingual annotations and editorial notes.`,
   inLanguage: ["en", "zh-Hans", "ja"],
   publisher: {
@@ -31,7 +31,7 @@ const siteJsonLd = {
   // we just don't claim one exists.
   potentialAction: {
     "@type": "ReadAction",
-    target: `${SITE_CANONICAL}explore`,
+    target: `${SITE_CANONICAL}/explore`,
   },
 };
 
