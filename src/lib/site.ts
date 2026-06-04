@@ -14,8 +14,17 @@ import { getAllProjects, getCategoryCount, getTotalForks, getTotalStars } from "
 /** GitHub owner used everywhere we attribute the work / link the repo. */
 export const SITE_OWNER = "badhope";
 
-/** GitHub Pages base path (matches next.config.ts `basePath`). */
-export const SITE_BASE_PATH = `/${SITE_OWNER}/NetTools-Hub`;
+/** GitHub Pages base path (matches next.config.ts `basePath`).
+ *  GitHub Pages serves a user/org site at `https://<owner>.github.io`
+ *  and each *project* site at `https://<owner>.github.io/<repo>/`.
+ *  The Next.js `basePath` setting (computed from the `GITHUB_REPOSITORY`
+ *  env var) is just the repo name — the owner is already in the
+ *  origin. Building the full base path as `/{owner}/{repo}` would
+ *  double it (`/badhope/NetTools-Hub`), which is what the first cut
+ *  of this file did and what the sitemap and JSON-LD payloads
+ *  immediately picked up. The owner is therefore *not* part of
+ *  `SITE_BASE_PATH` here. */
+export const SITE_BASE_PATH = "/NetTools-Hub";
 
 /** Canonical origin (no trailing slash). */
 export const SITE_ORIGIN = "https://badhope.github.io";
