@@ -37,6 +37,7 @@ interface ProjectRowProps {
 export function ProjectRow({ project: p, lang }: ProjectRowProps) {
   const [pressing, setPressing] = useState(false);
   const timerRef = useRef<number | null>(null);
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const { linkState, preflight } = useLinkPreflight(p.url);
 
   useEffect(() => {
@@ -47,9 +48,7 @@ export function ProjectRow({ project: p, lang }: ProjectRowProps) {
     };
   }, []);
 
-  const open = async () => {
-    const ok = await preflight();
-    if (!ok) return; // broken: stay on page, badge already shown
+  const open = () => {
     window.open(p.url, '_blank', 'noopener,noreferrer');
   };
 
@@ -57,11 +56,15 @@ export function ProjectRow({ project: p, lang }: ProjectRowProps) {
     if (timerRef.current !== null) {
       window.clearTimeout(timerRef.current);
     }
+    // Run preflight in background (non-blocking) — just for badge status
+    void preflight();
     timerRef.current = window.setTimeout(() => {
-      void open();
+      open();
       timerRef.current = null;
     }, 280);
   };
+
+  const MOVE_THRESHOLD = 6; // px — beyond this, treat as scroll/drag, not click
 
   return (
     <tr
@@ -69,15 +72,38 @@ export function ProjectRow({ project: p, lang }: ProjectRowProps) {
       data-pressing={pressing ? 'true' : undefined}
       data-link={linkState}
       onPointerDown={(e) => {
-        // Don't hijack middle / right clicks; those are the
-        // browser's "open in new tab" gestures.
         if (e.button !== 0) return;
+        pointerStartRef.current = { x: e.clientX, y: e.clientY };
         setPressing(true);
         navigate();
       }}
-      onPointerUp={() => setPressing(false)}
-      onPointerCancel={() => setPressing(false)}
-      onPointerLeave={() => setPressing(false)}
+      onPointerMove={(e) => {
+        // If the pointer moved significantly, this is a scroll/drag — cancel the press
+        const start = pointerStartRef.current;
+        if (start && pressing) {
+          const dx = Math.abs(e.clientX - start.x);
+          const dy = Math.abs(e.clientY - start.y);
+          if (dx > MOVE_THRESHOLD || dy > MOVE_THRESHOLD) {
+            setPressing(false);
+            if (timerRef.current !== null) {
+              window.clearTimeout(timerRef.current);
+              timerRef.current = null;
+            }
+          }
+        }
+      }}
+      onPointerUp={() => {
+        setPressing(false);
+        pointerStartRef.current = null;
+      }}
+      onPointerCancel={() => {
+        setPressing(false);
+        pointerStartRef.current = null;
+      }}
+      onPointerLeave={() => {
+        setPressing(false);
+        pointerStartRef.current = null;
+      }}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
