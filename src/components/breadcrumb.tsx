@@ -1,17 +1,15 @@
+'use client';
+
 import Link from 'next/link';
 import { Lang, withLang, t } from '@/lib/i18n';
 import { kindLabel, platformLabel } from '@/lib/taxonomy';
-
-interface Crumb {
-  label: string;
-  href?: string;
-}
+import { useLang } from '@/components/lang-provider';
+import type { Crumb } from '@/lib/breadcrumb';
 
 interface BreadcrumbProps {
   /** Crumbs rendered left-to-right. The last one is the current page
    *  and is rendered without a link. */
   trail: Crumb[];
-  lang: Lang;
 }
 
 /**
@@ -23,7 +21,8 @@ interface BreadcrumbProps {
  *   ─────────────────────────────────
  *   38 entries · last commit 2026-05-30
  */
-export function Breadcrumb({ trail, lang }: BreadcrumbProps) {
+export function Breadcrumb({ trail }: BreadcrumbProps) {
+  const { lang } = useLang();
   return (
     <div className="flex flex-col gap-1">
       <nav
@@ -47,24 +46,4 @@ export function Breadcrumb({ trail, lang }: BreadcrumbProps) {
       </nav>
     </div>
   );
-}
-
-/** Convenience constructor: the `explore` root crumb. */
-export function rootCrumb(lang: Lang): Crumb {
-  return { label: t(lang, 'breadcrumb.root'), href: '/explore' };
-}
-
-/** Convenience: kind crumb. */
-export function kindCrumb(lang: Lang, kind: string): Crumb {
-  return {
-    label: `${kindLabel(kind as never, lang)} (${kind})`,
-    href: `/explore/k/${kind}`,
-  };
-}
-
-/** Convenience: platform crumb (last, no link). */
-export function platformCrumb(lang: Lang, kind: string, platform: string): Crumb {
-  return {
-    label: `${platformLabel(platform as never, lang)} (${platform})`,
-  };
 }

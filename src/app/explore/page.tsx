@@ -6,7 +6,8 @@ import {
   getKindPlatformCounts,
   getTotalStars,
 } from '@/lib/projects';
-import { Breadcrumb, rootCrumb } from '@/components/breadcrumb';
+import { Breadcrumb } from '@/components/breadcrumb';
+import { rootCrumb } from '@/lib/breadcrumb';
 import { PROJECT_COUNT, SITE_CANONICAL } from '@/lib/site';
 import { safeJsonLd, formatStars } from '@/lib/utils';
 
@@ -47,7 +48,6 @@ export default function ExploreRootPage() {
       kindCounts={kindCounts}
       kindPlatformCounts={kpCounts}
       total={projects.length}
-      lang="en" // hydrated on the client; the breadcrumb/server text is static
       title="All projects"
       meta={
         <p className="text-[12.5px] text-fg-2">
@@ -56,13 +56,13 @@ export default function ExploreRootPage() {
           <span className="font-mono text-muted">search, filter, and sort</span>
         </p>
       }
-      breadcrumb={<Breadcrumb trail={[rootCrumb('en')]} lang="en" />}
+      breadcrumb={<Breadcrumb trail={[rootCrumb('en')]} />}
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(itemListJsonLd) }}
       />
-      <SearchFilter projects={projects} lang="en" />
+      <SearchFilter projects={projects} />
     </ExploreLayout>
   );
 }

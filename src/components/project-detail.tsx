@@ -1,12 +1,14 @@
+'use client';
+
 import type { Project } from '@/types/project';
-import { Lang, t } from '@/lib/i18n';
+import { t } from '@/lib/i18n';
 import { formatStars, formatNumber } from '@/lib/utils';
 import { PlatformBadges, StatusBadge, VerdictBadge } from './project-row/project-badges';
 import Link from 'next/link';
+import { useLang } from '@/components/lang-provider';
 
 interface ProjectDetailProps {
   project: Project;
-  lang: Lang;
   relatedProjects?: readonly Project[];
 }
 
@@ -26,8 +28,13 @@ interface ProjectDetailProps {
  * The layout is optimized for scanning: the most important information
  * (name, description, stars) is at the top, followed by structured
  * metadata in a two-column grid on desktop, stacking on mobile.
+ *
+ * Reads the active language from the `LangProvider` context so a
+ * language switch in the top nav re-renders the labels, date
+ * formats, and badges without a full page reload.
  */
-export function ProjectDetail({ project: p, lang, relatedProjects }: ProjectDetailProps) {
+export function ProjectDetail({ project: p, relatedProjects }: ProjectDetailProps) {
+  const { lang } = useLang();
   const addedDate = new Date(p.addedAt).toLocaleDateString(
     lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US',
     { year: 'numeric', month: 'short', day: 'numeric' },
@@ -49,8 +56,8 @@ export function ProjectDetail({ project: p, lang, relatedProjects }: ProjectDeta
             </p>
           </div>
           <div className="flex flex-col items-end gap-2">
-            <StatusBadge status={p.status} lang={lang} />
-            {p.verdict && <VerdictBadge verdict={p.verdict} lang={lang} />}
+            <StatusBadge status={p.status} />
+            {p.verdict && <VerdictBadge verdict={p.verdict} />}
           </div>
         </div>
         <p className="mt-3 text-[0.9375rem] text-fg-2 leading-relaxed">{p.description}</p>
@@ -68,7 +75,7 @@ export function ProjectDetail({ project: p, lang, relatedProjects }: ProjectDeta
       <div className="border border-line p-4">
         <h3 className="kicker mb-3">{t(lang, 'taxonomy.platform')}</h3>
         <div className="flex flex-wrap gap-2">
-          <PlatformBadges project={p} lang={lang} />
+          <PlatformBadges project={p} />
         </div>
       </div>
 
@@ -179,7 +186,7 @@ export function ProjectDetail({ project: p, lang, relatedProjects }: ProjectDeta
                     </h4>
                     <p className="text-xs text-muted mt-0.5">{related.author}</p>
                   </div>
-                  <StatusBadge status={related.status} lang={lang} />
+                  <StatusBadge status={related.status} />
                 </div>
                 <p className="text-sm text-fg-2 mt-2 line-clamp-2">{related.description}</p>
                 <div className="flex items-center gap-3 mt-3 text-xs text-muted">

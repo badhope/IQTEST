@@ -9,10 +9,9 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { COPYRIGHT_YEAR } from '@/lib/site';
 import { kindLabel } from '@/lib/taxonomy';
 import { KIND_ORDER } from '@/lib/constants';
+import { useLang } from '@/components/lang-provider';
 
 interface TopNavProps {
-  lang: Lang;
-  onLangChange?: ((lang: Lang) => void) | undefined;
   /**
    * Per-kind counts, used by the mobile drawer to render a kind
    * list with project totals. Optional — when absent (e.g. on a
@@ -33,13 +32,12 @@ interface TopNavProps {
 }
 
 export function TopNav({
-  lang,
-  onLangChange,
   kindCounts,
   total,
   variant,
   sticky = true,
 }: TopNavProps) {
+  const { lang, setLang } = useLang();
   const [mobileOpen, setMobileOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -90,10 +88,10 @@ export function TopNav({
 
   const handleLangChange = useCallback(
     (next: Lang) => {
-      onLangChange?.(next);
+      setLang(next);
       setMobileOpen(false);
     },
-    [onLangChange],
+    [setLang],
   );
 
   const homeHref = langParam(lang, '/');
@@ -128,7 +126,7 @@ export function TopNav({
           <div className="flex-1" />
 
           <ThemeToggle />
-          <LanguageSwitcher lang={lang} onChange={onLangChange} />
+          <LanguageSwitcher lang={lang} onChange={setLang} />
 
           <Link
             href={primaryHref}

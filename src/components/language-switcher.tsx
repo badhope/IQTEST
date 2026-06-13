@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Lang, LANG_OPTIONS, t } from '@/lib/i18n';
+import { useLang } from '@/components/lang-provider';
 
 /**
  * Look up the listbox index of a given language. The two callers
@@ -20,7 +21,7 @@ function highlightForLang(target: Lang): number {
 }
 
 interface LanguageSwitcherProps {
-  lang: Lang;
+  lang?: Lang;
   onChange?: ((lang: Lang) => void) | undefined;
 }
 
@@ -43,8 +44,15 @@ interface LanguageSwitcherProps {
  * this rewrite only adds the keyboard layer and the ARIA semantics
  * that screen readers (NVDA, VoiceOver, JAWS) need to expose the
  * widget as a listbox rather than as a bare cluster of buttons.
+ *
+ * If the caller does not pass an explicit `lang` / `onChange` pair,
+ * the switcher falls back to the global `LangProvider` context so
+ * the change propagates to every other component on the page.
  */
-export function LanguageSwitcher({ lang, onChange }: LanguageSwitcherProps) {
+export function LanguageSwitcher(props: LanguageSwitcherProps) {
+  const ctx = useLang();
+  const lang = props.lang ?? ctx.lang;
+  const onChange = props.onChange ?? ctx.setLang;
   const [open, setOpen] = useState(false);
   // The *visual* highlight index is separate from the *selected*
   // language: the user can arrow-key through options without having

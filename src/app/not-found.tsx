@@ -2,16 +2,34 @@
 
 import Link from 'next/link';
 import { t, langParam } from '@/lib/i18n';
-import { useClientLang } from '@/lib/use-client-lang';
+import { LangProvider, useLang } from '@/components/lang-provider';
 
+/**
+ * The 404 page.
+ *
+ * `next/navigation` calls this with the active root layout, which
+ * already wraps `children` in a `LangProvider`. The 404 page is
+ * therefore a child of that provider and can call `useLang()`
+ * directly. *But* Next.js also prerenders the `/_not-found` page
+ * as a static fallback (used when the user types an arbitrary
+ * URL that does not match any route), and the prerender path
+ * does *not* go through the root layout — it renders the page
+ * in isolation, with no provider above it. The defensive
+ * `<LangProvider>` wrapper below covers that case: at runtime
+ * the provider is a no-op (the page is already inside the
+ * layout's provider, the contexts compose), and at prerender
+ * time it is the only provider in scope and `useLang()` works.
+ */
 export default function NotFound() {
-  // `output: "export"` pre-renders this page in English regardless of
-  // the URL, so the shared `useClientLang` hook picks up `?lang=`
-  // (and the storage / navigator fallback chain) on mount. The
-  // skip-link target `id="main"` here makes the global
-  // `<a href="#main" class="skip-link">` in the layout actually
-  // usable from this error page, which is a common a11y miss.
-  const [lang] = useClientLang();
+  return (
+    <LangProvider>
+      <NotFoundInner />
+    </LangProvider>
+  );
+}
+
+function NotFoundInner() {
+  const { lang } = useLang();
 
   return (
     <main

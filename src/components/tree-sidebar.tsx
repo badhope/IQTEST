@@ -7,6 +7,7 @@ import { kindLabel, platformLabel } from '@/lib/taxonomy';
 import type { ProjectKind, ProjectPlatform } from '@/types/project';
 import { KIND_ORDER, PLATFORM_ORDER } from '@/lib/constants';
 import { useRef, KeyboardEvent } from 'react';
+import { useLang } from '@/components/lang-provider';
 
 interface TreeSidebarProps {
   /** Path of the current request: [kind?, platform?]. */
@@ -17,7 +18,6 @@ interface TreeSidebarProps {
   kindPlatformCounts: Record<string, number>;
   /** Total project count (for the "All" link). */
   total: number;
-  lang: Lang;
 }
 
 /**
@@ -53,8 +53,8 @@ export function TreeSidebar({
   kindCounts,
   kindPlatformCounts,
   total,
-  lang,
 }: TreeSidebarProps) {
+  const { lang } = useLang();
   const isKindActive = (k: ProjectKind) => current.kind === k;
   const isPlatformActive = (p: ProjectPlatform) => current.platform === p;
   const isRoot = !current.kind;

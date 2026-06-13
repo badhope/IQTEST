@@ -8,7 +8,8 @@ import {
   isValidKind,
   getProjectsByKind,
 } from '@/lib/projects';
-import { Breadcrumb, kindCrumb, rootCrumb } from '@/components/breadcrumb';
+import { Breadcrumb } from '@/components/breadcrumb';
+import { kindCrumb, rootCrumb } from '@/lib/breadcrumb';
 import { kindLabel } from '@/lib/taxonomy';
 import { SITE_CANONICAL } from '@/lib/site';
 import { safeJsonLd } from '@/lib/utils';
@@ -62,7 +63,6 @@ export default async function KindPage({ params }: { params: Promise<{ kind: str
       kindCounts={kindCounts}
       kindPlatformCounts={kpCounts}
       total={total}
-      lang="en"
       title={`${kindLabel(kind)} (${kind})`}
       meta={
         <p className="text-[12.5px] text-fg-2">
@@ -73,10 +73,10 @@ export default async function KindPage({ params }: { params: Promise<{ kind: str
           </a>
         </p>
       }
-      breadcrumb={<Breadcrumb trail={[rootCrumb('en'), kindCrumb('en', kind)]} lang="en" />}
+      breadcrumb={<Breadcrumb trail={[rootCrumb('en'), kindCrumb('en', kind)]} />}
     >
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }} />
-      <ProjectTable projects={sorted} lang="en" />
+      <ProjectTable projects={sorted} />
     </ExploreLayout>
   );
 }

@@ -10,9 +10,9 @@ import {
   getRelatedProjects,
   getTotalStars,
 } from '@/lib/projects';
-import { Breadcrumb, rootCrumb } from '@/components/breadcrumb';
+import { Breadcrumb } from '@/components/breadcrumb';
+import { rootCrumb } from '@/lib/breadcrumb';
 import { safeJsonLd, formatStars } from '@/lib/utils';
-import { Lang } from '@/lib/i18n';
 import type { ProjectKind } from '@/types/project';
 
 export const metadata: Metadata = {
@@ -23,7 +23,6 @@ export const metadata: Metadata = {
 interface ProjectDetailPageProps {
   // Next.js 15+: params and searchParams are now async (Promise<>).
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ lang?: string }>;
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
@@ -35,10 +34,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   }
 
   // The page is statically generated, so we hard-code the
-  // default language. The LanguageSwitcher on the client can
-  // still re-render with a chosen language via its own
-  // localStorage state.
-  const lang: Lang = 'en';
+  // default language for the breadcrumb. The client-side
+  // `LangProvider` re-renders the rest of the page (TopNav,
+  // TreeSidebar, badges, status labels) on language change.
+  const lang = 'en';
 
   const projects = getAllProjects();
   const kindCounts = getKindCounts();
@@ -79,7 +78,6 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
       kindCounts={kindCounts}
       kindPlatformCounts={kpCounts}
       total={projects.length}
-      lang={lang}
       title={title}
       meta={
         <p className="text-[12.5px] text-fg-2">
@@ -88,13 +86,13 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <span className="font-mono text-muted">{project.language}</span>
         </p>
       }
-      breadcrumb={<Breadcrumb trail={breadcrumbTrail} lang={lang} />}
+      breadcrumb={<Breadcrumb trail={breadcrumbTrail} />}
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(projectJsonLd) }}
       />
-      <ProjectDetail project={project} lang={lang} relatedProjects={relatedProjects} />
+      <ProjectDetail project={project} relatedProjects={relatedProjects} />
     </ExploreLayout>
   );
 }

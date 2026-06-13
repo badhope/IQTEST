@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google';
 import { SetHtmlLang } from '@/components/set-html-lang';
+import { LangProvider } from '@/components/lang-provider';
 import { SiteFooter } from '@/components/site-footer';
 import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
 import { WebVitals } from '@/components/web-vitals';
@@ -191,8 +192,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
+        <LangProvider>
+          {children}
+        </LangProvider>
         <SetHtmlLang />
-        {children}
         <SiteFooter />
         <PWAInstallPrompt />
         <WebVitals />

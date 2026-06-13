@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { t } from '@/lib/i18n';
-import { useClientLang } from '@/lib/use-client-lang';
+import { useLang } from '@/components/lang-provider';
 
 export default function Error({
   error,
@@ -15,10 +15,10 @@ export default function Error({
     console.error(error);
   }, [error]);
 
-  // `output: "export"` pre-renders this page in English regardless of
-  // the URL; the shared `useClientLang` hook picks up the real
-  // language from `?lang=` / `localStorage` / `navigator` on mount.
-  const [lang] = useClientLang();
+  // Reads the active language from the global `LangProvider`
+  // context. The static export pre-renders this page in English
+  // and the provider swaps in the real language after mount.
+  const { lang } = useLang();
 
   return (
     <main

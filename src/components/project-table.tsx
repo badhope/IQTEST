@@ -1,10 +1,12 @@
+'use client';
+
 import { Project } from '@/types/project';
-import { Lang, t } from '@/lib/i18n';
+import { t } from '@/lib/i18n';
 import { ProjectRow } from '@/components/project-row';
+import { useLang } from '@/components/lang-provider';
 
 interface ProjectTableProps {
   projects: readonly Project[];
-  lang: Lang;
 }
 
 /**
@@ -20,8 +22,16 @@ interface ProjectTableProps {
  * "Last commit" / "License" / "Status" / "Verdict" columns are
  * 3-9 character mono fields that all read from the same line of
  * the table.
+ *
+ * The component is a client component that reads the active
+ * language from the global `LangProvider` context. This is the
+ * mechanism that makes the language switcher "actually switch":
+ * the table headers, the row data-labels (used in the mobile
+ * stacked layout), and the badges inside each row all read
+ * `lang` from context and re-render on change.
  */
-export function ProjectTable({ projects, lang }: ProjectTableProps) {
+export function ProjectTable({ projects }: ProjectTableProps) {
+  const { lang } = useLang();
   if (projects.length === 0) {
     return (
       <p className="border border-dashed border-dim p-6 text-center text-[13px] text-muted">
@@ -56,7 +66,7 @@ export function ProjectTable({ projects, lang }: ProjectTableProps) {
       </thead>
       <tbody>
         {projects.map((p) => (
-          <ProjectRow key={p.id} project={p} lang={lang} />
+          <ProjectRow key={p.id} project={p} />
         ))}
       </tbody>
     </table>

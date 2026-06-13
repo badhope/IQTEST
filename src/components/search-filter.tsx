@@ -3,11 +3,11 @@
 import { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import type { Project } from '@/types/project';
 import { ProjectTable } from './project-table';
-import { t, Lang } from '@/lib/i18n';
+import { t } from '@/lib/i18n';
+import { useLang } from '@/components/lang-provider';
 
 interface SearchFilterProps {
   projects: readonly Project[];
-  lang: Lang;
 }
 
 /**
@@ -27,8 +27,14 @@ interface SearchFilterProps {
  * the surrounding layout into CSR-only mode, which means users
  * would see a loading skeleton until JS hydrates. The standard
  * browser API gives us URL persistence without that cost.
+ *
+ * The active language is read from the global `LangProvider`
+ * context, so a switch from English to Chinese in the top nav
+ * re-renders the search labels, placeholder, and badges
+ * immediately without prop drilling.
  */
-export function SearchFilter({ projects, lang }: SearchFilterProps) {
+export function SearchFilter({ projects }: SearchFilterProps) {
+  const { lang } = useLang();
   const [searchTerm, setSearchTerm] = useState('');
   const [languageFilter, setLanguageFilter] = useState('');
   const [sortBy, setSortBy] = useState<'stars' | 'name' | 'lastCommit'>('stars');
@@ -232,7 +238,7 @@ export function SearchFilter({ projects, lang }: SearchFilterProps) {
       </div>
 
       {filteredProjects.length > 0 ? (
-        <ProjectTable projects={filteredProjects} lang={lang} />
+        <ProjectTable projects={filteredProjects} />
       ) : (
         <div className="border border-line p-8 text-center">
           <p className="text-lg text-fg-2 mb-2">{t(lang, 'empty.title')}</p>

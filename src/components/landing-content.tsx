@@ -1,12 +1,15 @@
+'use client';
+
 import Link from 'next/link';
 import { TopNav } from '@/components/top-nav';
-import { Lang, withLang } from '@/lib/i18n';
+import { withLang } from '@/lib/i18n';
 import { PROJECT_COUNT, TOTAL_STARS, SITE_OWNER, COPYRIGHT_YEAR } from '@/lib/site';
 import { getAllProjects, getKindCounts, getLastUpdated } from '@/lib/projects';
 import { kindLabel } from '@/lib/taxonomy';
 import type { ProjectKind } from '@/types/project';
 import { KIND_ORDER } from '@/lib/constants';
 import { formatStars } from '@/lib/utils';
+import { useLang } from '@/components/lang-provider';
 
 const KIND_BLURB: Record<ProjectKind, string> = {
   proxy: 'Cores & clients (Clash / Mihomo / sing-box / V2Ray / Xray).',
@@ -27,14 +30,21 @@ const KIND_BLURB: Record<ProjectKind, string> = {
  * a kind-card grid. No marketing copy, no "atlas" metaphor, no
  * gradients, no round-corner card with a coloured rail — those
  * are gone with the editorial direction this design replaces.
+ *
+ * The component is a client component that reads the active
+ * language from the `LangProvider` context — that is how the
+ * language switcher in the top nav re-renders the kind-card
+ * labels, the "open the index" CTA, and the rest of the
+ * chrome without a full page reload.
  */
-export function LandingContent({ lang = 'en' as Lang }: { lang?: Lang }) {
+export function LandingContent() {
+  const { lang } = useLang();
   const projects = getAllProjects();
   const counts = getKindCounts();
   const lastUpdated = getLastUpdated();
   return (
     <div className="min-h-screen bg-bg text-fg">
-      <TopNav lang={lang} variant="landing" kindCounts={counts} total={projects.length} />
+      <TopNav variant="landing" kindCounts={counts} total={projects.length} />
       <main
         id="main"
         aria-label="Main content"

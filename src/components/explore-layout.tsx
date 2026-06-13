@@ -1,3 +1,5 @@
+'use client';
+
 import { TreeSidebar } from '@/components/tree-sidebar';
 import { TopNav } from '@/components/top-nav';
 import { ReactNode } from 'react';
@@ -8,7 +10,6 @@ interface ExploreLayoutProps {
   kindCounts: Record<string, number>;
   kindPlatformCounts: Record<string, number>;
   total: number;
-  lang: 'en' | 'zh' | 'ja';
   title: string;
   meta?: ReactNode;
   breadcrumb?: ReactNode;
@@ -31,17 +32,18 @@ interface ExploreLayoutProps {
  *   │ └──────────┘  └──────────────────────────────────────┘  │
  *   └──────────────────────────────────────────────────────────┘
  *
- * The tree sidebar is a server component, so no client JS is
- * needed for navigation beyond Next's prefetch (which runs on
- * hover/intersection, not on click — and a click in Next's app
- * router is already a `pushState` round-trip).
+ * The language is read from the `LangProvider` context by the
+ * children (TopNav, TreeSidebar, Breadcrumb) so a switch in the
+ * top nav re-renders the labels, tree titles, and breadcrumbs
+ * without a full page reload. The `title` and `meta` props are
+ * still passed in from the page because they are page-specific
+ * and not in the i18n key space.
  */
 export function ExploreLayout({
   current,
   kindCounts,
   kindPlatformCounts,
   total,
-  lang,
   title,
   meta,
   breadcrumb,
@@ -49,7 +51,7 @@ export function ExploreLayout({
 }: ExploreLayoutProps) {
   return (
     <div className="min-h-screen bg-bg text-fg">
-      <TopNav lang={lang} kindCounts={kindCounts} total={total} variant="explore" sticky />
+      <TopNav kindCounts={kindCounts} total={total} variant="explore" sticky />
       <main id="main" className="mx-auto max-w-7xl px-4 py-6 sm:px-6">
         <header className="mb-5 border-b border-line pb-4">
           {breadcrumb}
@@ -62,7 +64,6 @@ export function ExploreLayout({
             kindCounts={kindCounts}
             kindPlatformCounts={kindPlatformCounts}
             total={total}
-            lang={lang}
           />
           <div className="min-w-0 flex-1 overflow-x-auto">{children}</div>
         </div>
