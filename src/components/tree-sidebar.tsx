@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import type { Lang } from '@/lib/i18n';
 import { withLang, t } from '@/lib/i18n';
 import { kindLabel, platformLabel } from '@/lib/taxonomy';
 import type { ProjectKind, ProjectPlatform } from '@/types/project';
@@ -48,12 +47,7 @@ interface TreeSidebarProps {
  * - Arrow Left: Collapse kind (if expanded) or move to parent
  * - Enter/Space: Activate link
  */
-export function TreeSidebar({
-  current,
-  kindCounts,
-  kindPlatformCounts,
-  total,
-}: TreeSidebarProps) {
+export function TreeSidebar({ current, kindCounts, kindPlatformCounts, total }: TreeSidebarProps) {
   const { lang } = useLang();
   const isKindActive = (k: ProjectKind) => current.kind === k;
   const isPlatformActive = (p: ProjectPlatform) => current.platform === p;

@@ -192,9 +192,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
-        <LangProvider>
-          {children}
-        </LangProvider>
+        <LangProvider>{children}</LangProvider>
         <SetHtmlLang />
         <SiteFooter />
         <PWAInstallPrompt />

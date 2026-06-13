@@ -1,11 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
-import {
-  Lang,
-  resolveInitialLang,
-  setLangAndPersist,
-} from '@/lib/i18n';
+import { Lang, resolveInitialLang, setLangAndPersist } from '@/lib/i18n';
 
 /**
  * Client-side language context.
@@ -94,9 +90,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
     setLangAndPersist(next);
   }, []);
 
-  return (
-    <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>
-  );
+  return <LangContext.Provider value={{ lang, setLang }}>{children}</LangContext.Provider>;
 }
 
 /**

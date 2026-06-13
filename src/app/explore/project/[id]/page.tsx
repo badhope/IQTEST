@@ -8,7 +8,6 @@ import {
   getKindPlatformCounts,
   getProjectById,
   getRelatedProjects,
-  getTotalStars,
 } from '@/lib/projects';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { rootCrumb } from '@/lib/breadcrumb';

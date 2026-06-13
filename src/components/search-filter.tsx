@@ -35,21 +35,23 @@ interface SearchFilterProps {
  */
 export function SearchFilter({ projects }: SearchFilterProps) {
   const { lang } = useLang();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [languageFilter, setLanguageFilter] = useState('');
-  const [sortBy, setSortBy] = useState<'stars' | 'name' | 'lastCommit'>('stars');
-
-  // Read initial state from URL (runs once after mount)
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const params = new URLSearchParams(window.location.search);
-    setSearchTerm(params.get('q') || '');
-    setLanguageFilter(params.get('language') || '');
-    const sort = params.get('sort');
-    if (sort === 'stars' || sort === 'name' || sort === 'lastCommit') {
-      setSortBy(sort);
-    }
+  // Read initial state from URL via lazy initializers so the
+  // first render already has the correct values. Using
+  // `useState(() => ...)` avoids the `set-state-in-effect`
+  // rule violation: the URL is read synchronously during
+  // state initialization, not inside an effect body.
+  const readUrlParam = useCallback((key: string) => {
+    if (typeof window === 'undefined') return '';
+    return new URLSearchParams(window.location.search).get(key) || '';
   }, []);
+
+  const [searchTerm, setSearchTerm] = useState(() => readUrlParam('q'));
+  const [languageFilter, setLanguageFilter] = useState(() => readUrlParam('language'));
+  const [sortBy, setSortBy] = useState<'stars' | 'name' | 'lastCommit'>(() => {
+    const sort = readUrlParam('sort');
+    if (sort === 'stars' || sort === 'name' || sort === 'lastCommit') return sort;
+    return 'stars';
+  });
 
   // 防抖：延迟更新实际用于过滤的搜索词
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');

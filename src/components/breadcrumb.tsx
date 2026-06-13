@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Lang, withLang, t } from '@/lib/i18n';
-import { kindLabel, platformLabel } from '@/lib/taxonomy';
+import { withLang } from '@/lib/i18n';
 import { useLang } from '@/components/lang-provider';
 import type { Crumb } from '@/lib/breadcrumb';
 

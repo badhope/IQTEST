@@ -31,12 +31,7 @@ interface TopNavProps {
   sticky?: boolean;
 }
 
-export function TopNav({
-  kindCounts,
-  total,
-  variant,
-  sticky = true,
-}: TopNavProps) {
+export function TopNav({ kindCounts, total, variant, sticky = true }: TopNavProps) {
   const { lang, setLang } = useLang();
   const [mobileOpen, setMobileOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
